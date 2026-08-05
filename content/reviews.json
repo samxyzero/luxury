@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "id": "r1",
+      "name": "Anish Gurung",
+      "role": "Homeowner, Pokhara",
+      "rating": 5,
+      "quote": "The quality of the mattresses and bedsheets is outstanding. The team helped us choose exactly what suited our home and delivered right on schedule.",
+      "source": "Google Review"
+    },
+    {
+      "id": "r2",
+      "name": "Sujata Rana",
+      "role": "General Manager, Boutique Resort",
+      "rating": 5,
+      "quote": "Luxury Enterprises furnished our entire resort — from curtains to towels. Professional, reliable, and the finish looks genuinely premium.",
+      "source": "Google Review"
+    },
+    {
+      "id": "r3",
+      "name": "Bikash Thapa",
+      "role": "Homeowner, Lakeside",
+      "rating": 5,
+      "quote": "Excellent range of carpets and rugs. Their consultation made choosing so much easier, and installation was quick and tidy.",
+      "source": "Google Review"
+    },
+    {
+      "id": "r4",
+      "name": "Namrata Shrestha",
+      "role": "Procurement Manager, Hotel Group",
+      "rating": 5,
+      "quote": "We've reordered hotel linens and pillows twice now — consistent quality and always on time. Highly recommended for hospitality projects.",
+      "source": "Google Review"
+    },
+    {
+      "id": "r5",
+      "name": "Kiran Adhikari",
+      "role": "Homeowner, Pokhara",
+      "rating": 5,
+      "quote": "Beautiful curtains and blinds, exactly as shown in-store. The whole experience felt premium from consultation to installation.",
+      "source": "Google Review"
+    },
+    {
+      "id": "r6",
+      "name": "Prashant Koirala",
+      "role": "Owner, Guest House",
+      "rating": 5,
+      "quote": "Great value for hotel-grade towels and duvets. Their team understood exactly what a hospitality business needs.",
+      "source": "Google Review"
+    }
+  ]
+}

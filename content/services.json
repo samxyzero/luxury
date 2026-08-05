@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": "home-furnishing",
+      "title": "Home Furnishing",
+      "description": "Complete furnishing solutions for apartments and houses — mattresses, linens, curtains and rugs chosen to suit your lifestyle.",
+      "icon": "home"
+    },
+    {
+      "id": "hotel-resort-furnishing",
+      "title": "Hotel & Resort Furnishing",
+      "description": "Bulk, hospitality-grade furnishing packages built for durability, comfort and guest satisfaction at scale.",
+      "icon": "building-2"
+    },
+    {
+      "id": "custom-solutions",
+      "title": "Custom Furnishing Solutions",
+      "description": "Bespoke fabric, sizing and design choices tailored precisely to your space and brand identity.",
+      "icon": "ruler"
+    },
+    {
+      "id": "consultation",
+      "title": "Expert Consultation",
+      "description": "Personalised guidance from our specialists to match the right materials, textures and palettes to your project.",
+      "icon": "message-circle"
+    },
+    {
+      "id": "delivery",
+      "title": "Delivery",
+      "description": "Reliable, careful delivery across Pokhara and beyond — on time, every time.",
+      "icon": "truck"
+    },
+    {
+      "id": "installation",
+      "title": "Installation",
+      "description": "Professional fitting and installation by our trained team, so everything is guest and family ready from day one.",
+      "icon": "wrench"
+    }
+  ]
+}

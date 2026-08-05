@@ -1,0 +1,57 @@
+{
+  "businessName": "Luxury Enterprises",
+  "tagline": "Pokhara's Premier Home & Hotel Furnishing House",
+  "metaDescription": "Luxury Enterprises is Pokhara's trusted furnishing partner for homes, hotels and resorts — premium mattresses, bedsheets, duvets, curtains, carpets, blinds, rugs, towels and hotel furnishings, backed by expert consultation, delivery and installation.",
+  "phone": "+977-985-6034727",
+  "phoneDisplay": "985-6034727",
+  "whatsapp": "9779856034727",
+  "email": "info@luxuryenterprises.com.np",
+  "address": {
+    "line1": "New Road",
+    "area": "New Rd",
+    "city": "Pokhara",
+    "postalCode": "33700",
+    "country": "Nepal",
+    "mapEmbedUrl": "https://www.google.com/maps?q=Luxury+Enterprises+New+Rd+Pokhara+33700+Nepal&output=embed",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Luxury+Enterprises+New+Rd+Pokhara+33700+Nepal"
+  },
+  "hours": [
+    { "day": "Sunday – Friday", "time": "8:30 AM – 7:30 PM" },
+    { "day": "Saturday", "time": "Closed" }
+  ],
+  "social": {
+    "facebook": "https://www.facebook.com/",
+    "instagram": "https://www.instagram.com/"
+  },
+  "hero": {
+    "eyebrow": "Est. in Pokhara · Trusted by Homes & Hotels",
+    "headline": "Furnishing Spaces Fit For",
+    "highlight": "Royalty",
+    "subheadline": "From cherished family homes to award-winning hotels and resorts, Luxury Enterprises brings premium mattresses, linens and furnishings that turn every space into an experience worth remembering.",
+    "image": "https://images.unsplash.com/photo-1723516908282-b3c795e9416a?auto=format&fit=crop&w=2000&q=80",
+    "ctaPrimaryLabel": "Get a Quote",
+    "ctaSecondaryLabel": "Visit Our Store"
+  },
+  "about": {
+    "eyebrow": "About Luxury Enterprises",
+    "heading": "Crafting Comfort & Elegance Across Nepal, One Space at a Time",
+    "body": [
+      "Luxury Enterprise is a leading provider of premium furnishing solutions for homes and hotels. We specialize in high-quality mattresses, bedsheets, duvets, pillows, covers, curtains, carpets, blinds, rugs, and towels.",
+      "Whether you're enhancing your home or outfitting an entire hotel, we offer elegant, durable, and comfortable products to suit every need. With a focus on quality and customer satisfaction, Luxury Enterprise is your trusted partner in creating luxurious and welcoming spaces across Pokhara and beyond."
+    ],
+    "image": "https://images.unsplash.com/photo-1758448755778-90ebf4d0f1e7?auto=format&fit=crop&w=1600&q=80",
+    "yearsExperience": 15,
+    "highlights": [
+      "Curated premium fabrics & materials",
+      "Trusted by hotels, resorts & homeowners",
+      "End-to-end consultation to installation",
+      "5.0★ rated on Google Reviews"
+    ]
+  },
+  "stats": [
+    { "id": "years", "label": "Years of Trusted Service", "value": 15, "suffix": "+" },
+    { "id": "projects", "label": "Projects Furnished", "value": 850, "suffix": "+" },
+    { "id": "hotels", "label": "Hotels & Resorts Served", "value": 60, "suffix": "+" },
+    { "id": "rating", "label": "Google Rating", "value": 5, "suffix": ".0★" }
+  ]
+}

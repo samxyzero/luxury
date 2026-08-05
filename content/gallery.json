@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "id": "g1",
+      "image": "https://images.unsplash.com/photo-1637730827702-de34e9ae4ede?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Boutique hotel lounge furnishing",
+      "category": "Hotels"
+    },
+    {
+      "id": "g2",
+      "image": "https://images.unsplash.com/photo-1758448755778-90ebf4d0f1e7?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Contemporary living room styling",
+      "category": "Homes"
+    },
+    {
+      "id": "g3",
+      "image": "https://images.unsplash.com/photo-1769784123040-751bbe038003?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Custom velvet drapery installation",
+      "category": "Curtains"
+    },
+    {
+      "id": "g4",
+      "image": "https://images.unsplash.com/photo-1594847915592-2a7ef568e2b6?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Hand-selected rug detailing",
+      "category": "Rugs & Carpets"
+    },
+    {
+      "id": "g5",
+      "image": "https://images.unsplash.com/photo-1760722974657-f64bce2f9cc5?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Spa-grade hospitality towel sets",
+      "category": "Hotels"
+    },
+    {
+      "id": "g6",
+      "image": "https://images.unsplash.com/photo-1605346434674-a440ca4dc4c0?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Serene master bedroom refresh",
+      "category": "Homes"
+    },
+    {
+      "id": "g7",
+      "image": "https://images.unsplash.com/photo-1646991761123-d83ce47c30c9?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Resort lobby furnishing package",
+      "category": "Hotels"
+    },
+    {
+      "id": "g8",
+      "image": "https://images.unsplash.com/photo-1621700052663-f1170e9b26ec?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Statement floral area rug",
+      "category": "Rugs & Carpets"
+    },
+    {
+      "id": "g9",
+      "image": "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Warm, textured guest bedroom",
+      "category": "Homes"
+    },
+    {
+      "id": "g10",
+      "image": "https://images.unsplash.com/photo-1628428989131-5a838e23caac?auto=format&fit=crop&w=1400&q=80",
+      "caption": "Gold-accented drapery for suites",
+      "category": "Curtains"
+    }
+  ]
+}

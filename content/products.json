@@ -1,0 +1,74 @@
+{
+  "items": [
+    {
+      "id": "mattresses",
+      "name": "Mattresses",
+      "category": "Sleep Comfort",
+      "description": "Orthopedic, memory foam and hybrid mattresses engineered for restorative sleep and lasting support.",
+      "image": "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "bedsheets",
+      "name": "Bedsheets",
+      "category": "Sleep Comfort",
+      "description": "Fine cotton and premium blend bedsheets in timeless weaves and refined colour palettes.",
+      "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "duvets",
+      "name": "Duvets",
+      "category": "Sleep Comfort",
+      "description": "Plush, temperature-balanced duvets and comforters designed for year-round comfort.",
+      "image": "https://images.unsplash.com/photo-1728614669329-29e10a0698ea?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "pillows",
+      "name": "Pillows & Covers",
+      "category": "Sleep Comfort",
+      "description": "Supportive pillows and elegant covers, tailored for both home comfort and hotel-grade durability.",
+      "image": "https://images.unsplash.com/photo-1600414428640-f78a67c2aa3b?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "curtains",
+      "name": "Curtains",
+      "category": "Interior Décor",
+      "description": "Statement drapery in silk, velvet and linen — tailored to frame every window beautifully.",
+      "image": "https://images.unsplash.com/photo-1769784123040-751bbe038003?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "carpets",
+      "name": "Carpets",
+      "category": "Interior Décor",
+      "description": "Hand-selected carpets that anchor a room with texture, warmth and understated luxury.",
+      "image": "https://images.unsplash.com/photo-1652634213812-f0deeb1de78e?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "blinds",
+      "name": "Blinds",
+      "category": "Interior Décor",
+      "description": "Modern roller, roman and venetian blinds balancing natural light with privacy and style.",
+      "image": "https://images.unsplash.com/photo-1711006295130-406e8e9057f2?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "rugs",
+      "name": "Rugs",
+      "category": "Interior Décor",
+      "description": "Artisanal area rugs that bring character, comfort and a finishing touch to any space.",
+      "image": "https://images.unsplash.com/photo-1660338183700-12388dc9aa4f?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "towels",
+      "name": "Towels",
+      "category": "Hospitality Essentials",
+      "description": "Spa-grade, highly absorbent towels trusted by leading hotels and resorts across Nepal.",
+      "image": "https://images.unsplash.com/photo-1760722974657-f64bce2f9cc5?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": "hotel-furnishings",
+      "name": "Hotel Furnishings",
+      "category": "Hospitality Essentials",
+      "description": "Complete furnishing packages for hotels and resorts — from suites to lobbies, delivered turnkey.",
+      "image": "https://images.unsplash.com/photo-1646991761123-d83ce47c30c9?auto=format&fit=crop&w=1200&q=80"
+    }
+  ]
+}
