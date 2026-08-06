@@ -7,6 +7,7 @@ import {
   type GalleryItemFormState,
 } from "@/lib/actions/gallery";
 import FormField, { fieldInputClassName } from "@/components/admin/FormField";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 import SubmitButton from "@/components/admin/SubmitButton";
 import type { GalleryItem } from "@/lib/generated/prisma/client";
 
@@ -22,15 +23,7 @@ export default function GalleryItemForm({ item }: GalleryItemFormProps) {
 
   return (
     <form action={formAction} className="max-w-2xl space-y-6">
-      <FormField label="Image URL" htmlFor="image">
-        <input
-          id="image"
-          name="image"
-          defaultValue={item?.image}
-          required
-          className={fieldInputClassName}
-        />
-      </FormField>
+      <ImageUploadField label="Gallery Image" name="image" defaultValue={item?.image} required />
       <FormField label="Caption" htmlFor="caption">
         <input
           id="caption"

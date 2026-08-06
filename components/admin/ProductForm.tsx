@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { createProduct, updateProduct, type ProductFormState } from "@/lib/actions/products";
 import FormField, { fieldInputClassName } from "@/components/admin/FormField";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 import SubmitButton from "@/components/admin/SubmitButton";
 import type { Product } from "@/lib/generated/prisma/client";
 
@@ -47,15 +48,7 @@ export default function ProductForm({ product }: ProductFormProps) {
           className={fieldInputClassName}
         />
       </FormField>
-      <FormField label="Image URL" htmlFor="image">
-        <input
-          id="image"
-          name="image"
-          defaultValue={product?.image}
-          required
-          className={fieldInputClassName}
-        />
-      </FormField>
+      <ImageUploadField label="Product Image" name="image" defaultValue={product?.image} required />
       <FormField label="Ideal For" htmlFor="idealFor">
         <select
           id="idealFor"
