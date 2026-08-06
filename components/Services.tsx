@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import type { Service } from "@/types/content";
+import SectionLink from "@/components/SectionLink";
 
 const ICONS: Record<string, LucideIcon> = {
   home: Home,
@@ -27,9 +28,13 @@ const ICONS: Record<string, LucideIcon> = {
 
 interface ServicesProps {
   services: Service[];
+  /** Rendered heading tag — pages pass "h1", homepage sections keep "h2". */
+  as?: "h1" | "h2";
+  /** Homepage teaser CTA linking to the full page. */
+  footerLink?: { href: string; label: string };
 }
 
-export default function Services({ services }: ServicesProps) {
+export default function Services({ services, as: Heading = "h2", footerLink }: ServicesProps) {
   return (
     <section id="services" className="bg-paper py-24 sm:py-32 lg:py-40">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
@@ -38,9 +43,9 @@ export default function Services({ services }: ServicesProps) {
             <span className="h-px w-8 bg-gold" />
             <span className="label text-ink-muted">Our Services</span>
           </div>
-          <h2 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
+          <Heading className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
             Full-Service Furnishing, Start to Finish
-          </h2>
+          </Heading>
           <p className="mt-6 text-base leading-relaxed text-ink-muted sm:text-lg">
             We don&apos;t just supply furnishings — we guide every step, from first
             consultation to final installation.
@@ -65,6 +70,14 @@ export default function Services({ services }: ServicesProps) {
             );
           })}
         </div>
+
+        {footerLink && (
+          <div className="mt-14">
+            <SectionLink href={footerLink.href} tone="ink">
+              {footerLink.label}
+            </SectionLink>
+          </div>
+        )}
       </div>
     </section>
   );

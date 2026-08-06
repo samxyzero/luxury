@@ -21,14 +21,18 @@ export default async function ProtectedAdminLayout({
   const session = await verifySession();
 
   return (
-    <div className="flex min-h-screen bg-paper">
-      <aside className="flex w-64 shrink-0 flex-col bg-navy p-6">
-        <Link href="/admin" className="font-display text-xl font-medium text-paper">
-          Luxury Enterprises
-        </Link>
-        <p className="label mt-1 text-paper/50">Admin</p>
+    <div className="flex min-h-screen items-start bg-paper">
+      {/* h-screen + sticky keeps the account block pinned to the viewport bottom
+          instead of drifting below the fold on long pages. */}
+      <aside className="sticky top-0 flex h-screen w-64 shrink-0 flex-col bg-navy p-6">
+        <div className="shrink-0">
+          <Link href="/admin" className="font-display text-xl font-medium text-paper">
+            Luxury Enterprises
+          </Link>
+          <p className="label mt-1 text-paper/50">Admin</p>
+        </div>
 
-        <nav className="mt-10 flex flex-col gap-1">
+        <nav className="mt-10 flex flex-1 flex-col gap-1 overflow-y-auto">
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.href}
@@ -40,7 +44,7 @@ export default async function ProtectedAdminLayout({
           ))}
         </nav>
 
-        <div className="mt-auto space-y-4 border-t border-stone-on-navy pt-6">
+        <div className="mt-6 shrink-0 space-y-4 border-t border-stone-on-navy pt-6">
           <p className="truncate text-xs text-paper/45">{session.email}</p>
           <Link
             href="/"
@@ -60,7 +64,9 @@ export default async function ProtectedAdminLayout({
         </div>
       </aside>
 
-      <main className="flex-1 overflow-x-hidden p-8 sm:p-10">{children}</main>
+      {/* No overflow-x-hidden here — it creates a scroll container that breaks
+          the sticky save bar in the forms. min-w-0 handles flex overflow instead. */}
+      <main className="min-w-0 flex-1 p-8 sm:p-10">{children}</main>
     </div>
   );
 }

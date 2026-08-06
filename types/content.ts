@@ -52,11 +52,14 @@ export interface SiteSettings {
 
 export interface Product {
   id: string;
+  slug: string;
   name: string;
   category: string;
   description: string;
   image: string;
   idealFor: "Homes" | "Hotels" | "Homes & Hotels";
+  /** Present on database-backed rows; absent in the static fallback content. */
+  updatedAt?: Date | string;
 }
 
 export interface Service {

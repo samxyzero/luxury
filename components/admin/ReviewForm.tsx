@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { createReview, updateReview, type ReviewFormState } from "@/lib/actions/reviews";
 import FormField, { fieldInputClassName } from "@/components/admin/FormField";
-import SubmitButton from "@/components/admin/SubmitButton";
+import FormActions from "@/components/admin/FormActions";
 import type { Review } from "@/lib/generated/prisma/client";
 
 interface ReviewFormProps {
@@ -15,11 +15,12 @@ const initialState: ReviewFormState = {};
 export default function ReviewForm({ review }: ReviewFormProps) {
   const action = review ? updateReview.bind(null, review.id) : createReview;
   const [state, formAction] = useActionState(action, initialState);
+  const errors = state.fieldErrors ?? {};
 
   return (
     <form action={formAction} className="max-w-2xl space-y-6">
       <div className="grid gap-6 sm:grid-cols-2">
-        <FormField label="Name" htmlFor="name">
+        <FormField label="Name" htmlFor="name" error={errors.name}>
           <input
             id="name"
             name="name"
@@ -28,7 +29,7 @@ export default function ReviewForm({ review }: ReviewFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <FormField label="Role / Context" htmlFor="role">
+        <FormField label="Role / Context" htmlFor="role" error={errors.role}>
           <input
             id="role"
             name="role"
@@ -39,7 +40,7 @@ export default function ReviewForm({ review }: ReviewFormProps) {
           />
         </FormField>
       </div>
-      <FormField label="Rating (1–5)" htmlFor="rating">
+      <FormField label="Rating (1–5)" htmlFor="rating" error={errors.rating}>
         <input
           id="rating"
           name="rating"
@@ -51,7 +52,7 @@ export default function ReviewForm({ review }: ReviewFormProps) {
           className={fieldInputClassName}
         />
       </FormField>
-      <FormField label="Quote" htmlFor="quote">
+      <FormField label="Quote" htmlFor="quote" error={errors.quote}>
         <textarea
           id="quote"
           name="quote"
@@ -61,7 +62,7 @@ export default function ReviewForm({ review }: ReviewFormProps) {
           className={fieldInputClassName}
         />
       </FormField>
-      <FormField label="Source" htmlFor="source">
+      <FormField label="Source" htmlFor="source" error={errors.source}>
         <input
           id="source"
           name="source"
@@ -70,7 +71,11 @@ export default function ReviewForm({ review }: ReviewFormProps) {
           className={fieldInputClassName}
         />
       </FormField>
-      <FormField label="Display Order (lower shows first)" htmlFor="order">
+      <FormField
+        label="Display Order (lower shows first)"
+        htmlFor="order"
+        error={errors.order}
+      >
         <input
           id="order"
           name="order"
@@ -80,9 +85,11 @@ export default function ReviewForm({ review }: ReviewFormProps) {
         />
       </FormField>
 
-      {state.error && <p className="text-sm text-red-700">{state.error}</p>}
-
-      <SubmitButton>{review ? "Save Changes" : "Create Review"}</SubmitButton>
+      <FormActions
+        label={review ? "Save Changes" : "Create Review"}
+        error={state.error}
+        fieldErrors={state.fieldErrors}
+      />
     </form>
   );
 }

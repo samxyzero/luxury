@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import CornerMarks from "@/components/CornerMarks";
@@ -8,14 +9,9 @@ import type { Product } from "@/types/content";
 
 interface ProductCardProps {
   product: Product;
-  whatsapp: string;
 }
 
-export default function ProductCard({ product, whatsapp }: ProductCardProps) {
-  const href = `https://wa.me/${whatsapp}?text=${encodeURIComponent(
-    `Hi Luxury Enterprises, I'd like a quote for ${product.name}.`
-  )}`;
-
+export default function ProductCard({ product }: ProductCardProps) {
   return (
     <motion.div
       layout
@@ -25,7 +21,7 @@ export default function ProductCard({ product, whatsapp }: ProductCardProps) {
       transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
       className="group"
     >
-      <a href={href} target="_blank" rel="noopener noreferrer" className="block">
+      <Link href={`/products/${product.slug}`} className="block">
         <div className="relative aspect-[4/5] overflow-hidden">
           <Image
             src={product.image}
@@ -49,15 +45,15 @@ export default function ProductCard({ product, whatsapp }: ProductCardProps) {
           <h3 className="mt-1.5 font-display text-xl font-medium text-paper">
             {product.name}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-paper/55">
+          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-paper/55">
             {product.description}
           </p>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-paper/80 transition-colors duration-300 group-hover:text-gold">
-            Enquire
+            View Details
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </span>
         </div>
-      </a>
+      </Link>
     </motion.div>
   );
 }

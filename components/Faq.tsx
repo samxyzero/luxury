@@ -4,12 +4,17 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Reveal from "@/components/Reveal";
 import type { FaqItem } from "@/types/content";
+import SectionLink from "@/components/SectionLink";
 
 interface FaqProps {
   faqs: FaqItem[];
+  /** Rendered heading tag — pages pass "h1", homepage sections keep "h2". */
+  as?: "h1" | "h2";
+  /** Homepage teaser CTA linking to the full page. */
+  footerLink?: { href: string; label: string };
 }
 
-export default function Faq({ faqs }: FaqProps) {
+export default function Faq({ faqs, as: Heading = "h2", footerLink }: FaqProps) {
   const [open, setOpen] = useState<string | null>(faqs[0]?.id ?? null);
 
   return (
@@ -21,9 +26,9 @@ export default function Faq({ faqs }: FaqProps) {
             <span className="label text-ink-muted">FAQ</span>
             <span className="h-px w-8 bg-gold" />
           </div>
-          <h2 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
+          <Heading className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
             Questions, Answered
-          </h2>
+          </Heading>
         </Reveal>
 
         <div className="mt-14 border-t border-stone">
@@ -63,6 +68,14 @@ export default function Faq({ faqs }: FaqProps) {
             );
           })}
         </div>
+
+        {footerLink && (
+          <div className="mt-14">
+            <SectionLink href={footerLink.href} tone="ink">
+              {footerLink.label}
+            </SectionLink>
+          </div>
+        )}
       </div>
     </section>
   );

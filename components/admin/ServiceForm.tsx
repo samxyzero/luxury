@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { createService, updateService, type ServiceFormState } from "@/lib/actions/services";
 import { SERVICE_ICON_OPTIONS } from "@/lib/constants";
 import FormField, { fieldInputClassName } from "@/components/admin/FormField";
-import SubmitButton from "@/components/admin/SubmitButton";
+import FormActions from "@/components/admin/FormActions";
 import type { Service } from "@/lib/generated/prisma/client";
 
 interface ServiceFormProps {
@@ -16,10 +16,11 @@ const initialState: ServiceFormState = {};
 export default function ServiceForm({ service }: ServiceFormProps) {
   const action = service ? updateService.bind(null, service.id) : createService;
   const [state, formAction] = useActionState(action, initialState);
+  const errors = state.fieldErrors ?? {};
 
   return (
     <form action={formAction} className="max-w-2xl space-y-6">
-      <FormField label="Title" htmlFor="title">
+      <FormField label="Title" htmlFor="title" error={errors.title}>
         <input
           id="title"
           name="title"
@@ -28,7 +29,7 @@ export default function ServiceForm({ service }: ServiceFormProps) {
           className={fieldInputClassName}
         />
       </FormField>
-      <FormField label="Description" htmlFor="description">
+      <FormField label="Description" htmlFor="description" error={errors.description}>
         <textarea
           id="description"
           name="description"
@@ -38,7 +39,7 @@ export default function ServiceForm({ service }: ServiceFormProps) {
           className={fieldInputClassName}
         />
       </FormField>
-      <FormField label="Icon" htmlFor="icon">
+      <FormField label="Icon" htmlFor="icon" error={errors.icon}>
         <select
           id="icon"
           name="icon"
@@ -52,7 +53,11 @@ export default function ServiceForm({ service }: ServiceFormProps) {
           ))}
         </select>
       </FormField>
-      <FormField label="Display Order (lower shows first)" htmlFor="order">
+      <FormField
+        label="Display Order (lower shows first)"
+        htmlFor="order"
+        error={errors.order}
+      >
         <input
           id="order"
           name="order"
@@ -62,9 +67,11 @@ export default function ServiceForm({ service }: ServiceFormProps) {
         />
       </FormField>
 
-      {state.error && <p className="text-sm text-red-700">{state.error}</p>}
-
-      <SubmitButton>{service ? "Save Changes" : "Create Service"}</SubmitButton>
+      <FormActions
+        label={service ? "Save Changes" : "Create Service"}
+        error={state.error}
+        fieldErrors={state.fieldErrors}
+      />
     </form>
   );
 }

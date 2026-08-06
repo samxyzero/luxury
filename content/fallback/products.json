@@ -2,6 +2,7 @@
   "items": [
     {
       "id": "mattresses",
+      "slug": "mattresses",
       "name": "Mattresses",
       "category": "Sleep Comfort",
       "description": "Orthopedic, memory foam and hybrid mattresses engineered for restorative sleep. Available in single, queen and king sizes with firmness options suited to family bedrooms and hotel-grade nightly turnover alike.",
@@ -10,6 +11,7 @@
     },
     {
       "id": "bedsheets",
+      "slug": "bedsheets",
       "name": "Bedsheets",
       "category": "Sleep Comfort",
       "description": "Fine cotton and premium cotton-blend bedsheets in timeless weaves — crisp percale for hotel freshness, or soft sateen for a cosier home feel, in a refined, easy-to-coordinate colour palette.",
@@ -18,6 +20,7 @@
     },
     {
       "id": "duvets",
+      "slug": "duvets",
       "name": "Duvets",
       "category": "Sleep Comfort",
       "description": "Plush, temperature-balanced duvets and comforters in a range of warmth ratings, from light all-season options for guest rooms to heavier fills for Pokhara's cooler winter months at home.",
@@ -26,6 +29,7 @@
     },
     {
       "id": "pillows",
+      "slug": "pillows-and-covers",
       "name": "Pillows & Covers",
       "category": "Sleep Comfort",
       "description": "Supportive pillows in soft, medium and firm fills, paired with elegant covers — sized and finished to hotel housekeeping standards or a softer, personal touch for the home.",
@@ -34,6 +38,7 @@
     },
     {
       "id": "curtains",
+      "slug": "curtains",
       "name": "Curtains",
       "category": "Interior Décor",
       "description": "Statement drapery in silk, velvet and linen, made to measure for every window — blackout linings available for guest rooms, and lighter sheers for airy living spaces at home.",
@@ -42,6 +47,7 @@
     },
     {
       "id": "curtain-hardware",
+      "slug": "curtain-tracks-and-rods",
       "name": "Curtain Tracks & Rods",
       "category": "Interior Décor",
       "description": "Motorised and manual tracks, poles and finials in brushed brass, matte black and wood finishes — sized for large hotel window walls or fitted neatly into a single home window.",
@@ -50,6 +56,7 @@
     },
     {
       "id": "carpets",
+      "slug": "carpets",
       "name": "Carpets",
       "category": "Interior Décor",
       "description": "Hand-selected wall-to-wall and area carpets in durable, high-traffic weaves for hotel corridors and lobbies, or softer pile options that anchor a living room at home.",
@@ -58,6 +65,7 @@
     },
     {
       "id": "blinds",
+      "slug": "blinds",
       "name": "Blinds",
       "category": "Interior Décor",
       "description": "Roller, roman and venetian blinds in blackout, dim-out and light-filtering fabrics — balancing natural light with privacy for both guest rooms and home offices.",
@@ -66,6 +74,7 @@
     },
     {
       "id": "rugs",
+      "slug": "rugs",
       "name": "Rugs",
       "category": "Interior Décor",
       "description": "Artisanal area rugs in wool, jute and synthetic blends, chosen for character underfoot in a lobby seating area or as the finishing layer in a family living room.",
@@ -74,6 +83,7 @@
     },
     {
       "id": "sofa-covers",
+      "slug": "sofa-and-cushion-covers",
       "name": "Sofa & Cushion Covers",
       "category": "Interior Décor",
       "description": "Tailored, washable sofa and cushion covers that refresh a lobby lounge or living room instantly — a practical way for hotels to protect upholstery between deep cleans.",
@@ -82,6 +92,7 @@
     },
     {
       "id": "table-linen",
+      "slug": "table-linen-and-kitchen-textiles",
       "name": "Table Linen & Kitchen Textiles",
       "category": "Interior Décor",
       "description": "Tablecloths, runners, napkins and kitchen textiles in durable, easy-care fabrics — set for a hotel breakfast room or dressed simply for everyday family dining.",
@@ -90,6 +101,7 @@
     },
     {
       "id": "towels",
+      "slug": "towels",
       "name": "Towels",
       "category": "Hospitality Essentials",
       "description": "Spa-grade, highly absorbent cotton towels in bath, hand and face sizes, woven for the repeated wash cycles of hotel laundry while staying soft enough for daily home use.",
@@ -98,6 +110,7 @@
     },
     {
       "id": "bath-robes",
+      "slug": "bath-robes-and-slippers",
       "name": "Bath Robes & Slippers",
       "category": "Hospitality Essentials",
       "description": "Waffle-weave and terry bath robes with matching slippers — a signature guest amenity for resorts and boutique hotels, also available for a spa-style touch at home.",
@@ -106,6 +119,7 @@
     },
     {
       "id": "hotel-furnishings",
+      "slug": "hotel-furnishings",
       "name": "Hotel Furnishings",
       "category": "Hospitality Essentials",
       "description": "Complete furnishing packages for hotels and resorts — mattresses to linens, curtains to carpets — coordinated by room type and delivered turnkey, floor by floor.",

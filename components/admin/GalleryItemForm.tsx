@@ -8,7 +8,7 @@ import {
 } from "@/lib/actions/gallery";
 import FormField, { fieldInputClassName } from "@/components/admin/FormField";
 import ImageUploadField from "@/components/admin/ImageUploadField";
-import SubmitButton from "@/components/admin/SubmitButton";
+import FormActions from "@/components/admin/FormActions";
 import type { GalleryItem } from "@/lib/generated/prisma/client";
 
 interface GalleryItemFormProps {
@@ -20,11 +20,18 @@ const initialState: GalleryItemFormState = {};
 export default function GalleryItemForm({ item }: GalleryItemFormProps) {
   const action = item ? updateGalleryItem.bind(null, item.id) : createGalleryItem;
   const [state, formAction] = useActionState(action, initialState);
+  const errors = state.fieldErrors ?? {};
 
   return (
     <form action={formAction} className="max-w-2xl space-y-6">
-      <ImageUploadField label="Gallery Image" name="image" defaultValue={item?.image} required />
-      <FormField label="Caption" htmlFor="caption">
+      <ImageUploadField
+        label="Gallery Image"
+        name="image"
+        defaultValue={item?.image}
+        required
+        error={errors.image}
+      />
+      <FormField label="Caption" htmlFor="caption" error={errors.caption}>
         <input
           id="caption"
           name="caption"
@@ -33,7 +40,7 @@ export default function GalleryItemForm({ item }: GalleryItemFormProps) {
           className={fieldInputClassName}
         />
       </FormField>
-      <FormField label="Category" htmlFor="category">
+      <FormField label="Category" htmlFor="category" error={errors.category}>
         <input
           id="category"
           name="category"
@@ -43,7 +50,11 @@ export default function GalleryItemForm({ item }: GalleryItemFormProps) {
           placeholder="e.g. Hotels"
         />
       </FormField>
-      <FormField label="Display Order (lower shows first)" htmlFor="order">
+      <FormField
+        label="Display Order (lower shows first)"
+        htmlFor="order"
+        error={errors.order}
+      >
         <input
           id="order"
           name="order"
@@ -53,9 +64,11 @@ export default function GalleryItemForm({ item }: GalleryItemFormProps) {
         />
       </FormField>
 
-      {state.error && <p className="text-sm text-red-700">{state.error}</p>}
-
-      <SubmitButton>{item ? "Save Changes" : "Create Gallery Item"}</SubmitButton>
+      <FormActions
+        label={item ? "Save Changes" : "Create Gallery Item"}
+        error={state.error}
+        fieldErrors={state.fieldErrors}
+      />
     </form>
   );
 }
