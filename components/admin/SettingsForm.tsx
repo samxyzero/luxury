@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { updateSettings, type SettingsState } from "@/lib/actions/settings";
 import FormField, { fieldInputClassName } from "@/components/admin/FormField";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 import SubmitButton from "@/components/admin/SubmitButton";
 import type { SiteSettings as SiteSettingsRow } from "@/lib/generated/prisma/client";
 
@@ -234,15 +235,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <FormField label="Background Image URL" htmlFor="heroImage">
-          <input
-            id="heroImage"
-            name="heroImage"
-            defaultValue={settings.heroImage}
-            required
-            className={fieldInputClassName}
-          />
-        </FormField>
+        <ImageUploadField label="Hero Background Image" name="heroImage" defaultValue={settings.heroImage} required />
         <div className="grid gap-6 sm:grid-cols-2">
           <FormField label="Primary Button Label" htmlFor="heroCtaPrimaryLabel">
             <input
@@ -285,15 +278,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <FormField label="Image URL" htmlFor="aboutImage">
-          <input
-            id="aboutImage"
-            name="aboutImage"
-            defaultValue={settings.aboutImage}
-            required
-            className={fieldInputClassName}
-          />
-        </FormField>
+        <ImageUploadField label="About Section Image" name="aboutImage" defaultValue={settings.aboutImage} required />
         <FormField label="Years of Experience" htmlFor="aboutYearsExperience">
           <input
             id="aboutYearsExperience"
