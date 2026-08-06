@@ -31,9 +31,9 @@ export default async function Home() {
     <>
       <Hero
         hero={site.hero}
-        businessName={site.businessName}
         whatsapp={site.whatsapp}
         mapsUrl={site.address.mapsUrl}
+        stats={site.stats}
       />
       <About about={site.about} />
       <ProductsGrid products={products} whatsapp={site.whatsapp} />
