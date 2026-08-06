@@ -13,11 +13,10 @@ interface HeroProps {
   mapsUrl: string;
 }
 
-const SIDE_IMAGE = "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=900&q=80";
-const ACCENT_IMAGE = "https://images.unsplash.com/photo-1628428989131-5a838e23caac?auto=format&fit=crop&w=700&q=80";
+const ACCENT_IMAGE =
+  "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=800&q=80";
 
-const wordmarkClass =
-  "block font-display font-medium uppercase text-gold leading-[0.84] tracking-tight text-[clamp(3.25rem,9.5vw,8.25rem)]";
+const ease = [0.4, 0, 0.2, 1] as const;
 
 function splitWordmark(businessName: string) {
   const [first, ...rest] = businessName.split(" ");
@@ -31,69 +30,73 @@ export default function Hero({ hero, businessName, whatsapp, mapsUrl }: HeroProp
   )}`;
   const { first, second } = splitWordmark(businessName);
 
-  const cta = (
-    <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
-      <a
-        href={quoteHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="label border border-ink px-6 py-3.5 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
-      >
-        {hero.ctaPrimaryLabel}
-      </a>
-      <a
-        href={mapsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group label inline-flex items-center gap-2 text-ink transition-colors duration-300 hover:text-gold-dim"
-      >
-        <MapPin className="h-4 w-4" />
-        {hero.ctaSecondaryLabel}
-        <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-      </a>
-    </div>
-  );
-
-  const rating = (
-    <div className="flex items-center gap-2 text-sm text-ink-muted">
-      <div className="flex text-gold">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Star key={i} className="h-3.5 w-3.5 fill-gold" />
-        ))}
-      </div>
-      <span>5.0 &middot; Google Reviews</span>
-    </div>
-  );
-
-  const tagline = (
-    <div>
-      <span className="label text-ink-muted">{hero.eyebrow}</span>
-      <p className="mt-4 max-w-[15rem] text-sm leading-relaxed tracking-wide text-ink-muted uppercase">
-        {hero.subheadline}
-      </p>
-    </div>
-  );
-
   return (
-    <section id="top" className="relative overflow-hidden bg-paper pt-[104px] pb-16 lg:pt-32 lg:pb-24">
-      {/* Desktop editorial collage */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-        className="mx-auto hidden max-w-[1500px] px-10 lg:block xl:px-16"
-      >
-        <h1 className={wordmarkClass + " text-center"}>{first}</h1>
+    <section id="top" className="relative overflow-hidden bg-paper pt-[104px] pb-16 lg:pt-28 lg:pb-0">
+      <div className="mx-auto grid max-w-[1600px] grid-cols-1 lg:grid-cols-12 lg:items-stretch lg:gap-x-10 xl:gap-x-16">
+        {/* Text column */}
+        <div className="order-2 flex flex-col justify-center gap-8 px-6 py-12 sm:px-8 lg:order-1 lg:col-span-5 lg:px-0 lg:py-0 lg:pl-12 xl:pl-16">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease }}
+            className="label text-ink-muted"
+          >
+            {hero.eyebrow}
+          </motion.span>
 
-        <div className="relative mt-[-2vw] grid grid-cols-12 items-center">
-          <span className={wordmarkClass + " col-span-12 col-start-1 row-start-1 text-center"}>
-            {second}
-          </span>
+          <motion.h1
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease }}
+            className="font-display font-medium uppercase leading-[0.92] tracking-tight text-gold text-[clamp(2.75rem,5.6vw,4.75rem)]"
+          >
+            <span className="block">{first}</span>
+            <span className="block">{second}</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease }}
+            className="max-w-md text-base leading-relaxed text-ink-muted"
+          >
+            {hero.subheadline}
+          </motion.p>
+
           <motion.div
-            initial={{ opacity: 0, scale: 1.04 }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3, ease }}
+            className="flex flex-wrap items-center gap-x-7 gap-y-4"
+          >
+            <a
+              href={quoteHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="label border border-ink px-6 py-3.5 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
+            >
+              {hero.ctaPrimaryLabel}
+            </a>
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group label inline-flex items-center gap-2 text-ink transition-colors duration-300 hover:text-gold-dim"
+            >
+              <MapPin className="h-4 w-4" />
+              {hero.ctaSecondaryLabel}
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </motion.div>
+        </div>
+
+        {/* Image column */}
+        <div className="relative order-1 px-6 sm:px-8 lg:order-2 lg:col-span-7 lg:px-0">
+          <motion.div
+            initial={{ opacity: 0, scale: 1.03 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-            className="relative z-10 col-span-5 col-start-5 row-start-1 aspect-[4/3] shadow-soft-lg"
+            transition={{ duration: 0.8, ease }}
+            className="relative h-[56vh] w-full shadow-soft-lg sm:h-[64vh] lg:h-full lg:min-h-[calc(100vh-112px)]"
           >
             <Image
               src={hero.image}
@@ -101,114 +104,47 @@ export default function Hero({ hero, businessName, whatsapp, mapsUrl }: HeroProp
               fill
               priority
               className="object-cover"
-              sizes="45vw"
+              sizes="(min-width: 1024px) 58vw, 100vw"
             />
-            <CornerMarks tone="gold" inset={16} />
+            <CornerMarks tone="paper" inset={20} />
           </motion.div>
-        </div>
 
-        <div className="relative mt-8 grid grid-cols-12 items-end gap-6">
+          {/* Peeking accent image */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35, ease }}
+            className="absolute -top-8 right-14 hidden aspect-[4/5] w-32 shadow-soft-lg lg:block xl:right-20 xl:w-40"
+          >
+            <Image
+              src={ACCENT_IMAGE}
+              alt="Furnished interior detail"
+              fill
+              className="object-cover"
+              sizes="15vw"
+            />
+            <CornerMarks tone="gold" inset={8} size={16} />
+          </motion.div>
+
+          {/* Credential card */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className="col-span-3"
+            transition={{ duration: 0.6, delay: 0.45, ease }}
+            className="relative z-10 mt-6 flex w-full flex-col gap-4 bg-navy px-8 py-7 text-paper sm:absolute sm:bottom-0 sm:left-6 sm:mt-0 sm:w-72 lg:left-0 lg:w-80"
           >
-            <div className="relative aspect-[4/5] w-full">
-              <Image
-                src={SIDE_IMAGE}
-                alt="Furnished bedroom detail"
-                fill
-                className="object-cover"
-                sizes="25vw"
-              />
-              <CornerMarks tone="gold" inset={10} size={16} />
+            <div className="flex items-center gap-2.5">
+              <div className="flex text-gold">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-gold" />
+                ))}
+              </div>
+              <span className="text-sm text-paper/70">5.0 &middot; Google Reviews</span>
             </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
-            className="col-span-4 space-y-6"
-          >
-            {tagline}
-            {cta}
-            {rating}
-          </motion.div>
-
-          <div className="col-span-3" />
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.55, ease: [0.4, 0, 0.2, 1] }}
-            className="col-span-2 col-start-11 w-36 justify-self-end"
-          >
-            <div className="relative aspect-[3/5]">
-              <Image
-                src={ACCENT_IMAGE}
-                alt="Curtain fabric detail"
-                fill
-                className="object-cover"
-                sizes="15vw"
-              />
-              <CornerMarks tone="gold" inset={8} size={14} />
-            </div>
+            <div className="h-px w-10 bg-gold" />
+            <p className="label text-gold">Trusted by Homes &amp; Hotels</p>
           </motion.div>
         </div>
-      </motion.div>
-
-      {/* Mobile / tablet stacked version */}
-      <div className="px-6 sm:px-8 lg:hidden">
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="text-center font-display font-medium uppercase leading-[0.85] tracking-tight text-gold text-[clamp(3rem,15vw,5rem)]"
-        >
-          <span className="block">{first}</span>
-          <span className="block">{second}</span>
-        </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 1.03 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-          className="relative mt-8 aspect-[4/3] w-full"
-        >
-          <Image
-            src={hero.image}
-            alt={`Elegant interior furnished by ${businessName}`}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-          <CornerMarks tone="gold" inset={14} />
-        </motion.div>
-
-        <div className="mt-8 grid grid-cols-2 gap-4">
-          <div className="relative aspect-[4/5] w-full">
-            <Image src={SIDE_IMAGE} alt="Furnished bedroom detail" fill className="object-cover" sizes="50vw" />
-            <CornerMarks tone="gold" inset={8} size={14} />
-          </div>
-          <div className="relative aspect-[4/5] w-full">
-            <Image src={ACCENT_IMAGE} alt="Curtain fabric detail" fill className="object-cover" sizes="50vw" />
-            <CornerMarks tone="gold" inset={8} size={14} />
-          </div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          className="mt-10 space-y-6"
-        >
-          {tagline}
-          {cta}
-          {rating}
-        </motion.div>
       </div>
     </section>
   );
