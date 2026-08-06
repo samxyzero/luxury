@@ -8,6 +8,14 @@ import { verifySession } from "@/lib/dal";
 import { slugify } from "@/lib/slug";
 import { zodToFormState, prismaToFormState, type FormState } from "@/lib/actions/form-errors";
 
+/** Textarea lists are one item per line; blanks are dropped. */
+function splitLines(value: string | undefined): string[] {
+  return (value ?? "")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+}
+
 const productSchema = z.object({
   name: z.string().trim().min(1, "Enter a product name."),
   slug: z
@@ -32,6 +40,20 @@ const productSchema = z.object({
   idealFor: z.enum(["Homes", "Hotels", "Homes & Hotels"], {
     message: "Choose whether this suits Homes, Hotels, or both.",
   }),
+  shortDescription: z
+    .string()
+    .trim()
+    .max(200, "Keep the short description under 200 characters — it's used on cards.")
+    .optional()
+    .transform((v) => v || null),
+  material: z.string().trim().optional().transform((v) => v || null),
+  care: z.string().trim().optional().transform((v) => v || null),
+  highlights: z.string().optional().transform(splitLines),
+  colors: z.string().optional().transform(splitLines),
+  // Unchecked checkboxes are absent from FormData, which coerces to false —
+  // exactly the intended semantics, so no default is needed here.
+  inStock: z.coerce.boolean(),
+  featured: z.coerce.boolean(),
   order: z.coerce
     .number({ message: "Display order must be a number." })
     .int("Display order must be a whole number.")

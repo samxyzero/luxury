@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Check, MapPin, Phone } from "lucide-react";
 import CornerMarks from "@/components/CornerMarks";
 import PageShell from "@/components/PageShell";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
+import Badge from "@/components/ui/Badge";
 import { getSiteSettings, getProducts, getProductBySlug } from "@/lib/content";
 import { pageMetadata, siteUrl } from "@/lib/seo";
+import { colorSwatch, formatList, truncate } from "@/lib/format";
 
 export async function generateStaticParams() {
   const products = await getProducts();
@@ -29,7 +31,7 @@ export async function generateMetadata({
 
   return pageMetadata({
     title: product.name,
-    description: product.description.slice(0, 300),
+    description: truncate(product.shortDescription ?? product.description, 300),
     path: `/products/${product.slug}`,
     image: product.image,
     keywords: [
@@ -38,6 +40,7 @@ export async function generateMetadata({
       `${product.name} Pokhara`,
       `${product.name} Nepal`,
       `${product.category} Nepal`,
+      ...(product.colors ?? []).map((c) => `${c} ${product.name.toLowerCase()}`),
     ],
   });
 }
@@ -64,19 +67,37 @@ export default async function ProductDetailPage({
     `Hi ${site.businessName}, I'd like a quote for ${product.name}.`
   )}`;
 
+  const variants = product.variants ?? [];
+  const colors = product.colors ?? [];
+  const highlights = product.highlights ?? [];
+  const availability = product.inStock === false
+    ? "https://schema.org/OutOfStock"
+    : "https://schema.org/InStock";
+
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    description: product.description,
+    description: product.shortDescription ?? product.description,
     image: product.image,
     category: product.category,
     url: `${siteUrl}/products/${product.slug}`,
     brand: { "@type": "Brand", name: site.businessName },
+    ...(product.material ? { material: product.material } : {}),
+    ...(colors.length > 0 ? { color: colors.join(", ") } : {}),
+    ...(variants.length > 0
+      ? {
+          hasVariant: variants.map((v) => ({
+            "@type": "Product",
+            name: `${product.name} — ${v.name}${v.size ? ` (${v.size})` : ""}`,
+            ...(v.sku ? { sku: v.sku } : {}),
+          })),
+        }
+      : {}),
     offers: {
       "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      priceCurrency: "NPR",
+      availability,
+      priceCurrency: product.currency ?? "NPR",
       seller: { "@type": "Organization", name: site.businessName },
       url: `${siteUrl}/products/${product.slug}`,
     },
@@ -118,13 +139,60 @@ export default async function ProductDetailPage({
                 {product.name}
               </h1>
 
-              <p className="label mt-6 inline-block border border-stone px-4 py-2 text-ink-muted">
-                Ideal for {product.idealFor}
-              </p>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <Badge tone="muted">Ideal for {product.idealFor}</Badge>
+                {product.inStock === false ? (
+                  <Badge tone="muted" className="opacity-70">Made to order</Badge>
+                ) : (
+                  <Badge tone="gold">In stock</Badge>
+                )}
+              </div>
 
               <p className="mt-6 text-base leading-relaxed text-ink-muted sm:text-lg">
                 {product.description}
               </p>
+
+              {highlights.length > 0 && (
+                <ul className="mt-8 space-y-3 border-t border-stone pt-6">
+                  {highlights.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm text-ink-muted">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {colors.length > 0 && (
+                <div className="mt-8 border-t border-stone pt-6">
+                  <h2 className="label text-ink">
+                    Colourways
+                    <span className="ml-2 font-normal normal-case tracking-normal text-ink-muted">
+                      {colors.length} available
+                    </span>
+                  </h2>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {colors.map((color) => {
+                      const swatch = colorSwatch(color);
+                      return (
+                        <li
+                          key={color}
+                          className="flex items-center gap-2 border border-stone px-3 py-1.5 text-sm text-ink-muted"
+                        >
+                          {swatch && (
+                            <span
+                              aria-hidden
+                              className="h-3.5 w-3.5 border border-ink/15"
+                              style={{ backgroundColor: swatch }}
+                            />
+                          )}
+                          {color}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
 
               <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
                 <a
@@ -160,6 +228,81 @@ export default async function ProductDetailPage({
           </div>
         </div>
       </section>
+
+      {(variants.length > 0 || product.material || product.care) && (
+        <section className="border-t border-stone bg-paper-dim py-16 sm:py-20">
+          <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+            <h2 className="font-display text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+              Specifications
+            </h2>
+
+            <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
+              {variants.length > 0 && (
+                <div className="lg:col-span-7">
+                  <h3 className="label text-ink-muted">Sizes &amp; Options</h3>
+                  <div className="mt-4 overflow-x-auto">
+                    <table className="w-full min-w-[26rem] border-collapse text-left text-sm">
+                      <thead>
+                        <tr className="border-b border-stone">
+                          <th scope="col" className="label py-3 pr-4 font-semibold text-ink">
+                            Option
+                          </th>
+                          <th scope="col" className="label py-3 pr-4 font-semibold text-ink">
+                            Size
+                          </th>
+                          <th scope="col" className="label py-3 font-semibold text-ink">
+                            Availability
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {variants.map((variant) => (
+                          <tr key={variant.id} className="border-b border-stone/60">
+                            <td className="py-3 pr-4 font-medium text-ink">{variant.name}</td>
+                            <td className="py-3 pr-4 text-ink-muted">{variant.size ?? "—"}</td>
+                            <td className="py-3 text-ink-muted">
+                              {variant.inStock ? "In stock" : "To order"}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-4 text-sm text-ink-muted">
+                    Custom sizes are available on most ranges — send us the measurements and
+                    we&apos;ll confirm what&apos;s possible.
+                  </p>
+                </div>
+              )}
+
+              <div className="space-y-8 lg:col-span-5">
+                {product.material && (
+                  <div>
+                    <h3 className="label text-ink-muted">Materials &amp; Quality</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                      {product.material}
+                    </p>
+                  </div>
+                )}
+                {product.care && (
+                  <div className="border-t border-stone pt-8">
+                    <h3 className="label text-ink-muted">Care</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-ink-muted">{product.care}</p>
+                  </div>
+                )}
+                {colors.length > 0 && (
+                  <div className="border-t border-stone pt-8">
+                    <h3 className="label text-ink-muted">Available In</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                      {formatList(colors)}.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {related.length > 0 && (
         <section className="border-t border-stone bg-paper py-20 sm:py-24">

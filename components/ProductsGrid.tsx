@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
@@ -33,7 +34,14 @@ export default function ProductsGrid({
     () => ["All", ...Array.from(new Set(products.map((p) => p.category)))],
     [products]
   );
-  const [active, setActive] = useState("All");
+
+  // Read the filter client-side so /products stays statically pre-rendered —
+  // using searchParams in the page itself would force dynamic rendering.
+  // An unknown value falls back to "All" rather than rendering an empty grid.
+  const requested = useSearchParams().get("category");
+  const [active, setActive] = useState(() =>
+    requested && categories.includes(requested) ? requested : "All"
+  );
 
   const filtered =
     active === "All" ? products : products.filter((p) => p.category === active);

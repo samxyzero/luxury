@@ -59,6 +59,54 @@ export default function Contact({ site, as: Heading = "h2" }: ContactProps) {
           </p>
         </Reveal>
 
+        {/* Quick actions first — most enquiries here start on WhatsApp or a
+            phone call, so those shouldn't sit below a form. */}
+        <Reveal delay={0.05}>
+          <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {[
+              {
+                href: whatsappHref,
+                external: true,
+                icon: MessageCircle,
+                label: "WhatsApp",
+                value: "Fastest reply",
+              },
+              {
+                href: `tel:${site.phone}`,
+                external: false,
+                icon: Phone,
+                label: "Call",
+                value: site.phoneDisplay,
+              },
+              {
+                href: site.address.mapsUrl,
+                external: true,
+                icon: MapPin,
+                label: "Directions",
+                value: `${site.address.area}, ${site.address.city}`,
+              },
+            ].map((action) => (
+              <li key={action.label}>
+                <a
+                  href={action.href}
+                  {...(action.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="group flex items-center gap-4 border border-stone-on-navy px-5 py-5 transition-colors duration-300 hover:border-gold"
+                >
+                  <action.icon className="h-5 w-5 shrink-0 text-gold" />
+                  <span>
+                    <span className="label block text-paper/45">{action.label}</span>
+                    <span className="text-paper transition-colors duration-300 group-hover:text-gold">
+                      {action.value}
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+
         <div className="mt-16 grid grid-cols-1 gap-14 lg:grid-cols-5 lg:gap-16">
           <Reveal delay={0.1} className="lg:col-span-2">
             <div className="divide-y divide-stone-on-navy border-y border-stone-on-navy">
