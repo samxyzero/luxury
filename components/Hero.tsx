@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight, MapPin, Star } from "lucide-react";
+import { ArrowDown, MapPin, Star } from "lucide-react";
 import CornerMarks from "@/components/CornerMarks";
 import type { SiteSettings } from "@/types/content";
 
@@ -13,203 +13,87 @@ interface HeroProps {
   mapsUrl: string;
 }
 
-const SIDE_IMAGE = "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=900&q=80";
-const ACCENT_IMAGE = "https://images.unsplash.com/photo-1628428989131-5a838e23caac?auto=format&fit=crop&w=700&q=80";
-
-const wordmarkClass =
-  "block font-display font-medium uppercase text-gold leading-[0.84] tracking-tight text-[clamp(3.25rem,9.5vw,8.25rem)]";
-
-function splitWordmark(businessName: string) {
-  const [first, ...rest] = businessName.split(" ");
-  const second = rest.join(" ") || first;
-  return { first, second };
-}
+const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Hero({ hero, businessName, whatsapp, mapsUrl }: HeroProps) {
   const quoteHref = `https://wa.me/${whatsapp}?text=${encodeURIComponent(
     "Hi Luxury Enterprises, I'd like to get a quote."
   )}`;
-  const { first, second } = splitWordmark(businessName);
-
-  const cta = (
-    <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
-      <a
-        href={quoteHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="label border border-ink px-6 py-3.5 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
-      >
-        {hero.ctaPrimaryLabel}
-      </a>
-      <a
-        href={mapsUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group label inline-flex items-center gap-2 text-ink transition-colors duration-300 hover:text-gold-dim"
-      >
-        <MapPin className="h-4 w-4" />
-        {hero.ctaSecondaryLabel}
-        <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-      </a>
-    </div>
-  );
-
-  const rating = (
-    <div className="flex items-center gap-2 text-sm text-ink-muted">
-      <div className="flex text-gold">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Star key={i} className="h-3.5 w-3.5 fill-gold" />
-        ))}
-      </div>
-      <span>5.0 &middot; Google Reviews</span>
-    </div>
-  );
-
-  const tagline = (
-    <div>
-      <span className="label text-ink-muted">{hero.eyebrow}</span>
-      <p className="mt-4 max-w-[15rem] text-sm leading-relaxed tracking-wide text-ink-muted uppercase">
-        {hero.subheadline}
-      </p>
-    </div>
-  );
 
   return (
-    <section id="top" className="relative overflow-hidden bg-paper pt-[104px] pb-16 lg:pt-32 lg:pb-24">
-      {/* Desktop editorial collage */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-        className="mx-auto hidden max-w-[1500px] px-10 lg:block xl:px-16"
-      >
-        <h1 className={wordmarkClass + " text-center"}>{first}</h1>
+    <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden bg-navy">
+      <div className="absolute inset-0">
+        <Image
+          src={hero.image}
+          alt={`Elegant interior furnished by ${businessName}`}
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/55 to-navy" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/70 via-navy/10 to-transparent" />
+        <CornerMarks tone="paper" inset={24} />
+      </div>
 
-        <div className="relative mt-[-2vw] grid grid-cols-12 items-center">
-          <span className={wordmarkClass + " col-span-12 col-start-1 row-start-1 text-center"}>
-            {second}
-          </span>
-          <motion.div
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-            className="relative z-10 col-span-5 col-start-5 row-start-1 aspect-[4/3] shadow-soft-lg"
-          >
-            <Image
-              src={hero.image}
-              alt={`Elegant interior furnished by ${businessName}`}
-              fill
-              priority
-              className="object-cover"
-              sizes="45vw"
-            />
-            <CornerMarks tone="gold" inset={16} />
-          </motion.div>
-        </div>
-
-        <div className="relative mt-8 grid grid-cols-12 items-end gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-            className="col-span-3"
-          >
-            <div className="relative aspect-[4/5] w-full">
-              <Image
-                src={SIDE_IMAGE}
-                alt="Furnished bedroom detail"
-                fill
-                className="object-cover"
-                sizes="25vw"
-              />
-              <CornerMarks tone="gold" inset={10} size={16} />
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
-            className="col-span-4 space-y-6"
-          >
-            {tagline}
-            {cta}
-            {rating}
-          </motion.div>
-
-          <div className="col-span-3" />
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.55, ease: [0.4, 0, 0.2, 1] }}
-            className="col-span-2 col-start-11 w-36 justify-self-end"
-          >
-            <div className="relative aspect-[3/5]">
-              <Image
-                src={ACCENT_IMAGE}
-                alt="Curtain fabric detail"
-                fill
-                className="object-cover"
-                sizes="15vw"
-              />
-              <CornerMarks tone="gold" inset={8} size={14} />
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Mobile / tablet stacked version */}
-      <div className="px-6 sm:px-8 lg:hidden">
-        <motion.h1
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          className="text-center font-display font-medium uppercase leading-[0.85] tracking-tight text-gold text-[clamp(3rem,15vw,5rem)]"
-        >
-          <span className="block">{first}</span>
-          <span className="block">{second}</span>
-        </motion.h1>
-
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-28 pb-20 sm:px-8 lg:px-12">
         <motion.div
-          initial={{ opacity: 0, scale: 1.03 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-          className="relative mt-8 aspect-[4/3] w-full"
-        >
-          <Image
-            src={hero.image}
-            alt={`Elegant interior furnished by ${businessName}`}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
-          <CornerMarks tone="gold" inset={14} />
-        </motion.div>
-
-        <div className="mt-8 grid grid-cols-2 gap-4">
-          <div className="relative aspect-[4/5] w-full">
-            <Image src={SIDE_IMAGE} alt="Furnished bedroom detail" fill className="object-cover" sizes="50vw" />
-            <CornerMarks tone="gold" inset={8} size={14} />
-          </div>
-          <div className="relative aspect-[4/5] w-full">
-            <Image src={ACCENT_IMAGE} alt="Curtain fabric detail" fill className="object-cover" sizes="50vw" />
-            <CornerMarks tone="gold" inset={8} size={14} />
-          </div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-          className="mt-10 space-y-6"
+          transition={{ duration: 0.7, ease }}
+          className="max-w-2xl border-l-2 border-gold bg-navy/90 p-8 sm:p-12 lg:p-14"
         >
-          {tagline}
-          {cta}
-          {rating}
+          <div className="flex items-center gap-3 text-gold">
+            <span className="h-px w-8 bg-gold" />
+            <span className="label">{hero.eyebrow}</span>
+          </div>
+
+          <h1 className="mt-6 font-display text-4xl leading-[1.08] font-medium text-paper sm:text-5xl lg:text-6xl">
+            {hero.headline} <span className="text-gold">{hero.highlight}</span>
+          </h1>
+
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-paper/75 sm:text-lg">
+            {hero.subheadline}
+          </p>
+
+          <div className="mt-9 flex flex-wrap items-center gap-4">
+            <a
+              href={quoteHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="label bg-gold px-7 py-3.5 text-navy transition-colors duration-300 hover:bg-gold-dim"
+            >
+              {hero.ctaPrimaryLabel}
+            </a>
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="label flex items-center gap-2 border border-paper/40 px-7 py-3.5 text-paper transition-colors duration-300 hover:border-gold hover:text-gold"
+            >
+              <MapPin className="h-4 w-4" />
+              {hero.ctaSecondaryLabel}
+            </a>
+          </div>
+
+          <div className="mt-9 flex items-center gap-2 text-sm text-paper/70">
+            <div className="flex text-gold">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-gold" />
+              ))}
+            </div>
+            <span>5.0 &middot; Google Reviews &middot; Pokhara, Nepal</span>
+          </div>
         </motion.div>
       </div>
+
+      <motion.div
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-paper/60"
+      >
+        <ArrowDown className="h-5 w-5" />
+      </motion.div>
     </section>
   );
 }
