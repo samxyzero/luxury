@@ -42,38 +42,37 @@ interface WhyChooseUsProps {
 
 export default function WhyChooseUs({ stats }: WhyChooseUsProps) {
   return (
-    <section className="relative overflow-hidden bg-navy-950 py-24 sm:py-32">
-      <div className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-navy-600/30 blur-3xl" />
-      <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-gold-500/10 blur-3xl" />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <div className="mx-auto flex items-center justify-center gap-2 text-gold-400 text-xs sm:text-sm font-semibold tracking-widest uppercase">
-            <span className="h-px w-8 bg-gold-500" />
-            Why Choose Us
-            <span className="h-px w-8 bg-gold-500" />
+    <section className="bg-navy py-24 sm:py-32 lg:py-40">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+        <Reveal className="max-w-2xl">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-gold" />
+            <span className="label text-paper/55">Why Choose Us</span>
           </div>
-          <h2 className="mt-5 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white">
+          <h2 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-paper sm:text-5xl">
             The Trusted Name in Premium Furnishing
           </h2>
         </Reveal>
 
-        <Reveal delay={0.1} className="mt-14 grid grid-cols-2 gap-8 sm:grid-cols-4 rounded-3xl glass-navy px-6 py-10">
+        <Reveal
+          delay={0.1}
+          className="mt-16 grid grid-cols-2 divide-x divide-stone-on-navy border-y border-stone-on-navy lg:grid-cols-4"
+        >
           {stats.map((stat) => (
-            <StatCounter key={stat.id} value={stat.value} suffix={stat.suffix} label={stat.label} />
+            <div key={stat.id} className="px-6 py-10 first:pl-0 sm:px-10">
+              <StatCounter value={stat.value} suffix={stat.suffix} label={stat.label} />
+            </div>
           ))}
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-20 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2">
           {REASONS.map((reason, i) => (
-            <Reveal key={reason.title} delay={(i % 3) * 0.1}>
-              <div className="flex items-start gap-4 rounded-2xl border border-white/8 bg-white/[0.03] p-6 transition-colors hover:bg-white/[0.06]">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-gold-500 to-gold-300 text-navy-950">
-                  <reason.icon className="h-5 w-5" strokeWidth={2} />
-                </div>
+            <Reveal key={reason.title} delay={(i % 2) * 0.1}>
+              <div className="flex items-start gap-4 border-t border-stone-on-navy pt-6">
+                <reason.icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" strokeWidth={1.5} />
                 <div>
-                  <h3 className="font-display text-lg font-semibold text-white">{reason.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/65">{reason.description}</p>
+                  <h3 className="font-display text-lg font-medium text-paper">{reason.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-paper/60">{reason.description}</p>
                 </div>
               </div>
             </Reveal>

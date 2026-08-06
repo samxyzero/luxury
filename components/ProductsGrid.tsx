@@ -22,42 +22,46 @@ export default function ProductsGrid({ products, whatsapp }: ProductsGridProps) 
     active === "All" ? products : products.filter((p) => p.category === active);
 
   return (
-    <section id="products" className="relative bg-navy-950 py-24 sm:py-32 bg-grain">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <div className="mx-auto flex items-center justify-center gap-2 text-gold-400 text-xs sm:text-sm font-semibold tracking-widest uppercase">
-            <span className="h-px w-8 bg-gold-500" />
-            Featured Products
-            <span className="h-px w-8 bg-gold-500" />
+    <section id="products" className="bg-navy py-24 sm:py-32 lg:py-40">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+        <Reveal className="max-w-2xl">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-gold" />
+            <span className="label text-paper/55">Featured Products</span>
           </div>
-          <h2 className="mt-5 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white">
+          <h2 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-paper sm:text-5xl">
             Everything Your Space Deserves
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-white/65 leading-relaxed">
+          <p className="mt-6 text-base leading-relaxed text-paper/60 sm:text-lg">
             From restful sleep essentials to statement décor — explore our signature
             categories, each chosen for comfort, craftsmanship and lasting quality.
           </p>
         </Reveal>
 
-        <Reveal delay={0.1} className="mt-10 flex flex-wrap justify-center gap-2.5">
+        <Reveal delay={0.1} className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-b border-stone-on-navy py-5">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActive(category)}
-              className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
-                active === category
-                  ? "bg-gradient-to-r from-gold-500 to-gold-400 text-navy-950 shadow-[0_8px_20px_-6px_rgba(201,162,75,0.6)]"
-                  : "glass-navy text-white/70 hover:text-white"
+              className={`label relative pb-1 transition-colors duration-300 ${
+                active === category ? "text-paper" : "text-paper/45 hover:text-paper/75"
               }`}
             >
               {category}
+              {active === category && (
+                <motion.span
+                  layoutId="product-tab-underline"
+                  className="absolute -bottom-[1px] left-0 h-px w-full bg-gold"
+                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                />
+              )}
             </button>
           ))}
         </Reveal>
 
         <motion.div
           layout
-          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-14 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4"
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((product) => (

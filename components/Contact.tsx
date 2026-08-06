@@ -41,46 +41,39 @@ export default function Contact({ site }: ContactProps) {
   }
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-navy-950 py-24 sm:py-32">
-      <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-gold-500/10 blur-3xl" />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <div className="mx-auto flex items-center justify-center gap-2 text-gold-400 text-xs sm:text-sm font-semibold tracking-widest uppercase">
-            <span className="h-px w-8 bg-gold-500" />
-            Get In Touch
-            <span className="h-px w-8 bg-gold-500" />
+    <section id="contact" className="bg-navy py-24 sm:py-32 lg:py-40">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+        <Reveal className="max-w-2xl">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-gold" />
+            <span className="label text-paper/55">Get In Touch</span>
           </div>
-          <h2 className="mt-5 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white">
+          <h2 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-paper sm:text-5xl">
             Let&apos;s Furnish Something Beautiful
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-white/65 leading-relaxed">
+          <p className="mt-6 text-base leading-relaxed text-paper/60 sm:text-lg">
             Reach out for a quote, a consultation, or simply to visit our showroom on
             New Road, Pokhara.
           </p>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-5">
-          <Reveal delay={0.1} className="lg:col-span-2 space-y-5">
-            <div className="glass-navy rounded-2xl p-6 space-y-5">
-              <a href={`tel:${site.phone}`} className="flex items-start gap-3 group">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-500/15 text-gold-300">
-                  <Phone className="h-4.5 w-4.5" />
-                </span>
+        <div className="mt-16 grid grid-cols-1 gap-14 lg:grid-cols-5 lg:gap-16">
+          <Reveal delay={0.1} className="lg:col-span-2">
+            <div className="divide-y divide-stone-on-navy border-y border-stone-on-navy">
+              <a href={`tel:${site.phone}`} className="group flex items-start gap-4 py-5">
+                <Phone className="mt-0.5 h-4.5 w-4.5 shrink-0 text-gold" />
                 <span>
-                  <span className="block text-xs uppercase tracking-widest text-white/50">Call Us</span>
-                  <span className="text-white group-hover:text-gold-300 transition-colors">
+                  <span className="label block text-paper/45">Call Us</span>
+                  <span className="text-paper transition-colors duration-300 group-hover:text-gold">
                     {site.phoneDisplay}
                   </span>
                 </span>
               </a>
-              <a href={`mailto:${site.email}`} className="flex items-start gap-3 group">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-500/15 text-gold-300">
-                  <Mail className="h-4.5 w-4.5" />
-                </span>
+              <a href={`mailto:${site.email}`} className="group flex items-start gap-4 py-5">
+                <Mail className="mt-0.5 h-4.5 w-4.5 shrink-0 text-gold" />
                 <span>
-                  <span className="block text-xs uppercase tracking-widest text-white/50">Email</span>
-                  <span className="text-white group-hover:text-gold-300 transition-colors">
+                  <span className="label block text-paper/45">Email</span>
+                  <span className="text-paper transition-colors duration-300 group-hover:text-gold">
                     {site.email}
                   </span>
                 </span>
@@ -89,77 +82,73 @@ export default function Contact({ site }: ContactProps) {
                 href={site.address.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-start gap-3 group"
+                className="group flex items-start gap-4 py-5"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-500/15 text-gold-300">
-                  <MapPin className="h-4.5 w-4.5" />
-                </span>
+                <MapPin className="mt-0.5 h-4.5 w-4.5 shrink-0 text-gold" />
                 <span>
-                  <span className="block text-xs uppercase tracking-widest text-white/50">Visit Our Store</span>
-                  <span className="text-white group-hover:text-gold-300 transition-colors">
+                  <span className="label block text-paper/45">Visit Our Store</span>
+                  <span className="text-paper transition-colors duration-300 group-hover:text-gold">
                     {site.address.line1}, {site.address.city} {site.address.postalCode}
                   </span>
                 </span>
               </a>
-              <div className="flex items-start gap-3">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-500/15 text-gold-300">
-                  <Clock className="h-4.5 w-4.5" />
-                </span>
+              <div className="flex items-start gap-4 py-5">
+                <Clock className="mt-0.5 h-4.5 w-4.5 shrink-0 text-gold" />
                 <span>
-                  <span className="block text-xs uppercase tracking-widest text-white/50">Business Hours</span>
+                  <span className="label block text-paper/45">Business Hours</span>
                   {site.hours.map((h) => (
-                    <span key={h.day} className="block text-white/85 text-sm">
+                    <span key={h.day} className="block text-sm text-paper/80">
                       {h.day}: {h.time}
                     </span>
                   ))}
                 </span>
               </div>
-
-              <motion.a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-white"
-              >
-                <MessageCircle className="h-4.5 w-4.5" />
-                Chat on WhatsApp
-              </motion.a>
             </div>
 
-            <MapEmbed embedUrl={site.address.mapEmbedUrl} title={`${site.businessName} location`} />
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="label mt-8 flex items-center justify-center gap-2 border border-paper py-4 text-paper transition-colors duration-300 hover:bg-paper hover:text-navy"
+            >
+              <MessageCircle className="h-4 w-4" />
+              Chat on WhatsApp
+            </a>
+
+            <div className="mt-8">
+              <MapEmbed embedUrl={site.address.mapEmbedUrl} title={`${site.businessName} location`} />
+            </div>
           </Reveal>
 
           <Reveal delay={0.2} className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="glass-navy rounded-2xl p-6 sm:p-8 space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid gap-8 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="name" className="mb-1.5 block text-xs uppercase tracking-widest text-white/60">
+                  <label htmlFor="name" className="label mb-2 block text-paper/45">
                     Name
                   </label>
                   <input
                     id="name"
                     name="name"
                     required
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder-white/35 outline-none transition-colors focus:border-gold-400"
+                    className="w-full border-0 border-b border-stone-on-navy bg-transparent py-2.5 text-paper placeholder-paper/30 outline-none transition-colors duration-300 focus:border-gold"
                     placeholder="Your name"
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="mb-1.5 block text-xs uppercase tracking-widest text-white/60">
+                  <label htmlFor="phone" className="label mb-2 block text-paper/45">
                     Phone
                   </label>
                   <input
                     id="phone"
                     name="phone"
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder-white/35 outline-none transition-colors focus:border-gold-400"
+                    className="w-full border-0 border-b border-stone-on-navy bg-transparent py-2.5 text-paper placeholder-paper/30 outline-none transition-colors duration-300 focus:border-gold"
                     placeholder="98X-XXXXXXX"
                   />
                 </div>
               </div>
               <div>
-                <label htmlFor="email" className="mb-1.5 block text-xs uppercase tracking-widest text-white/60">
+                <label htmlFor="email" className="label mb-2 block text-paper/45">
                   Email
                 </label>
                 <input
@@ -167,12 +156,12 @@ export default function Contact({ site }: ContactProps) {
                   name="email"
                   type="email"
                   required
-                  className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder-white/35 outline-none transition-colors focus:border-gold-400"
+                  className="w-full border-0 border-b border-stone-on-navy bg-transparent py-2.5 text-paper placeholder-paper/30 outline-none transition-colors duration-300 focus:border-gold"
                   placeholder="you@email.com"
                 />
               </div>
               <div>
-                <label htmlFor="message" className="mb-1.5 block text-xs uppercase tracking-widest text-white/60">
+                <label htmlFor="message" className="label mb-2 block text-paper/45">
                   Message
                 </label>
                 <textarea
@@ -180,7 +169,7 @@ export default function Contact({ site }: ContactProps) {
                   name="message"
                   required
                   rows={4}
-                  className="w-full resize-none rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white placeholder-white/35 outline-none transition-colors focus:border-gold-400"
+                  className="w-full resize-none border-0 border-b border-stone-on-navy bg-transparent py-2.5 text-paper placeholder-paper/30 outline-none transition-colors duration-300 focus:border-gold"
                   placeholder="Tell us about your project..."
                 />
               </div>
@@ -188,23 +177,21 @@ export default function Contact({ site }: ContactProps) {
               <motion.button
                 type="submit"
                 disabled={status === "submitting"}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-400 px-6 py-3.5 text-sm font-semibold text-navy-950 shadow-[0_12px_30px_-8px_rgba(201,162,75,0.6)] disabled:opacity-60"
+                className="label flex w-full items-center justify-center gap-2 border border-paper py-4 text-paper transition-colors duration-300 hover:bg-paper hover:text-navy disabled:opacity-50"
               >
                 <Send className="h-4 w-4" />
                 {status === "submitting" ? "Sending..." : "Send Message"}
               </motion.button>
 
               {status === "success" && (
-                <p className="text-center text-sm text-gold-300">
+                <p className="text-center text-sm text-gold">
                   Thank you! We&apos;ll be in touch shortly.
                 </p>
               )}
               {status === "error" && (
-                <p className="text-center text-sm text-white/70">
+                <p className="text-center text-sm text-paper/70">
                   Something went wrong — please email us directly at{" "}
-                  <a href={`mailto:${site.email}`} className="underline text-gold-300">
+                  <a href={`mailto:${site.email}`} className="text-gold underline">
                     {site.email}
                   </a>
                   .

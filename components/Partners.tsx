@@ -6,29 +6,26 @@ interface PartnersProps {
 }
 
 export default function Partners({ partners }: PartnersProps) {
-  const loop = [...partners, ...partners];
-
   return (
-    <section className="relative bg-ivory py-16 sm:py-20 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Reveal className="text-center">
-          <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-navy-600">
-            Trusted Brand Partners
-          </p>
+    <section className="border-y border-stone bg-paper py-16 sm:py-20">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+        <Reveal>
+          <p className="label text-center text-ink-muted">Trusted Brand Partners</p>
         </Reveal>
-      </div>
 
-      <div className="relative mt-10 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="flex w-max animate-marquee gap-16">
-          {loop.map((partner, i) => (
+        <Reveal
+          delay={0.1}
+          className="mt-10 flex flex-wrap justify-center divide-x divide-stone"
+        >
+          {partners.map((partner) => (
             <span
-              key={`${partner.id}-${i}`}
-              className="font-display text-2xl sm:text-3xl font-semibold text-navy-900/25 whitespace-nowrap"
+              key={partner.id}
+              className="px-8 py-2 font-display text-lg text-ink-muted sm:text-xl"
             >
               {partner.name}
             </span>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

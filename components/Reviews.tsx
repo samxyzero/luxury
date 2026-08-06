@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import type { Review } from "@/types/content";
 
@@ -17,7 +17,7 @@ export default function Reviews({ reviews, mapsUrl }: ReviewsProps) {
   useEffect(() => {
     const timer = setInterval(() => {
       setIndex((i) => (i + 1) % reviews.length);
-    }, 5500);
+    }, 6000);
     return () => clearInterval(timer);
   }, [reviews.length]);
 
@@ -26,64 +26,60 @@ export default function Reviews({ reviews, mapsUrl }: ReviewsProps) {
   const review = reviews[index];
 
   return (
-    <section id="reviews" className="relative overflow-hidden bg-navy-950 py-24 sm:py-32">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-navy-600/20 blur-3xl" />
-
-      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <section id="reviews" className="bg-navy py-24 sm:py-32 lg:py-40">
+      <div className="mx-auto max-w-3xl px-6 sm:px-8 lg:px-12">
         <Reveal className="text-center">
-          <div className="mx-auto flex items-center justify-center gap-2 text-gold-400 text-xs sm:text-sm font-semibold tracking-widest uppercase">
-            <span className="h-px w-8 bg-gold-500" />
-            Customer Reviews
-            <span className="h-px w-8 bg-gold-500" />
+          <div className="flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-gold" />
+            <span className="label text-paper/55">Customer Reviews</span>
+            <span className="h-px w-8 bg-gold" />
           </div>
-          <h2 className="mt-5 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white">
-            Loved by Homes & Hotels Alike
+          <h2 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-paper sm:text-5xl">
+            Loved by Homes &amp; Hotels Alike
           </h2>
           <a
             href={mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-sm text-white/70 hover:text-gold-300 transition-colors"
+            className="mt-5 inline-flex items-center gap-2 text-sm text-paper/60 transition-colors duration-300 hover:text-paper"
           >
-            <span className="flex text-gold-400">
+            <span className="flex text-gold">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-4 w-4 fill-gold-400" />
+                <Star key={i} className="h-3.5 w-3.5 fill-gold" />
               ))}
             </span>
-            5.0 average · See all Google Reviews
+            5.0 average &middot; See all Google Reviews
           </a>
         </Reveal>
 
-        <div className="relative mt-14">
-          <Quote className="mx-auto h-10 w-10 text-gold-500/40" />
-          <div className="relative mt-4 min-h-[220px] sm:min-h-[180px]">
+        <div className="mt-16">
+          <div className="relative min-h-[200px] border-t border-stone-on-navy pt-10 text-center sm:min-h-[160px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={review.id}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="glass-navy rounded-3xl p-8 sm:p-10 text-center"
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
               >
-                <p className="font-display text-lg sm:text-2xl leading-relaxed text-white">
+                <p className="font-display text-2xl italic font-normal leading-relaxed text-paper sm:text-3xl">
                   &ldquo;{review.quote}&rdquo;
                 </p>
-                <div className="mt-6">
-                  <p className="font-semibold text-gold-300">{review.name}</p>
-                  <p className="text-sm text-white/60">{review.role}</p>
+                <div className="mt-7">
+                  <p className="font-medium text-gold">{review.name}</p>
+                  <p className="mt-1 text-sm text-paper/55">{review.role}</p>
                 </div>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <div className="mt-10 flex items-center justify-center gap-6">
             <button
               aria-label="Previous review"
               onClick={goPrev}
-              className="flex h-10 w-10 items-center justify-center rounded-full glass-light text-white"
+              className="flex h-10 w-10 items-center justify-center border border-stone-on-navy text-paper transition-colors duration-300 hover:bg-paper hover:text-navy"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 w-4" />
             </button>
             <div className="flex gap-2">
               {reviews.map((r, i) => (
@@ -91,8 +87,8 @@ export default function Reviews({ reviews, mapsUrl }: ReviewsProps) {
                   key={r.id}
                   aria-label={`Go to review ${i + 1}`}
                   onClick={() => setIndex(i)}
-                  className={`h-2 rounded-full transition-all ${
-                    i === index ? "w-6 bg-gold-400" : "w-2 bg-white/25"
+                  className={`h-1.5 w-6 transition-colors duration-300 ${
+                    i === index ? "bg-gold" : "bg-stone-on-navy"
                   }`}
                 />
               ))}
@@ -100,9 +96,9 @@ export default function Reviews({ reviews, mapsUrl }: ReviewsProps) {
             <button
               aria-label="Next review"
               onClick={goNext}
-              className="flex h-10 w-10 items-center justify-center rounded-full glass-light text-white"
+              className="flex h-10 w-10 items-center justify-center border border-stone-on-navy text-paper transition-colors duration-300 hover:bg-paper hover:text-navy"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>

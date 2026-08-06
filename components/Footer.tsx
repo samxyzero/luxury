@@ -17,21 +17,21 @@ interface FooterProps {
 
 export default function Footer({ site }: FooterProps) {
   return (
-    <footer className="relative bg-navy-950 border-t border-white/10 pt-16 pb-8">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="border-t border-stone-on-navy bg-navy pt-20 pb-8">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <span className="font-display text-2xl font-semibold text-white">
+            <span className="font-display text-2xl font-medium text-paper">
               {site.businessName}
             </span>
-            <p className="mt-3 text-sm leading-relaxed text-white/60">{site.tagline}</p>
-            <div className="mt-5 flex gap-3">
+            <p className="mt-3 text-sm leading-relaxed text-paper/55">{site.tagline}</p>
+            <div className="mt-6 flex gap-3">
               <a
                 href={site.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/8 text-white/75 hover:bg-gold-500 hover:text-navy-950 transition-colors"
+                className="flex h-9 w-9 items-center justify-center border border-stone-on-navy text-paper/75 transition-colors duration-300 hover:border-gold hover:text-gold"
               >
                 <FacebookIcon className="h-4 w-4" />
               </a>
@@ -40,7 +40,7 @@ export default function Footer({ site }: FooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/8 text-white/75 hover:bg-gold-500 hover:text-navy-950 transition-colors"
+                className="flex h-9 w-9 items-center justify-center border border-stone-on-navy text-paper/75 transition-colors duration-300 hover:border-gold hover:text-gold"
               >
                 <InstagramIcon className="h-4 w-4" />
               </a>
@@ -48,13 +48,14 @@ export default function Footer({ site }: FooterProps) {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-gold-400">
-              Quick Links
-            </h3>
-            <ul className="mt-4 space-y-2.5">
+            <h3 className="label text-gold">Quick Links</h3>
+            <ul className="mt-5 space-y-3">
               {QUICK_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-sm text-white/65 hover:text-gold-300 transition-colors">
+                  <a
+                    href={link.href}
+                    className="text-sm text-paper/65 transition-colors duration-300 hover:text-paper"
+                  >
                     {link.label}
                   </a>
                 </li>
@@ -63,17 +64,15 @@ export default function Footer({ site }: FooterProps) {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-gold-400">
-              Contact
-            </h3>
-            <ul className="mt-4 space-y-3 text-sm text-white/65">
-              <li className="flex items-start gap-2">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" />
+            <h3 className="label text-gold">Contact</h3>
+            <ul className="mt-5 space-y-3 text-sm text-paper/65">
+              <li className="flex items-start gap-2.5">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
                 {site.address.line1}, {site.address.city} {site.address.postalCode}, {site.address.country}
               </li>
-              <li className="flex items-start gap-2">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" />
-                <a href={`tel:${site.phone}`} className="hover:text-gold-300 transition-colors">
+              <li className="flex items-start gap-2.5">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                <a href={`tel:${site.phone}`} className="transition-colors duration-300 hover:text-paper">
                   {site.phoneDisplay}
                 </a>
               </li>
@@ -81,25 +80,23 @@ export default function Footer({ site }: FooterProps) {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-gold-400">
-              Business Hours
-            </h3>
-            <ul className="mt-4 space-y-2.5 text-sm text-white/65">
+            <h3 className="label text-gold">Business Hours</h3>
+            <ul className="mt-5 space-y-3 text-sm text-paper/65">
               {site.hours.map((h) => (
                 <li key={h.day} className="flex justify-between gap-4">
                   <span>{h.day}</span>
-                  <span className="text-white/85">{h.time}</span>
+                  <span className="text-paper/85">{h.time}</span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-stone-on-navy pt-6 text-xs text-paper/40 sm:flex-row">
           <p>
             &copy; {new Date().getFullYear()} {site.businessName}. All rights reserved.
           </p>
-          <p>Furnishing homes & hotels across Pokhara, Nepal.</p>
+          <p>Furnishing homes &amp; hotels across Pokhara, Nepal.</p>
         </div>
       </div>
     </footer>

@@ -21,20 +21,20 @@ export default function StatCounter({ value, suffix = "", label }: StatCounterPr
   useEffect(() => {
     if (isInView) {
       const controls = animate(count, value, {
-        duration: 1.8,
-        ease: [0.22, 1, 0.36, 1],
+        duration: 0.9,
+        ease: [0.4, 0, 0.2, 1],
       });
       return controls.stop;
     }
   }, [isInView, value, count]);
 
   return (
-    <div ref={ref} className="text-center">
-      <div className="font-display text-4xl sm:text-5xl font-semibold text-gradient-gold">
+    <div ref={ref}>
+      <div className="font-display text-4xl sm:text-5xl font-medium text-paper">
         <motion.span>{rounded}</motion.span>
-        <span>{suffix}</span>
+        <span className="text-gold">{suffix}</span>
       </div>
-      <p className="mt-2 text-sm sm:text-base text-white/70 tracking-wide">{label}</p>
+      <p className="label mt-3 text-paper/55">{label}</p>
     </div>
   );
 }

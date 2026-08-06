@@ -5,13 +5,13 @@ interface MapEmbedProps {
 
 export default function MapEmbed({ embedUrl, title }: MapEmbedProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10">
+    <div className="border border-stone-on-navy">
       <iframe
         src={embedUrl}
         title={title}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        className="h-72 w-full sm:h-full sm:min-h-[320px] grayscale-[15%]"
+        className="h-64 w-full grayscale-[20%] sm:h-72"
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import CornerMarks from "@/components/CornerMarks";
 import type { SiteSettings } from "@/types/content";
 
 interface AboutProps {
@@ -9,56 +9,57 @@ interface AboutProps {
 
 export default function About({ about }: AboutProps) {
   return (
-    <section id="about" className="relative bg-ivory py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-14 lg:grid-cols-2">
-          <Reveal>
-            <div className="relative">
-              <div className="relative overflow-hidden rounded-3xl shadow-[0_30px_60px_-20px_rgba(19,26,58,0.35)]">
-                <Image
-                  src={about.image}
-                  alt="Luxury Enterprises furnished interior"
-                  width={900}
-                  height={1000}
-                  className="h-[420px] sm:h-[520px] w-full object-cover"
-                />
-              </div>
-              <div className="glass-navy absolute -bottom-6 -right-4 sm:-right-8 flex flex-col items-center justify-center rounded-2xl px-6 py-5 text-center">
-                <span className="font-display text-3xl sm:text-4xl font-semibold text-gradient-gold">
-                  {about.yearsExperience}+
-                </span>
-                <span className="mt-1 text-xs sm:text-sm text-white/75 tracking-wide">
-                  Years of Excellence
-                </span>
-              </div>
+    <section id="about" className="bg-paper py-24 sm:py-32 lg:py-40">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+        <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-16">
+          <Reveal className="lg:col-span-5">
+            <div className="relative aspect-[4/5]">
+              <Image
+                src={about.image}
+                alt="Luxury Enterprises furnished interior"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+              />
+              <CornerMarks tone="gold" inset={14} />
             </div>
           </Reveal>
 
-          <Reveal delay={0.15}>
-            <div>
-              <div className="flex items-center gap-2 text-navy-600 text-xs sm:text-sm font-semibold tracking-widest uppercase">
-                <span className="h-px w-8 bg-gold-500" />
-                {about.eyebrow}
-              </div>
-              <h2 className="mt-5 font-display text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight text-navy-950">
-                {about.heading}
-              </h2>
-              <div className="mt-6 space-y-4">
-                {about.body.map((paragraph) => (
-                  <p key={paragraph} className="text-base sm:text-lg leading-relaxed text-charcoal/75">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+          <Reveal delay={0.1} className="lg:col-span-7">
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-gold" />
+              <span className="label text-ink-muted">{about.eyebrow}</span>
+            </div>
 
-              <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-                {about.highlights.map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-sm sm:text-base text-navy-900">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold-500" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <h2 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
+              {about.heading}
+            </h2>
+
+            <div className="mt-8 max-w-2xl space-y-5">
+              {about.body.map((paragraph) => (
+                <p key={paragraph} className="text-base leading-relaxed text-ink-muted sm:text-lg">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            <ul className="mt-10 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+              {about.highlights.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-ink sm:text-base">
+                  <span className="mt-2.5 h-px w-3 shrink-0 bg-gold" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-14 flex items-baseline gap-6 border-t border-stone pt-8">
+              <span className="font-display text-5xl font-medium text-ink">
+                {about.yearsExperience}
+                <span className="text-gold-dim">+</span>
+              </span>
+              <span className="label max-w-[10rem] text-ink-muted">
+                Years furnishing homes &amp; hotels across Nepal
+              </span>
             </div>
           </Reveal>
         </div>

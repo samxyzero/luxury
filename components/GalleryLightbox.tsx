@@ -36,13 +36,14 @@ export default function GalleryLightbox({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-navy-950/90 backdrop-blur-md p-4 sm:p-8"
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-navy p-4 sm:p-10"
           onClick={onClose}
         >
           <button
             aria-label="Close gallery"
             onClick={onClose}
-            className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full glass-light text-white"
+            className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center border border-stone-on-navy text-paper transition-colors duration-300 hover:bg-paper hover:text-navy"
           >
             <X className="h-5 w-5" />
           </button>
@@ -53,7 +54,7 @@ export default function GalleryLightbox({
               e.stopPropagation();
               goPrev();
             }}
-            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full glass-light text-white"
+            className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-stone-on-navy text-paper transition-colors duration-300 hover:bg-paper hover:text-navy sm:left-6"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -63,19 +64,19 @@ export default function GalleryLightbox({
               e.stopPropagation();
               goNext();
             }}
-            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full glass-light text-white"
+            className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-stone-on-navy text-paper transition-colors duration-300 hover:bg-paper hover:text-navy sm:right-6"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
 
           <motion.div
             key={item.id}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-4xl overflow-hidden rounded-2xl"
+            className="w-full max-w-4xl"
           >
             <div className="relative aspect-[4/3] w-full">
               <Image
@@ -86,9 +87,9 @@ export default function GalleryLightbox({
                 sizes="(min-width: 1024px) 900px, 100vw"
               />
             </div>
-            <div className="glass-navy p-5">
-              <p className="text-xs uppercase tracking-widest text-gold-400">{item.category}</p>
-              <p className="mt-1 font-display text-lg text-white">{item.caption}</p>
+            <div className="flex items-baseline justify-between gap-4 border-t border-stone-on-navy py-4">
+              <p className="font-display text-lg text-paper">{item.caption}</p>
+              <p className="label shrink-0 text-gold">{item.category}</p>
             </div>
           </motion.div>
         </motion.div>

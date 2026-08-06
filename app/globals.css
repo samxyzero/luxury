@@ -1,110 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbfaf7;
-  --foreground: #14162b;
+  --background: #f7f4ee;
+  --foreground: #1c1b18;
 
-  /* Royal blue scale */
-  --color-navy-50: #eef1fb;
-  --color-navy-100: #d6dcf3;
-  --color-navy-200: #adb9e7;
-  --color-navy-300: #8091d8;
-  --color-navy-400: #5566c4;
-  --color-navy-500: #38449f;
-  --color-navy-600: #2c3680;
-  --color-navy-700: #232b64;
-  --color-navy-800: #1a2049;
-  --color-navy-900: #12163a;
-  --color-navy-950: #080a1e;
-
-  /* Gold scale */
-  --color-gold-50: #fdf9ec;
-  --color-gold-100: #faf0cb;
-  --color-gold-200: #f4dd93;
-  --color-gold-300: #ecc85e;
-  --color-gold-400: #e0b13e;
-  --color-gold-500: #c9a24b;
-  --color-gold-600: #a9823a;
-  --color-gold-700: #866430;
-  --color-gold-800: #6c502c;
-  --color-gold-900: #5a4227;
-  --color-gold-950: #332312;
-
-  --color-ivory: #fbfaf7;
-  --color-charcoal: #1c1c1e;
+  /* Editorial palette — warm white, deep navy, charcoal, muted gold (used sparingly) */
+  --color-paper: #f7f4ee;
+  --color-paper-dim: #f0ece3;
+  --color-ink: #1c1b18;
+  --color-ink-muted: #6b675e;
+  --color-navy: #10203a;
+  --color-navy-dim: #182c4c;
+  --color-gold: #a9895a;
+  --color-gold-dim: #8a7048;
+  --color-stone: #e4dfd3;
+  --color-stone-on-navy: rgba(247, 244, 238, 0.16);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --color-navy-50: var(--color-navy-50);
-  --color-navy-100: var(--color-navy-100);
-  --color-navy-200: var(--color-navy-200);
-  --color-navy-300: var(--color-navy-300);
-  --color-navy-400: var(--color-navy-400);
-  --color-navy-500: var(--color-navy-500);
-  --color-navy-600: var(--color-navy-600);
-  --color-navy-700: var(--color-navy-700);
-  --color-navy-800: var(--color-navy-800);
-  --color-navy-900: var(--color-navy-900);
-  --color-navy-950: var(--color-navy-950);
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-navy: var(--color-navy);
+  --color-navy-dim: var(--color-navy-dim);
+  --color-gold: var(--color-gold);
+  --color-gold-dim: var(--color-gold-dim);
+  --color-stone: var(--color-stone);
+  --color-stone-on-navy: var(--color-stone-on-navy);
 
-  --color-gold-50: var(--color-gold-50);
-  --color-gold-100: var(--color-gold-100);
-  --color-gold-200: var(--color-gold-200);
-  --color-gold-300: var(--color-gold-300);
-  --color-gold-400: var(--color-gold-400);
-  --color-gold-500: var(--color-gold-500);
-  --color-gold-600: var(--color-gold-600);
-  --color-gold-700: var(--color-gold-700);
-  --color-gold-800: var(--color-gold-800);
-  --color-gold-900: var(--color-gold-900);
-  --color-gold-950: var(--color-gold-950);
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-archivo);
 
-  --color-ivory: var(--color-ivory);
-  --color-charcoal: var(--color-charcoal);
-
-  --font-display: var(--font-playfair);
-  --font-sans: var(--font-inter);
-
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  --animate-marquee: marquee 32s linear infinite;
-  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(28px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-  @keyframes pulse-ring {
-    0% {
-      box-shadow: 0 0 0 0 rgba(201, 162, 75, 0.55);
-    }
-    70% {
-      box-shadow: 0 0 0 14px rgba(201, 162, 75, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(201, 162, 75, 0);
-    }
-  }
+  --radius-none: 0px;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 96px;
 }
 
 body {
@@ -113,59 +52,61 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+/* Sharp corners everywhere — no rounded elements in the brand UI */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
 ::selection {
-  background: var(--color-gold-300);
-  color: var(--color-navy-950);
+  background: var(--color-gold);
+  color: var(--color-paper);
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-ivory);
+  background: var(--color-paper);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--color-navy-500), var(--color-navy-700));
-  border-radius: 999px;
+  background: var(--color-ink);
 }
 
-/* Frosted glass utilities */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @layer utilities {
-  .glass-light {
-    background: color-mix(in oklab, white 62%, transparent);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid color-mix(in oklab, white 45%, transparent);
+  /* Flat, neutral depth — soft shadow, no color glow */
+  .shadow-soft {
+    box-shadow:
+      0 1px 2px rgba(28, 27, 24, 0.04),
+      0 12px 28px -14px rgba(28, 27, 24, 0.16);
   }
-  .glass-navy {
-    background: color-mix(in oklab, var(--color-navy-950) 55%, transparent);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid color-mix(in oklab, white 12%, transparent);
+  .shadow-soft-lg {
+    box-shadow:
+      0 2px 4px rgba(28, 27, 24, 0.05),
+      0 24px 48px -16px rgba(28, 27, 24, 0.2);
   }
-  .glass-card {
-    background: color-mix(in oklab, white 70%, transparent);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid color-mix(in oklab, white 60%, transparent);
-    box-shadow: 0 8px 40px -12px rgba(8, 10, 30, 0.25);
-  }
-  .text-gradient-gold {
-    background: linear-gradient(
-      110deg,
-      var(--color-gold-600),
-      var(--color-gold-300) 45%,
-      var(--color-gold-600)
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-  .bg-grain {
-    background-image: radial-gradient(
-      color-mix(in oklab, white 8%, transparent) 1px,
-      transparent 1px
-    );
-    background-size: 3px 3px;
+
+  /* Editorial eyebrow label */
+  .label {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 }

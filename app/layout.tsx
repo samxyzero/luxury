@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Archivo, Fraunces } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,15 +8,17 @@ import ScrollProgress from "@/components/ScrollProgress";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { getSiteSettings, getReviews } from "@/lib/content";
 
-const inter = Inter({
-  variable: "--font-inter",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz", "SOFT", "WONK"],
   display: "swap",
 });
 
@@ -133,22 +136,24 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} h-full antialiased`}
+      className={`${archivo.variable} ${fraunces.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-ivory text-charcoal">
+      <body className="min-h-full flex flex-col bg-paper text-ink">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <ScrollProgress />
-        <Navbar
-          businessName={site.businessName}
-          phoneDisplay={site.phoneDisplay}
-          phone={site.phone}
-        />
-        <main className="flex-1">{children}</main>
-        <Footer site={site} />
-        <WhatsAppButton whatsapp={site.whatsapp} />
+        <MotionConfig reducedMotion="user">
+          <ScrollProgress />
+          <Navbar
+            businessName={site.businessName}
+            phoneDisplay={site.phoneDisplay}
+            phone={site.phone}
+          />
+          <main className="flex-1">{children}</main>
+          <Footer site={site} />
+          <WhatsAppButton whatsapp={site.whatsapp} />
+        </MotionConfig>
       </body>
     </html>
   );
