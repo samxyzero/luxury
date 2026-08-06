@@ -6,13 +6,18 @@ import { motion } from "framer-motion";
 import CornerMarks from "@/components/CornerMarks";
 import Reveal from "@/components/Reveal";
 import GalleryLightbox from "@/components/GalleryLightbox";
+import SectionLink from "@/components/SectionLink";
 import type { GalleryItem } from "@/types/content";
 
 interface GalleryProps {
   items: GalleryItem[];
+  /** Rendered heading tag — pages pass "h1", homepage sections keep "h2". */
+  as?: "h1" | "h2";
+  /** Homepage teaser CTA linking to the full page. */
+  footerLink?: { href: string; label: string };
 }
 
-export default function Gallery({ items }: GalleryProps) {
+export default function Gallery({ items, as: Heading = "h2", footerLink }: GalleryProps) {
   const categories = useMemo(
     () => ["All", ...Array.from(new Set(items.map((i) => i.category)))],
     [items]
@@ -30,9 +35,9 @@ export default function Gallery({ items }: GalleryProps) {
             <span className="h-px w-8 bg-gold" />
             <span className="label text-ink-muted">Gallery</span>
           </div>
-          <h2 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
+          <Heading className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
             Projects We&apos;re Proud Of
-          </h2>
+          </Heading>
         </Reveal>
 
         <Reveal delay={0.1} className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-b border-stone py-5">
@@ -93,6 +98,14 @@ export default function Gallery({ items }: GalleryProps) {
             );
           })}
         </div>
+
+        {footerLink && (
+          <div className="mt-14">
+            <SectionLink href={footerLink.href} tone="ink">
+              {footerLink.label}
+            </SectionLink>
+          </div>
+        )}
       </div>
 
       <GalleryLightbox

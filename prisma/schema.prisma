@@ -62,6 +62,7 @@ model SiteSettings {
 
 model Product {
   id          String   @id @default(cuid())
+  slug        String   @unique
   name        String
   category    String
   description String

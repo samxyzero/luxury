@@ -9,9 +9,17 @@ interface ImageUploadFieldProps {
   name: string;
   defaultValue?: string;
   required?: boolean;
+  /** Server-side validation error for this field. */
+  error?: string;
 }
 
-export default function ImageUploadField({ label, name, defaultValue, required }: ImageUploadFieldProps) {
+export default function ImageUploadField({
+  label,
+  name,
+  defaultValue,
+  required,
+  error: fieldError,
+}: ImageUploadFieldProps) {
   const fileInputId = useId();
   const [url, setUrl] = useState(defaultValue ?? "");
   const [uploading, setUploading] = useState(false);
@@ -76,8 +84,12 @@ export default function ImageUploadField({ label, name, defaultValue, required }
               disabled={uploading}
               className="hidden"
             />
-            {error && <span className="text-sm text-red-700">{error}</span>}
           </div>
+          {(error || fieldError) && (
+            <p className="border-l-2 border-red-700 bg-red-50 px-3 py-2 text-sm text-red-800">
+              {error ?? fieldError}
+            </p>
+          )}
         </div>
       </div>
     </div>

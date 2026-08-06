@@ -9,9 +9,11 @@ import type { Review } from "@/types/content";
 interface ReviewsProps {
   reviews: Review[];
   mapsUrl: string;
+  /** Rendered heading tag — pages pass "h1", homepage sections keep "h2". */
+  as?: "h1" | "h2";
 }
 
-export default function Reviews({ reviews, mapsUrl }: ReviewsProps) {
+export default function Reviews({ reviews, mapsUrl, as: Heading = "h2" }: ReviewsProps) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -34,9 +36,9 @@ export default function Reviews({ reviews, mapsUrl }: ReviewsProps) {
             <span className="label text-paper/55">Customer Reviews</span>
             <span className="h-px w-8 bg-gold" />
           </div>
-          <h2 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-paper sm:text-5xl">
+          <Heading className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-paper sm:text-5xl">
             Loved by Homes &amp; Hotels Alike
-          </h2>
+          </Heading>
           <a
             href={mapsUrl}
             target="_blank"

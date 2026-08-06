@@ -9,11 +9,13 @@ import type { SiteSettings } from "@/types/content";
 
 interface ContactProps {
   site: SiteSettings;
+  /** Rendered heading tag — pages pass "h1", homepage sections keep "h2". */
+  as?: "h1" | "h2";
 }
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export default function Contact({ site }: ContactProps) {
+export default function Contact({ site, as: Heading = "h2" }: ContactProps) {
   const [status, setStatus] = useState<Status>("idle");
 
   const whatsappHref = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
@@ -48,9 +50,9 @@ export default function Contact({ site }: ContactProps) {
             <span className="h-px w-8 bg-gold" />
             <span className="label text-paper/55">Get In Touch</span>
           </div>
-          <h2 className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-paper sm:text-5xl">
+          <Heading className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-paper sm:text-5xl">
             Let&apos;s Furnish Something Beautiful
-          </h2>
+          </Heading>
           <p className="mt-6 text-base leading-relaxed text-paper/60 sm:text-lg">
             Reach out for a quote, a consultation, or simply to visit our showroom on
             New Road, Pokhara.

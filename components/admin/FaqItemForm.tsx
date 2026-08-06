@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { createFaqItem, updateFaqItem, type FaqFormState } from "@/lib/actions/faq";
 import FormField, { fieldInputClassName } from "@/components/admin/FormField";
-import SubmitButton from "@/components/admin/SubmitButton";
+import FormActions from "@/components/admin/FormActions";
 import type { FaqItem } from "@/lib/generated/prisma/client";
 
 interface FaqItemFormProps {
@@ -15,10 +15,11 @@ const initialState: FaqFormState = {};
 export default function FaqItemForm({ faq }: FaqItemFormProps) {
   const action = faq ? updateFaqItem.bind(null, faq.id) : createFaqItem;
   const [state, formAction] = useActionState(action, initialState);
+  const errors = state.fieldErrors ?? {};
 
   return (
     <form action={formAction} className="max-w-2xl space-y-6">
-      <FormField label="Question" htmlFor="question">
+      <FormField label="Question" htmlFor="question" error={errors.question}>
         <input
           id="question"
           name="question"
@@ -27,7 +28,7 @@ export default function FaqItemForm({ faq }: FaqItemFormProps) {
           className={fieldInputClassName}
         />
       </FormField>
-      <FormField label="Answer" htmlFor="answer">
+      <FormField label="Answer" htmlFor="answer" error={errors.answer}>
         <textarea
           id="answer"
           name="answer"
@@ -37,7 +38,11 @@ export default function FaqItemForm({ faq }: FaqItemFormProps) {
           className={fieldInputClassName}
         />
       </FormField>
-      <FormField label="Display Order (lower shows first)" htmlFor="order">
+      <FormField
+        label="Display Order (lower shows first)"
+        htmlFor="order"
+        error={errors.order}
+      >
         <input
           id="order"
           name="order"
@@ -47,9 +52,11 @@ export default function FaqItemForm({ faq }: FaqItemFormProps) {
         />
       </FormField>
 
-      {state.error && <p className="text-sm text-red-700">{state.error}</p>}
-
-      <SubmitButton>{faq ? "Save Changes" : "Create FAQ"}</SubmitButton>
+      <FormActions
+        label={faq ? "Save Changes" : "Create FAQ"}
+        error={state.error}
+        fieldErrors={state.fieldErrors}
+      />
     </form>
   );
 }

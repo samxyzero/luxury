@@ -85,6 +85,19 @@ export async function getProducts(): Promise<Product[]> {
   }
 }
 
+export async function getProductBySlug(slug: string): Promise<Product | null> {
+  try {
+    const row = await prisma.product.findUnique({ where: { slug } });
+    if (!row) return null;
+    return { ...row, idealFor: row.idealFor as Product["idealFor"] };
+  } catch (error) {
+    console.error("[content] getProductBySlug: falling back to static content —", error);
+    return (
+      (fallbackProducts as { items: Product[] }).items.find((p) => p.slug === slug) ?? null
+    );
+  }
+}
+
 export async function getServices(): Promise<Service[]> {
   try {
     return await prisma.service.findMany({ orderBy: { order: "asc" } });

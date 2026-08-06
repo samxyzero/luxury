@@ -1,14 +1,16 @@
+import Link from "next/link";
 import { MapPin, Phone } from "lucide-react";
 import { FacebookIcon, InstagramIcon } from "@/components/icons/SocialIcons";
 import type { SiteSettings } from "@/types/content";
 
 const QUICK_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Products", href: "#products" },
-  { label: "Services", href: "#services" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Products", href: "/products" },
+  { label: "Services", href: "/services" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
 interface FooterProps {
@@ -52,12 +54,12 @@ export default function Footer({ site }: FooterProps) {
             <ul className="mt-5 space-y-3">
               {QUICK_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-sm text-paper/65 transition-colors duration-300 hover:text-paper"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

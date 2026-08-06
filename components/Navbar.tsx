@@ -1,17 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Products", href: "#products" },
-  { label: "Services", href: "#services" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Products", href: "/products" },
+  { label: "Services", href: "/services" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
 interface NavbarProps {
@@ -23,6 +25,7 @@ interface NavbarProps {
 export default function Navbar({ businessName, phoneDisplay, phone }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -45,23 +48,33 @@ export default function Navbar({ businessName, phoneDisplay, phone }: NavbarProp
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12">
-        <a href="#top" className="shrink-0">
+        <Link href="/" className="shrink-0">
           <span className="font-display text-xl sm:text-2xl font-medium tracking-tight text-ink">
             {businessName}
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden lg:flex items-center gap-9">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="group relative label text-ink/70 hover:text-ink transition-colors duration-300"
-            >
-              {link.label}
-              <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-gold transition-all duration-300 group-hover:w-full" />
-            </a>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={`group relative label transition-colors duration-300 ${
+                  active ? "text-ink" : "text-ink/70 hover:text-ink"
+                }`}
+              >
+                {link.label}
+                <span
+                  className={`absolute -bottom-1.5 left-0 h-px bg-gold transition-all duration-300 ${
+                    active ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden lg:flex items-center gap-6">
@@ -71,12 +84,12 @@ export default function Navbar({ businessName, phoneDisplay, phone }: NavbarProp
           >
             {phoneDisplay}
           </a>
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="label border border-ink px-6 py-3 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
           >
             Get a Quote
-          </a>
+          </Link>
         </div>
 
         <button
@@ -100,26 +113,29 @@ export default function Navbar({ businessName, phoneDisplay, phone }: NavbarProp
           >
             <nav className="flex flex-col gap-2">
               {NAV_LINKS.map((link, i) => (
-                <motion.a
+                <motion.div
                   key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35, delay: 0.05 * i, ease: [0.4, 0, 0.2, 1] }}
-                  className="border-b border-stone-on-navy py-4 font-display text-3xl font-medium text-paper"
                 >
-                  {link.label}
-                </motion.a>
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="block border-b border-stone-on-navy py-4 font-display text-3xl font-medium text-paper"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
             </nav>
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               onClick={() => setOpen(false)}
               className="label mt-10 inline-block w-fit border border-paper px-6 py-3 text-paper"
             >
               Get a Quote
-            </a>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

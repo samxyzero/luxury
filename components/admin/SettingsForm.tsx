@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { updateSettings, type SettingsState } from "@/lib/actions/settings";
 import FormField, { fieldInputClassName } from "@/components/admin/FormField";
 import ImageUploadField from "@/components/admin/ImageUploadField";
-import SubmitButton from "@/components/admin/SubmitButton";
+import FormActions from "@/components/admin/FormActions";
 import type { SiteSettings as SiteSettingsRow } from "@/lib/generated/prisma/client";
 
 interface SettingsFormProps {
@@ -26,6 +26,7 @@ const initialState: SettingsState = {};
 
 export default function SettingsForm({ settings }: SettingsFormProps) {
   const [state, formAction] = useActionState(updateSettings, initialState);
+  const errors = state.fieldErrors ?? {};
 
   const hoursText = (settings.hours as unknown as HourRow[])
     .map((h) => `${h.day} | ${h.time}`)
@@ -38,7 +39,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
     <form action={formAction} className="space-y-12">
       <fieldset className="space-y-6">
         <legend className="label mb-2 text-gold-dim">Business Info</legend>
-        <FormField label="Business Name" htmlFor="businessName">
+        <FormField label="Business Name" htmlFor="businessName" error={errors.businessName}>
           <input
             id="businessName"
             name="businessName"
@@ -47,7 +48,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <FormField label="Tagline" htmlFor="tagline">
+        <FormField label="Tagline" htmlFor="tagline" error={errors.tagline}>
           <input
             id="tagline"
             name="tagline"
@@ -56,7 +57,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <FormField label="SEO Meta Description" htmlFor="metaDescription">
+        <FormField label="SEO Meta Description" htmlFor="metaDescription" error={errors.metaDescription}>
           <textarea
             id="metaDescription"
             name="metaDescription"
@@ -67,10 +68,10 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
           />
         </FormField>
         <div className="grid gap-6 sm:grid-cols-2">
-          <FormField label="Phone (tel: format)" htmlFor="phone">
+          <FormField label="Phone (tel: format)" htmlFor="phone" error={errors.phone}>
             <input id="phone" name="phone" defaultValue={settings.phone} required className={fieldInputClassName} />
           </FormField>
-          <FormField label="Phone (display)" htmlFor="phoneDisplay">
+          <FormField label="Phone (display)" htmlFor="phoneDisplay" error={errors.phoneDisplay}>
             <input
               id="phoneDisplay"
               name="phoneDisplay"
@@ -79,7 +80,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
               className={fieldInputClassName}
             />
           </FormField>
-          <FormField label="WhatsApp (digits only, with country code)" htmlFor="whatsapp">
+          <FormField label="WhatsApp (digits only, with country code)" htmlFor="whatsapp" error={errors.whatsapp}>
             <input
               id="whatsapp"
               name="whatsapp"
@@ -88,7 +89,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
               className={fieldInputClassName}
             />
           </FormField>
-          <FormField label="Email" htmlFor="email">
+          <FormField label="Email" htmlFor="email" error={errors.email}>
             <input
               id="email"
               name="email"
@@ -104,7 +105,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
       <fieldset className="space-y-6">
         <legend className="label mb-2 text-gold-dim">Address</legend>
         <div className="grid gap-6 sm:grid-cols-2">
-          <FormField label="Street / Landmark" htmlFor="addressLine1">
+          <FormField label="Street / Landmark" htmlFor="addressLine1" error={errors.addressLine1}>
             <input
               id="addressLine1"
               name="addressLine1"
@@ -113,7 +114,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
               className={fieldInputClassName}
             />
           </FormField>
-          <FormField label="Area" htmlFor="addressArea">
+          <FormField label="Area" htmlFor="addressArea" error={errors.addressArea}>
             <input
               id="addressArea"
               name="addressArea"
@@ -122,7 +123,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
               className={fieldInputClassName}
             />
           </FormField>
-          <FormField label="City" htmlFor="addressCity">
+          <FormField label="City" htmlFor="addressCity" error={errors.addressCity}>
             <input
               id="addressCity"
               name="addressCity"
@@ -131,7 +132,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
               className={fieldInputClassName}
             />
           </FormField>
-          <FormField label="Postal Code" htmlFor="addressPostalCode">
+          <FormField label="Postal Code" htmlFor="addressPostalCode" error={errors.addressPostalCode}>
             <input
               id="addressPostalCode"
               name="addressPostalCode"
@@ -140,7 +141,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
               className={fieldInputClassName}
             />
           </FormField>
-          <FormField label="Country" htmlFor="addressCountry">
+          <FormField label="Country" htmlFor="addressCountry" error={errors.addressCountry}>
             <input
               id="addressCountry"
               name="addressCountry"
@@ -150,7 +151,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             />
           </FormField>
         </div>
-        <FormField label="Google Maps Embed URL" htmlFor="mapEmbedUrl">
+        <FormField label="Google Maps Embed URL" htmlFor="mapEmbedUrl" error={errors.mapEmbedUrl}>
           <input
             id="mapEmbedUrl"
             name="mapEmbedUrl"
@@ -159,7 +160,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <FormField label="Google Maps Link URL" htmlFor="mapsUrl">
+        <FormField label="Google Maps Link URL" htmlFor="mapsUrl" error={errors.mapsUrl}>
           <input
             id="mapsUrl"
             name="mapsUrl"
@@ -173,7 +174,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
       <fieldset className="space-y-6">
         <legend className="label mb-2 text-gold-dim">Social</legend>
         <div className="grid gap-6 sm:grid-cols-2">
-          <FormField label="Facebook URL" htmlFor="socialFacebook">
+          <FormField label="Facebook URL" htmlFor="socialFacebook" error={errors.socialFacebook}>
             <input
               id="socialFacebook"
               name="socialFacebook"
@@ -182,7 +183,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
               className={fieldInputClassName}
             />
           </FormField>
-          <FormField label="Instagram URL" htmlFor="socialInstagram">
+          <FormField label="Instagram URL" htmlFor="socialInstagram" error={errors.socialInstagram}>
             <input
               id="socialInstagram"
               name="socialInstagram"
@@ -196,7 +197,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
 
       <fieldset className="space-y-6">
         <legend className="label mb-2 text-gold-dim">Hero Section</legend>
-        <FormField label="Eyebrow" htmlFor="heroEyebrow">
+        <FormField label="Eyebrow" htmlFor="heroEyebrow" error={errors.heroEyebrow}>
           <input
             id="heroEyebrow"
             name="heroEyebrow"
@@ -206,7 +207,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
           />
         </FormField>
         <div className="grid gap-6 sm:grid-cols-2">
-          <FormField label="Headline" htmlFor="heroHeadline">
+          <FormField label="Headline" htmlFor="heroHeadline" error={errors.heroHeadline}>
             <input
               id="heroHeadline"
               name="heroHeadline"
@@ -215,7 +216,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
               className={fieldInputClassName}
             />
           </FormField>
-          <FormField label="Highlighted Word" htmlFor="heroHighlight">
+          <FormField label="Highlighted Word" htmlFor="heroHighlight" error={errors.heroHighlight}>
             <input
               id="heroHighlight"
               name="heroHighlight"
@@ -225,7 +226,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             />
           </FormField>
         </div>
-        <FormField label="Subheadline" htmlFor="heroSubheadline">
+        <FormField label="Subheadline" htmlFor="heroSubheadline" error={errors.heroSubheadline}>
           <textarea
             id="heroSubheadline"
             name="heroSubheadline"
@@ -235,9 +236,9 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <ImageUploadField label="Hero Background Image" name="heroImage" defaultValue={settings.heroImage} required />
+        <ImageUploadField label="Hero Background Image" name="heroImage" defaultValue={settings.heroImage} required error={errors.heroImage} />
         <div className="grid gap-6 sm:grid-cols-2">
-          <FormField label="Primary Button Label" htmlFor="heroCtaPrimaryLabel">
+          <FormField label="Primary Button Label" htmlFor="heroCtaPrimaryLabel" error={errors.heroCtaPrimaryLabel}>
             <input
               id="heroCtaPrimaryLabel"
               name="heroCtaPrimaryLabel"
@@ -246,7 +247,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
               className={fieldInputClassName}
             />
           </FormField>
-          <FormField label="Secondary Button Label" htmlFor="heroCtaSecondaryLabel">
+          <FormField label="Secondary Button Label" htmlFor="heroCtaSecondaryLabel" error={errors.heroCtaSecondaryLabel}>
             <input
               id="heroCtaSecondaryLabel"
               name="heroCtaSecondaryLabel"
@@ -260,7 +261,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
 
       <fieldset className="space-y-6">
         <legend className="label mb-2 text-gold-dim">About Section</legend>
-        <FormField label="Eyebrow" htmlFor="aboutEyebrow">
+        <FormField label="Eyebrow" htmlFor="aboutEyebrow" error={errors.aboutEyebrow}>
           <input
             id="aboutEyebrow"
             name="aboutEyebrow"
@@ -269,7 +270,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <FormField label="Heading" htmlFor="aboutHeading">
+        <FormField label="Heading" htmlFor="aboutHeading" error={errors.aboutHeading}>
           <input
             id="aboutHeading"
             name="aboutHeading"
@@ -278,8 +279,8 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <ImageUploadField label="About Section Image" name="aboutImage" defaultValue={settings.aboutImage} required />
-        <FormField label="Years of Experience" htmlFor="aboutYearsExperience">
+        <ImageUploadField label="About Section Image" name="aboutImage" defaultValue={settings.aboutImage} required error={errors.aboutImage} />
+        <FormField label="Years of Experience" htmlFor="aboutYearsExperience" error={errors.aboutYearsExperience}>
           <input
             id="aboutYearsExperience"
             name="aboutYearsExperience"
@@ -290,7 +291,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <FormField label="Body Paragraphs (one per line)" htmlFor="aboutBody">
+        <FormField label="Body Paragraphs (one per line)" htmlFor="aboutBody" error={errors.aboutBody}>
           <textarea
             id="aboutBody"
             name="aboutBody"
@@ -300,7 +301,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
             className={fieldInputClassName}
           />
         </FormField>
-        <FormField label="Highlights (one per line)" htmlFor="aboutHighlights">
+        <FormField label="Highlights (one per line)" htmlFor="aboutHighlights" error={errors.aboutHighlights}>
           <textarea
             id="aboutHighlights"
             name="aboutHighlights"
@@ -314,7 +315,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
 
       <fieldset className="space-y-6">
         <legend className="label mb-2 text-gold-dim">Hours &amp; Stats</legend>
-        <FormField label="Business Hours — one per line, format: Day(s) | Time" htmlFor="hours">
+        <FormField label="Business Hours — one per line, format: Day(s) | Time" htmlFor="hours" error={errors.hours}>
           <textarea
             id="hours"
             name="hours"
@@ -327,7 +328,7 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
         </FormField>
         <FormField
           label="Trust Stats — one per line, format: id | label | value | suffix"
-          htmlFor="stats"
+          htmlFor="stats" error={errors.stats}
         >
           <textarea
             id="stats"
@@ -341,10 +342,13 @@ export default function SettingsForm({ settings }: SettingsFormProps) {
         </FormField>
       </fieldset>
 
-      {state.error && <p className="text-sm text-red-700">{state.error}</p>}
-      {state.success && <p className="text-sm text-gold-dim">Saved — the live site is updating now.</p>}
+      {state.success && (
+        <p className="border-l-2 border-gold bg-gold/5 px-3 py-2 text-sm text-gold-dim">
+          Saved — the live site is updating now.
+        </p>
+      )}
 
-      <SubmitButton>Save Changes</SubmitButton>
+      <FormActions label="Save Changes" error={state.error} fieldErrors={state.fieldErrors} />
     </form>
   );
 }
