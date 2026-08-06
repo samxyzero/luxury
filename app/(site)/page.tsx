@@ -18,14 +18,14 @@ import {
   getPartners,
 } from "@/lib/content";
 
-export default function Home() {
-  const site = getSiteSettings();
-  const products = getProducts();
-  const services = getServices();
-  const gallery = getGallery();
-  const reviews = getReviews();
-  const faqs = getFaqs();
-  const partners = getPartners();
+export default async function Home() {
+  const site = await getSiteSettings();
+  const products = await getProducts();
+  const services = await getServices();
+  const gallery = await getGallery();
+  const reviews = await getReviews();
+  const faqs = await getFaqs();
+  const partners = await getPartners();
 
   return (
     <>

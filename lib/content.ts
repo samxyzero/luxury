@@ -1,5 +1,4 @@
-import fs from "fs";
-import path from "path";
+import { prisma } from "@/lib/prisma";
 import type {
   SiteSettings,
   Product,
@@ -9,43 +8,124 @@ import type {
   FaqItem,
   Partner,
 } from "@/types/content";
+import fallbackSite from "@/content/fallback/site.json";
+import fallbackProducts from "@/content/fallback/products.json";
+import fallbackServices from "@/content/fallback/services.json";
+import fallbackGallery from "@/content/fallback/gallery.json";
+import fallbackReviews from "@/content/fallback/reviews.json";
+import fallbackFaq from "@/content/fallback/faq.json";
+import fallbackPartners from "@/content/fallback/partners.json";
 
-const contentDir = path.join(process.cwd(), "content");
+type SiteSettingsRow = NonNullable<
+  Awaited<ReturnType<typeof prisma.siteSettings.findUnique>>
+>;
 
-function readJson<T>(fileName: string): T {
-  const filePath = path.join(contentDir, fileName);
-  const raw = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(raw) as T;
+function mapSiteSettings(row: SiteSettingsRow): SiteSettings {
+  return {
+    businessName: row.businessName,
+    tagline: row.tagline,
+    metaDescription: row.metaDescription,
+    phone: row.phone,
+    phoneDisplay: row.phoneDisplay,
+    whatsapp: row.whatsapp,
+    email: row.email,
+    address: {
+      line1: row.addressLine1,
+      area: row.addressArea,
+      city: row.addressCity,
+      postalCode: row.addressPostalCode,
+      country: row.addressCountry,
+      mapEmbedUrl: row.mapEmbedUrl,
+      mapsUrl: row.mapsUrl,
+    },
+    hours: row.hours as unknown as SiteSettings["hours"],
+    social: {
+      facebook: row.socialFacebook,
+      instagram: row.socialInstagram,
+    },
+    hero: {
+      eyebrow: row.heroEyebrow,
+      headline: row.heroHeadline,
+      highlight: row.heroHighlight,
+      subheadline: row.heroSubheadline,
+      image: row.heroImage,
+      ctaPrimaryLabel: row.heroCtaPrimaryLabel,
+      ctaSecondaryLabel: row.heroCtaSecondaryLabel,
+    },
+    about: {
+      eyebrow: row.aboutEyebrow,
+      heading: row.aboutHeading,
+      body: row.aboutBody,
+      image: row.aboutImage,
+      yearsExperience: row.aboutYearsExperience,
+      highlights: row.aboutHighlights,
+    },
+    stats: row.stats as unknown as SiteSettings["stats"],
+  };
 }
 
-function readJsonItems<T>(fileName: string): T[] {
-  return readJson<{ items: T[] }>(fileName).items;
+export async function getSiteSettings(): Promise<SiteSettings> {
+  try {
+    const row = await prisma.siteSettings.findUnique({ where: { id: 1 } });
+    if (!row) throw new Error("SiteSettings row not found in database");
+    return mapSiteSettings(row);
+  } catch (error) {
+    console.error("[content] getSiteSettings: falling back to static content —", error);
+    return fallbackSite as SiteSettings;
+  }
 }
 
-export function getSiteSettings(): SiteSettings {
-  return readJson<SiteSettings>("site.json");
+export async function getProducts(): Promise<Product[]> {
+  try {
+    const rows = await prisma.product.findMany({ orderBy: { order: "asc" } });
+    return rows.map((r) => ({ ...r, idealFor: r.idealFor as Product["idealFor"] }));
+  } catch (error) {
+    console.error("[content] getProducts: falling back to static content —", error);
+    return (fallbackProducts as { items: Product[] }).items;
+  }
 }
 
-export function getProducts(): Product[] {
-  return readJsonItems<Product>("products.json");
+export async function getServices(): Promise<Service[]> {
+  try {
+    return await prisma.service.findMany({ orderBy: { order: "asc" } });
+  } catch (error) {
+    console.error("[content] getServices: falling back to static content —", error);
+    return (fallbackServices as { items: Service[] }).items;
+  }
 }
 
-export function getServices(): Service[] {
-  return readJsonItems<Service>("services.json");
+export async function getGallery(): Promise<GalleryItem[]> {
+  try {
+    return await prisma.galleryItem.findMany({ orderBy: { order: "asc" } });
+  } catch (error) {
+    console.error("[content] getGallery: falling back to static content —", error);
+    return (fallbackGallery as { items: GalleryItem[] }).items;
+  }
 }
 
-export function getGallery(): GalleryItem[] {
-  return readJsonItems<GalleryItem>("gallery.json");
+export async function getReviews(): Promise<Review[]> {
+  try {
+    return await prisma.review.findMany({ orderBy: { order: "asc" } });
+  } catch (error) {
+    console.error("[content] getReviews: falling back to static content —", error);
+    return (fallbackReviews as { items: Review[] }).items;
+  }
 }
 
-export function getReviews(): Review[] {
-  return readJsonItems<Review>("reviews.json");
+export async function getFaqs(): Promise<FaqItem[]> {
+  try {
+    return await prisma.faqItem.findMany({ orderBy: { order: "asc" } });
+  } catch (error) {
+    console.error("[content] getFaqs: falling back to static content —", error);
+    return (fallbackFaq as { items: FaqItem[] }).items;
+  }
 }
 
-export function getFaqs(): FaqItem[] {
-  return readJsonItems<FaqItem>("faq.json");
-}
-
-export function getPartners(): Partner[] {
-  return readJsonItems<Partner>("partners.json");
+export async function getPartners(): Promise<Partner[]> {
+  try {
+    return await prisma.partner.findMany({ orderBy: { order: "asc" } });
+  } catch (error) {
+    console.error("[content] getPartners: falling back to static content —", error);
+    return (fallbackPartners as { items: Partner[] }).items;
+  }
 }

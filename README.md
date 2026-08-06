@@ -1,79 +1,74 @@
 # Luxury Enterprises — Website
 
-A premium, SEO-focused Next.js website for **Luxury Enterprises**, a home & hotel furnishing store in Pokhara, Nepal. No database — all content lives in versioned JSON files and is editable through a visual editor at `/admin`.
+A premium, SEO-focused Next.js website for **Luxury Enterprises**, a home & hotel furnishing store in Pokhara, Nepal. Content lives in a Postgres (Neon) database via Prisma, editable through a full authenticated admin dashboard at `/admin`.
 
 ## Stack
 
-- Next.js 16 (App Router) + TypeScript, fully statically generated
-- Tailwind CSS v4 (royal blue + gold design tokens, frosted-glass utilities — see `app/globals.css`)
+- Next.js 16 (App Router) + TypeScript
+- Tailwind CSS v4 (warm paper/ink/navy/gold design tokens — see `app/globals.css`)
 - Framer Motion for animation
-- [Decap CMS](https://decapcms.org) at `/admin` for content editing, backed by GitHub (no database, no SaaS account required)
+- **Neon (Postgres) + Prisma** for content storage — see `prisma/schema.prisma`
+- Custom auth: `jose` (signed JWT session cookie) + Node's built-in `crypto.scrypt` for password hashing — no third-party auth library
 - Resend for the contact form (optional — falls back to a "please email us" message if not configured)
 
 ## Local development
 
-```bash
-npm install
-npm run dev
-```
+1. Copy `.env.example` to `.env.local` and fill in `DATABASE_URL` (a Neon connection string) and `AUTH_SECRET` (any random 32+ byte hex string — generate one with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`).
+2. Push the schema to your database and generate the Prisma client:
+   ```bash
+   npm install
+   npm run db:push
+   ```
+3. Seed initial content (and create your first admin login) — set `ADMIN_EMAIL` and `ADMIN_SEED_PASSWORD` as temporary env vars for this one command, then remove them:
+   ```bash
+   ADMIN_EMAIL=you@example.com ADMIN_SEED_PASSWORD=temp-password npm run db:seed
+   ```
+4. Start the dev server:
+   ```bash
+   npm run dev
+   ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000) for the site, [http://localhost:3000/admin](http://localhost:3000/admin/login) to sign in.
 
 ## Editing content
 
-All editable content lives in `/content/*.json`:
+Everything shown on the public site — site settings, products, services, gallery, reviews, FAQ, brand partners — is managed from `/admin` after signing in. Saving any change calls `revalidatePath("/")`, so the public homepage reflects it on the very next request — no redeploy needed.
 
-| File | Powers |
-|---|---|
-| `site.json` | Business info, hero, about, contact details, hours, stats |
-| `products.json` | Featured Products grid |
-| `services.json` | Services section |
-| `gallery.json` | Gallery section |
-| `reviews.json` | Customer Reviews carousel |
-| `faq.json` | FAQ accordion |
-| `partners.json` | Brand partners strip |
+`prisma/seed.ts` and `content/fallback/*.json` are only used for the initial seed and as an emergency fallback (see **Error handling** below) — they are not the source of truth once the database is live.
 
-Images referenced in these files can be either an external URL (the placeholder content uses Unsplash) or a path like `/uploads/my-photo.jpg`, once uploaded via the CMS.
+## Error handling & fallbacks
 
-You can either:
-1. **Edit the JSON files directly** in your code editor and push/redeploy, or
-2. **Use the visual editor** at `yourdomain.com/admin` (see setup below) — no code required, safe for a non-technical owner.
+Every content read in `lib/content.ts` is wrapped in a try/catch: if the database is briefly unreachable, the function logs the error and falls back to the static snapshot in `content/fallback/*.json` instead of crashing the page. The public site stays up even during a database outage; only the admin dashboard (which needs live data to edit) will show an error until the connection recovers.
 
-### Setting up the content editor (`/admin`)
+## Admin authentication
 
-The CMS commits changes directly to your GitHub repo, which triggers a new Vercel deployment automatically. One-time setup, after you've pushed this project to a GitHub repo and deployed it to Vercel:
+Single-admin, email + password login:
 
-1. **Update `public/admin/config.yml`** — replace `YOUR_GITHUB_USERNAME/YOUR_REPO_NAME` in the `backend.repo` field with your actual repo, e.g. `acme/luxury-enterprises`.
-2. **Create a GitHub OAuth App**: GitHub → Settings → Developer settings → OAuth Apps → New OAuth App.
-   - Homepage URL: `https://yourdomain.com`
-   - Authorization callback URL: `https://yourdomain.com/api/callback`
-   - Save the generated **Client ID** and **Client Secret**.
-3. **Add environment variables in Vercel** (Project Settings → Environment Variables):
-   - `GITHUB_OAUTH_ID` = the Client ID
-   - `GITHUB_OAUTH_SECRET` = the Client Secret
-   - Redeploy.
-4. Visit `https://yourdomain.com/admin`, click **Login with GitHub**, authorize the app, and start editing. Only GitHub accounts with write access to the repo can log in.
+- Passwords are hashed with Node's built-in `crypto.scrypt` (see `lib/password.ts`) — never stored in plaintext.
+- Sessions are a signed JWT (via `jose`) in an `httpOnly`, `secure`, `sameSite: lax` cookie (see `lib/session.ts`).
+- `proxy.ts` does an optimistic redirect for any unauthenticated request to `/admin/**`; every Server Action under `lib/actions/` independently re-verifies the session before touching the database (see `lib/dal.ts`) — the proxy check is a first line of defense, not the only one.
+- Admin routes are marked `robots: { index: false, follow: false }` so they're excluded from search engines.
 
-Optional: for local CMS testing without GitHub auth, run `npx decap-server` in a second terminal and uncomment `local_backend: true` in `public/admin/config.yml`.
+To add or reset an admin user later, run the seed script again with new `ADMIN_EMAIL`/`ADMIN_SEED_PASSWORD` values, or write a one-off script using `hashPassword` from `lib/password.ts` and `prisma.adminUser.upsert(...)`.
 
 ## Contact form
 
 The contact form posts to `/api/contact`, which sends an email via [Resend](https://resend.com):
 
 1. Create a free Resend account and API key.
-2. Add `RESEND_API_KEY` (and optionally `CONTACT_NOTIFY_EMAIL`) to your Vercel environment variables.
+2. Add `RESEND_API_KEY` (and optionally `CONTACT_NOTIFY_EMAIL`) to your environment.
 
 Without a key configured, the form still validates and submits, but visitors are shown a graceful fallback pointing them to your email address directly — nothing breaks.
 
 ## SEO
 
-- Metadata, Open Graph/Twitter tags, and `FurnitureStore` JSON-LD structured data are generated from `content/site.json` in `app/layout.tsx`.
+- Metadata, Open Graph/Twitter tags, and `FurnitureStore` JSON-LD structured data are generated from the database in `app/layout.tsx` and `app/(site)/layout.tsx`.
 - `app/sitemap.ts` and `app/robots.ts` are generated automatically.
 - Set `NEXT_PUBLIC_SITE_URL` in your environment to your production domain so metadata/canonical URLs and the sitemap resolve correctly.
 
 ## Deploying
 
-1. Push this repo to GitHub.
-2. Import it in [Vercel](https://vercel.com/new) — no build configuration needed.
-3. Set the environment variables described above (`.env.example` lists them all).
-4. Point your domain at Vercel and update `NEXT_PUBLIC_SITE_URL`.
+1. Push this repo to GitHub, import it in [Vercel](https://vercel.com/new).
+2. Set `DATABASE_URL`, `AUTH_SECRET`, `NEXT_PUBLIC_SITE_URL` (and optionally `RESEND_API_KEY` / `CONTACT_NOTIFY_EMAIL`) as Vercel environment variables — see `.env.example`.
+3. `npm run build` runs `prisma generate` automatically via the `postinstall` script, so no extra Vercel build configuration is needed.
+4. The schema is already pushed to your Neon database from local development — no migration step needed on deploy. If you change `prisma/schema.prisma` later, run `npm run db:push` locally against production before deploying the code that depends on it.

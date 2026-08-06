@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const notifyEmail = process.env.CONTACT_NOTIFY_EMAIL || getSiteSettings().email;
+  const notifyEmail = process.env.CONTACT_NOTIFY_EMAIL || (await getSiteSettings()).email;
 
   if (!apiKey) {
     return NextResponse.json(

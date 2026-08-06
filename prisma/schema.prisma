@@ -1,0 +1,122 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model SiteSettings {
+  id Int @id @default(1)
+
+  businessName    String
+  tagline         String
+  metaDescription String
+  phone           String
+  phoneDisplay    String
+  whatsapp        String
+  email           String
+
+  addressLine1      String
+  addressArea       String
+  addressCity       String
+  addressPostalCode String
+  addressCountry    String
+  mapEmbedUrl       String
+  mapsUrl           String
+
+  socialFacebook  String
+  socialInstagram String
+
+  heroEyebrow            String
+  heroHeadline           String
+  heroHighlight          String
+  heroSubheadline        String
+  heroImage              String
+  heroCtaPrimaryLabel    String
+  heroCtaSecondaryLabel  String
+
+  aboutEyebrow         String
+  aboutHeading         String
+  aboutImage           String
+  aboutYearsExperience Int
+  aboutBody            String[]
+  aboutHighlights      String[]
+
+  hours Json
+  stats Json
+
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  category    String
+  description String
+  image       String
+  idealFor    String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  icon        String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model GalleryItem {
+  id        String   @id @default(cuid())
+  image     String
+  caption   String
+  category  String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  rating    Int
+  quote     String
+  source    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FaqItem {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Partner {
+  id        String   @id @default(cuid())
+  name      String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
