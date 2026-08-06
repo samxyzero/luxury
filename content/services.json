@@ -3,38 +3,56 @@
     {
       "id": "home-furnishing",
       "title": "Home Furnishing",
-      "description": "Complete furnishing solutions for apartments and houses — mattresses, linens, curtains and rugs chosen to suit your lifestyle.",
+      "description": "Room-by-room furnishing for apartments and houses — mattresses, linens, curtains and rugs selected together so every room feels considered, not just filled.",
       "icon": "home"
     },
     {
       "id": "hotel-resort-furnishing",
       "title": "Hotel & Resort Furnishing",
-      "description": "Bulk, hospitality-grade furnishing packages built for durability, comfort and guest satisfaction at scale.",
+      "description": "Bulk, hospitality-grade furnishing programmes built for durability under daily guest turnover — coordinated by room type across an entire property.",
       "icon": "building-2"
     },
     {
       "id": "custom-solutions",
       "title": "Custom Furnishing Solutions",
-      "description": "Bespoke fabric, sizing and design choices tailored precisely to your space and brand identity.",
+      "description": "Bespoke fabric, sizing and finish choices for non-standard windows, beds or brand colour requirements — made to fit your space, not the other way round.",
       "icon": "ruler"
+    },
+    {
+      "id": "fabric-sourcing",
+      "title": "Fabric & Material Sourcing",
+      "description": "Direct access to premium cotton, linen, velvet and blackout linings — sourced and sampled before you commit, for both single rooms and full hotel orders.",
+      "icon": "layers"
+    },
+    {
+      "id": "bulk-wholesale",
+      "title": "Bulk & Wholesale Supply",
+      "description": "Volume pricing and staged deliveries for hotel groups, resorts and property developers furnishing multiple rooms or units at once.",
+      "icon": "package"
     },
     {
       "id": "consultation",
       "title": "Expert Consultation",
-      "description": "Personalised guidance from our specialists to match the right materials, textures and palettes to your project.",
+      "description": "One-on-one guidance from our specialists to match materials, textures and palettes to your project — in-store, on-site, or over a call.",
       "icon": "message-circle"
     },
     {
       "id": "delivery",
       "title": "Delivery",
-      "description": "Reliable, careful delivery across Pokhara and beyond — on time, every time.",
+      "description": "Scheduled, careful delivery across Pokhara and beyond — single-room drop-offs for homes, or staged floor-by-floor delivery for hotel projects.",
       "icon": "truck"
     },
     {
       "id": "installation",
       "title": "Installation",
-      "description": "Professional fitting and installation by our trained team, so everything is guest and family ready from day one.",
+      "description": "Professional fitting by our trained team — curtain tracks, blinds and bedding set up and guest- or family-ready from day one.",
       "icon": "wrench"
+    },
+    {
+      "id": "after-sales-care",
+      "title": "After-Sales Care",
+      "description": "Ongoing support for replacements, repairs and reordering — so hotels can maintain consistency and homeowners always know who to call.",
+      "icon": "life-buoy"
     }
   ]
 }

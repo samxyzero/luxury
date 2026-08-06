@@ -4,71 +4,113 @@
       "id": "mattresses",
       "name": "Mattresses",
       "category": "Sleep Comfort",
-      "description": "Orthopedic, memory foam and hybrid mattresses engineered for restorative sleep and lasting support.",
-      "image": "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?auto=format&fit=crop&w=1200&q=80"
+      "description": "Orthopedic, memory foam and hybrid mattresses engineered for restorative sleep. Available in single, queen and king sizes with firmness options suited to family bedrooms and hotel-grade nightly turnover alike.",
+      "image": "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
     },
     {
       "id": "bedsheets",
       "name": "Bedsheets",
       "category": "Sleep Comfort",
-      "description": "Fine cotton and premium blend bedsheets in timeless weaves and refined colour palettes.",
-      "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80"
+      "description": "Fine cotton and premium cotton-blend bedsheets in timeless weaves — crisp percale for hotel freshness, or soft sateen for a cosier home feel, in a refined, easy-to-coordinate colour palette.",
+      "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
     },
     {
       "id": "duvets",
       "name": "Duvets",
       "category": "Sleep Comfort",
-      "description": "Plush, temperature-balanced duvets and comforters designed for year-round comfort.",
-      "image": "https://images.unsplash.com/photo-1728614669329-29e10a0698ea?auto=format&fit=crop&w=1200&q=80"
+      "description": "Plush, temperature-balanced duvets and comforters in a range of warmth ratings, from light all-season options for guest rooms to heavier fills for Pokhara's cooler winter months at home.",
+      "image": "https://images.unsplash.com/photo-1728614669329-29e10a0698ea?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
     },
     {
       "id": "pillows",
       "name": "Pillows & Covers",
       "category": "Sleep Comfort",
-      "description": "Supportive pillows and elegant covers, tailored for both home comfort and hotel-grade durability.",
-      "image": "https://images.unsplash.com/photo-1600414428640-f78a67c2aa3b?auto=format&fit=crop&w=1200&q=80"
+      "description": "Supportive pillows in soft, medium and firm fills, paired with elegant covers — sized and finished to hotel housekeeping standards or a softer, personal touch for the home.",
+      "image": "https://images.unsplash.com/photo-1600414428640-f78a67c2aa3b?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
     },
     {
       "id": "curtains",
       "name": "Curtains",
       "category": "Interior Décor",
-      "description": "Statement drapery in silk, velvet and linen — tailored to frame every window beautifully.",
-      "image": "https://images.unsplash.com/photo-1769784123040-751bbe038003?auto=format&fit=crop&w=1200&q=80"
+      "description": "Statement drapery in silk, velvet and linen, made to measure for every window — blackout linings available for guest rooms, and lighter sheers for airy living spaces at home.",
+      "image": "https://images.unsplash.com/photo-1769784123040-751bbe038003?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
+    },
+    {
+      "id": "curtain-hardware",
+      "name": "Curtain Tracks & Rods",
+      "category": "Interior Décor",
+      "description": "Motorised and manual tracks, poles and finials in brushed brass, matte black and wood finishes — sized for large hotel window walls or fitted neatly into a single home window.",
+      "image": "https://images.unsplash.com/photo-1671328920741-ea6f4233dc07?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
     },
     {
       "id": "carpets",
       "name": "Carpets",
       "category": "Interior Décor",
-      "description": "Hand-selected carpets that anchor a room with texture, warmth and understated luxury.",
-      "image": "https://images.unsplash.com/photo-1652634213812-f0deeb1de78e?auto=format&fit=crop&w=1200&q=80"
+      "description": "Hand-selected wall-to-wall and area carpets in durable, high-traffic weaves for hotel corridors and lobbies, or softer pile options that anchor a living room at home.",
+      "image": "https://images.unsplash.com/photo-1652634213812-f0deeb1de78e?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
     },
     {
       "id": "blinds",
       "name": "Blinds",
       "category": "Interior Décor",
-      "description": "Modern roller, roman and venetian blinds balancing natural light with privacy and style.",
-      "image": "https://images.unsplash.com/photo-1711006295130-406e8e9057f2?auto=format&fit=crop&w=1200&q=80"
+      "description": "Roller, roman and venetian blinds in blackout, dim-out and light-filtering fabrics — balancing natural light with privacy for both guest rooms and home offices.",
+      "image": "https://images.unsplash.com/photo-1711006295130-406e8e9057f2?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
     },
     {
       "id": "rugs",
       "name": "Rugs",
       "category": "Interior Décor",
-      "description": "Artisanal area rugs that bring character, comfort and a finishing touch to any space.",
-      "image": "https://images.unsplash.com/photo-1660338183700-12388dc9aa4f?auto=format&fit=crop&w=1200&q=80"
+      "description": "Artisanal area rugs in wool, jute and synthetic blends, chosen for character underfoot in a lobby seating area or as the finishing layer in a family living room.",
+      "image": "https://images.unsplash.com/photo-1660338183700-12388dc9aa4f?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
+    },
+    {
+      "id": "sofa-covers",
+      "name": "Sofa & Cushion Covers",
+      "category": "Interior Décor",
+      "description": "Tailored, washable sofa and cushion covers that refresh a lobby lounge or living room instantly — a practical way for hotels to protect upholstery between deep cleans.",
+      "image": "https://images.unsplash.com/photo-1731399211410-e3ffe1560310?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
+    },
+    {
+      "id": "table-linen",
+      "name": "Table Linen & Kitchen Textiles",
+      "category": "Interior Décor",
+      "description": "Tablecloths, runners, napkins and kitchen textiles in durable, easy-care fabrics — set for a hotel breakfast room or dressed simply for everyday family dining.",
+      "image": "https://images.unsplash.com/photo-1619043518800-7f14be467dca?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
     },
     {
       "id": "towels",
       "name": "Towels",
       "category": "Hospitality Essentials",
-      "description": "Spa-grade, highly absorbent towels trusted by leading hotels and resorts across Nepal.",
-      "image": "https://images.unsplash.com/photo-1760722974657-f64bce2f9cc5?auto=format&fit=crop&w=1200&q=80"
+      "description": "Spa-grade, highly absorbent cotton towels in bath, hand and face sizes, woven for the repeated wash cycles of hotel laundry while staying soft enough for daily home use.",
+      "image": "https://images.unsplash.com/photo-1760722974657-f64bce2f9cc5?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Homes & Hotels"
+    },
+    {
+      "id": "bath-robes",
+      "name": "Bath Robes & Slippers",
+      "category": "Hospitality Essentials",
+      "description": "Waffle-weave and terry bath robes with matching slippers — a signature guest amenity for resorts and boutique hotels, also available for a spa-style touch at home.",
+      "image": "https://images.unsplash.com/photo-1747257574419-290e1e535d92?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Hotels"
     },
     {
       "id": "hotel-furnishings",
       "name": "Hotel Furnishings",
       "category": "Hospitality Essentials",
-      "description": "Complete furnishing packages for hotels and resorts — from suites to lobbies, delivered turnkey.",
-      "image": "https://images.unsplash.com/photo-1646991761123-d83ce47c30c9?auto=format&fit=crop&w=1200&q=80"
+      "description": "Complete furnishing packages for hotels and resorts — mattresses to linens, curtains to carpets — coordinated by room type and delivered turnkey, floor by floor.",
+      "image": "https://images.unsplash.com/photo-1646991761123-d83ce47c30c9?auto=format&fit=crop&w=1200&q=80",
+      "idealFor": "Hotels"
     }
   ]
 }

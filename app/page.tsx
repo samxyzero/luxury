@@ -29,7 +29,12 @@ export default function Home() {
 
   return (
     <>
-      <Hero hero={site.hero} whatsapp={site.whatsapp} mapsUrl={site.address.mapsUrl} />
+      <Hero
+        hero={site.hero}
+        whatsapp={site.whatsapp}
+        mapsUrl={site.address.mapsUrl}
+        stats={site.stats}
+      />
       <About about={site.about} />
       <ProductsGrid products={products} whatsapp={site.whatsapp} />
       <Services services={services} />

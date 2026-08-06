@@ -40,7 +40,7 @@
       "Whether you're enhancing your home or outfitting an entire hotel, we offer elegant, durable, and comfortable products to suit every need. With a focus on quality and customer satisfaction, Luxury Enterprise is your trusted partner in creating luxurious and welcoming spaces across Pokhara and beyond."
     ],
     "image": "https://images.unsplash.com/photo-1758448755778-90ebf4d0f1e7?auto=format&fit=crop&w=1600&q=80",
-    "yearsExperience": 15,
+    "yearsExperience": 7,
     "highlights": [
       "Curated premium fabrics & materials",
       "Trusted by hotels, resorts & homeowners",
@@ -49,7 +49,7 @@
     ]
   },
   "stats": [
-    { "id": "years", "label": "Years of Trusted Service", "value": 15, "suffix": "+" },
+    { "id": "years", "label": "Years of Trusted Service", "value": 7, "suffix": "+" },
     { "id": "projects", "label": "Projects Furnished", "value": 850, "suffix": "+" },
     { "id": "hotels", "label": "Hotels & Resorts Served", "value": 60, "suffix": "+" },
     { "id": "rating", "label": "Google Rating", "value": 5, "suffix": ".0★" }

@@ -1,4 +1,11 @@
-import { Award, Clock3, Handshake, ShieldCheck, Sparkles, Truck } from "lucide-react";
+import {
+  Award,
+  Clock3,
+  Handshake,
+  ShieldCheck,
+  Sparkles,
+  Truck,
+} from "lucide-react";
 import Reveal from "@/components/Reveal";
 import StatCounter from "@/components/StatCounter";
 import type { SiteSettings } from "@/types/content";
@@ -7,32 +14,38 @@ const REASONS = [
   {
     icon: ShieldCheck,
     title: "Premium Quality, Always",
-    description: "Every product is chosen for durability, comfort and lasting finish.",
+    description:
+      "Every product is chosen for durability, comfort and lasting finish.",
   },
   {
     icon: Handshake,
     title: "Trusted by Hotels & Homes",
-    description: "From family bedrooms to resort suites, our work speaks for itself.",
+    description:
+      "From family bedrooms to resort suites, our work speaks for itself.",
   },
   {
     icon: Sparkles,
     title: "Elegant, Curated Range",
-    description: "Refined fabrics and finishes selected for a genuinely premium feel.",
+    description:
+      "Refined fabrics and finishes selected for a genuinely premium feel.",
   },
   {
     icon: Clock3,
     title: "On-Time, Every Time",
-    description: "Dependable delivery and installation timelines you can plan around.",
+    description:
+      "Dependable delivery and installation timelines you can plan around.",
   },
   {
     icon: Award,
-    title: "15+ Years of Expertise",
-    description: "Deep experience furnishing homes, hotels and commercial projects.",
+    title: "7+ Years of Expertise",
+    description:
+      "Deep experience furnishing homes, hotels and commercial projects.",
   },
   {
     icon: Truck,
     title: "End-to-End Service",
-    description: "Consultation, delivery and installation handled by one dedicated team.",
+    description:
+      "Consultation, delivery and installation handled by one dedicated team.",
   },
 ];
 
@@ -60,7 +73,11 @@ export default function WhyChooseUs({ stats }: WhyChooseUsProps) {
         >
           {stats.map((stat) => (
             <div key={stat.id} className="px-6 py-10 first:pl-0 sm:px-10">
-              <StatCounter value={stat.value} suffix={stat.suffix} label={stat.label} />
+              <StatCounter
+                value={stat.value}
+                suffix={stat.suffix}
+                label={stat.label}
+              />
             </div>
           ))}
         </Reveal>
@@ -69,10 +86,17 @@ export default function WhyChooseUs({ stats }: WhyChooseUsProps) {
           {REASONS.map((reason, i) => (
             <Reveal key={reason.title} delay={(i % 2) * 0.1}>
               <div className="flex items-start gap-4 border-t border-stone-on-navy pt-6">
-                <reason.icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" strokeWidth={1.5} />
+                <reason.icon
+                  className="mt-0.5 h-5 w-5 shrink-0 text-gold"
+                  strokeWidth={1.5}
+                />
                 <div>
-                  <h3 className="font-display text-lg font-medium text-paper">{reason.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-paper/60">{reason.description}</p>
+                  <h3 className="font-display text-lg font-medium text-paper">
+                    {reason.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-paper/60">
+                    {reason.description}
+                  </p>
                 </div>
               </div>
             </Reveal>

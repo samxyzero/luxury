@@ -1,4 +1,15 @@
-import { Building2, Home, MessageCircle, Ruler, Truck, Wrench, type LucideIcon } from "lucide-react";
+import {
+  Building2,
+  Home,
+  Layers,
+  LifeBuoy,
+  MessageCircle,
+  Package,
+  Ruler,
+  Truck,
+  Wrench,
+  type LucideIcon,
+} from "lucide-react";
 import Reveal from "@/components/Reveal";
 import type { Service } from "@/types/content";
 
@@ -6,9 +17,12 @@ const ICONS: Record<string, LucideIcon> = {
   home: Home,
   "building-2": Building2,
   ruler: Ruler,
+  layers: Layers,
+  package: Package,
   "message-circle": MessageCircle,
   truck: Truck,
   wrench: Wrench,
+  "life-buoy": LifeBuoy,
 };
 
 interface ServicesProps {

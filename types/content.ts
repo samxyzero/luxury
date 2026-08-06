@@ -56,6 +56,7 @@ export interface Product {
   category: string;
   description: string;
   image: string;
+  idealFor: "Homes" | "Hotels" | "Homes & Hotels";
 }
 
 export interface Service {
