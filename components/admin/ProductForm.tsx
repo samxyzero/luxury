@@ -101,6 +101,100 @@ export default function ProductForm({ product }: ProductFormProps) {
       </FormField>
 
       <FormField
+        label="Short Description (used on cards)"
+        htmlFor="shortDescription"
+        error={errors.shortDescription}
+      >
+        <input
+          id="shortDescription"
+          name="shortDescription"
+          defaultValue={product?.shortDescription ?? ""}
+          maxLength={200}
+          className={fieldInputClassName}
+          placeholder="One line — falls back to the full description if left blank"
+        />
+      </FormField>
+
+      <FormField
+        label="Materials & Quality"
+        htmlFor="material"
+        error={errors.material}
+      >
+        <textarea
+          id="material"
+          name="material"
+          defaultValue={product?.material ?? ""}
+          rows={3}
+          className={fieldInputClassName}
+          placeholder="e.g. 300TC long-staple cotton sateen"
+        />
+      </FormField>
+
+      <FormField label="Care Instructions" htmlFor="care" error={errors.care}>
+        <textarea
+          id="care"
+          name="care"
+          defaultValue={product?.care ?? ""}
+          rows={2}
+          className={fieldInputClassName}
+          placeholder="e.g. Machine wash warm. Tumble dry low."
+        />
+      </FormField>
+
+      <FormField
+        label="Highlights — one per line"
+        htmlFor="highlights"
+        error={errors.highlights}
+      >
+        <textarea
+          id="highlights"
+          name="highlights"
+          defaultValue={(product?.highlights ?? []).join("\n")}
+          rows={4}
+          className={fieldInputClassName}
+          placeholder={"Blackout linings for guest rooms\nMeasured and installed by our team"}
+        />
+      </FormField>
+
+      <FormField
+        label="Colourways — one per line"
+        htmlFor="colors"
+        error={errors.colors}
+      >
+        <textarea
+          id="colors"
+          name="colors"
+          defaultValue={(product?.colors ?? []).join("\n")}
+          rows={4}
+          className={fieldInputClassName}
+          placeholder={"Ivory\nCharcoal\nNavy"}
+        />
+      </FormField>
+
+      <div className="flex flex-wrap gap-x-10 gap-y-4">
+        <label htmlFor="featured" className="flex items-center gap-3 text-sm text-ink">
+          <input
+            id="featured"
+            name="featured"
+            type="checkbox"
+            defaultChecked={product?.featured ?? false}
+            className="h-4 w-4 accent-gold"
+          />
+          Show on the homepage
+        </label>
+        <label htmlFor="inStock" className="flex items-center gap-3 text-sm text-ink">
+          <input
+            id="inStock"
+            name="inStock"
+            type="checkbox"
+            defaultChecked={product?.inStock ?? true}
+            className="h-4 w-4 accent-gold"
+          />
+          In stock
+        </label>
+      </div>
+
+      <FormField
         label="Display Order (lower shows first)"
         htmlFor="order"
         error={errors.order}

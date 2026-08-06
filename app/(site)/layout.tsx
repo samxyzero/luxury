@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { getSiteSettings, getReviews } from "@/lib/content";
+import { getSiteSettings, getReviews, getProductCategories } from "@/lib/content";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://luxuryenterprises.com.np";
 
@@ -33,8 +33,11 @@ function expandDayRange(day: string): string[] {
 }
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const site = await getSiteSettings();
-  const reviews = await getReviews();
+  const [site, reviews, categories] = await Promise.all([
+    getSiteSettings(),
+    getReviews(),
+    getProductCategories(),
+  ]);
   const avgRating =
     reviews.reduce((sum, r) => sum + r.rating, 0) / Math.max(reviews.length, 1);
 
@@ -85,7 +88,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         phone={site.phone}
       />
       <main className="flex-1">{children}</main>
-      <Footer site={site} />
+      <Footer site={site} categories={categories} />
       <WhatsAppButton whatsapp={site.whatsapp} />
     </>
   );

@@ -50,6 +50,17 @@ export interface SiteSettings {
   }[];
 }
 
+export interface ProductVariant {
+  id: string;
+  name: string;
+  size: string | null;
+  color: string | null;
+  sku: string | null;
+  /** Minor units (paisa). Null until pricing is published. */
+  price: number | null;
+  inStock: boolean;
+}
+
 export interface Product {
   id: string;
   slug: string;
@@ -58,8 +69,35 @@ export interface Product {
   description: string;
   image: string;
   idealFor: "Homes" | "Hotels" | "Homes & Hotels";
+
+  /** One-line summary for cards and meta descriptions. */
+  shortDescription?: string | null;
+  /** Fabric / construction notes. */
+  material?: string | null;
+  /** Washing and upkeep guidance. */
+  care?: string | null;
+  highlights?: string[];
+  colors?: string[];
+
+  /**
+   * Minor units (paisa). Null until pricing is published — storefront price UI
+   * is hidden entirely while this is unset, so nothing shows "NPR 0".
+   */
+  basePrice?: number | null;
+  currency?: string;
+  inStock?: boolean;
+  featured?: boolean;
+  variants?: ProductVariant[];
+
   /** Present on database-backed rows; absent in the static fallback content. */
   updatedAt?: Date | string;
+}
+
+/** Derived from products rather than stored — see getProductCategories(). */
+export interface ProductCategory {
+  name: string;
+  count: number;
+  image: string;
 }
 
 export interface Service {

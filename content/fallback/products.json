@@ -7,7 +7,61 @@
       "category": "Sleep Comfort",
       "description": "Orthopedic, memory foam and hybrid mattresses engineered for restorative sleep. Available in single, queen and king sizes with firmness options suited to family bedrooms and hotel-grade nightly turnover alike.",
       "image": "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Orthopaedic, memory-foam and hybrid mattresses built for nightly use.",
+      "material": "High-density PU foam, cooling memory foam and pocket-spring cores, finished with a quilted knit or damask cover.",
+      "care": "Rotate head-to-toe every three months. Spot clean only — never soak. Use a mattress protector in guest rooms.",
+      "highlights": [
+        "Firmness graded soft, medium and firm so guest rooms can be matched room by room",
+        "Pocket-spring options isolate movement — a practical choice for shared beds",
+        "Breathable covers suited to Pokhara's humid monsoon months",
+        "Bulk pricing and staged delivery available for hotel refits"
+      ],
+      "colors": [
+        "Ivory",
+        "Pearl Grey"
+      ],
+      "featured": true,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_mattresses_0",
+          "name": "Single",
+          "size": "3ft × 6ft",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_mattresses_1",
+          "name": "Double",
+          "size": "4ft × 6ft",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_mattresses_2",
+          "name": "Queen",
+          "size": "5ft × 6.5ft",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_mattresses_3",
+          "name": "King",
+          "size": "6ft × 6.5ft",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "bedsheets",
@@ -16,7 +70,64 @@
       "category": "Sleep Comfort",
       "description": "Fine cotton and premium cotton-blend bedsheets in timeless weaves — crisp percale for hotel freshness, or soft sateen for a cosier home feel, in a refined, easy-to-coordinate colour palette.",
       "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Percale and sateen bedsheet sets in hotel-grade cotton.",
+      "material": "200–300 thread-count long-staple cotton and cotton-rich blends. Percale for a crisp, cool hand; sateen for a softer sheen.",
+      "care": "Machine wash warm with like colours. Tumble dry low. Wash before first use to set the weave.",
+      "highlights": [
+        "Sold as fitted sheet, flat sheet and pillowcase sets, or as individual replacements",
+        "Deep-pocket fitted sheets stay put on thicker hotel mattresses",
+        "Colour-fast dyes hold up to repeated commercial laundering",
+        "Neutral palette designed to coordinate across an entire property"
+      ],
+      "colors": [
+        "White",
+        "Ivory",
+        "Stone",
+        "Sage",
+        "Charcoal"
+      ],
+      "featured": true,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_bedsheets_0",
+          "name": "Single Set",
+          "size": "3ft bed",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_bedsheets_1",
+          "name": "Double Set",
+          "size": "4ft bed",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_bedsheets_2",
+          "name": "Queen Set",
+          "size": "5ft bed",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_bedsheets_3",
+          "name": "King Set",
+          "size": "6ft bed",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "duvets",
@@ -25,7 +136,61 @@
       "category": "Sleep Comfort",
       "description": "Plush, temperature-balanced duvets and comforters in a range of warmth ratings, from light all-season options for guest rooms to heavier fills for Pokhara's cooler winter months at home.",
       "image": "https://images.unsplash.com/photo-1728614669329-29e10a0698ea?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Temperature-balanced duvets, comforters and protective covers.",
+      "material": "Microfibre and down-alternative fills in a cotton cambric shell, baffle-box stitched to stop the filling migrating.",
+      "care": "Use a washable duvet cover. Air regularly; professional cleaning once a season.",
+      "highlights": [
+        "All-season and winter weights — the heavier fill suits Pokhara's cooler months",
+        "Hypoallergenic fills, an easy default for guest rooms",
+        "Baffle-box construction keeps loft even after repeated washing",
+        "Matching covers available in the bedsheet palette"
+      ],
+      "colors": [
+        "White",
+        "Ivory"
+      ],
+      "featured": false,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_duvets_0",
+          "name": "Single",
+          "size": "150 × 220 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_duvets_1",
+          "name": "Double",
+          "size": "200 × 220 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_duvets_2",
+          "name": "Queen",
+          "size": "220 × 240 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_duvets_3",
+          "name": "King",
+          "size": "240 × 260 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "pillows",
@@ -34,7 +199,61 @@
       "category": "Sleep Comfort",
       "description": "Supportive pillows in soft, medium and firm fills, paired with elegant covers — sized and finished to hotel housekeeping standards or a softer, personal touch for the home.",
       "image": "https://images.unsplash.com/photo-1600414428640-f78a67c2aa3b?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Fibre, memory-foam and latex pillows with protective covers.",
+      "material": "Siliconised hollow-fibre, moulded memory foam and natural latex in cotton casings.",
+      "care": "Fibre pillows are machine washable; foam and latex should be spot cleaned and aired.",
+      "highlights": [
+        "Soft, medium and firm lofts so guests can be offered a pillow menu",
+        "Zippered protectors extend pillow life in high-turnover rooms",
+        "Memory foam holds neck support through the night",
+        "Bolsters and decorative cushions available to match soft furnishings"
+      ],
+      "colors": [
+        "White",
+        "Ivory"
+      ],
+      "featured": false,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_pillowsandcovers_0",
+          "name": "Standard",
+          "size": "45 × 70 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_pillowsandcovers_1",
+          "name": "Queen",
+          "size": "50 × 75 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_pillowsandcovers_2",
+          "name": "King",
+          "size": "50 × 90 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_pillowsandcovers_3",
+          "name": "Bolster",
+          "size": "40 × 105 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "curtains",
@@ -43,7 +262,65 @@
       "category": "Interior Décor",
       "description": "Statement drapery in silk, velvet and linen, made to measure for every window — blackout linings available for guest rooms, and lighter sheers for airy living spaces at home.",
       "image": "https://images.unsplash.com/photo-1769784123040-751bbe038003?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Made-to-measure drapery in silk, velvet, linen and sheer weaves.",
+      "material": "Faux silk, cotton-linen, velvet and polyester sheers, with optional blackout or dim-out lining.",
+      "care": "Vacuum on a low setting monthly. Dry clean lined and velvet panels; wash unlined cotton cool.",
+      "highlights": [
+        "Measured, stitched and installed by our own team",
+        "Blackout linings for guest rooms; light-filtering sheers for living spaces",
+        "Pinch pleat, eyelet, rod pocket and wave headings",
+        "Coordinated with tracks, rods and tie-backs from the same range"
+      ],
+      "colors": [
+        "Ivory",
+        "Champagne",
+        "Dusty Rose",
+        "Olive",
+        "Navy",
+        "Charcoal"
+      ],
+      "featured": true,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_curtains_0",
+          "name": "Standard Window",
+          "size": "up to 5ft drop",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_curtains_1",
+          "name": "Tall Window",
+          "size": "up to 8ft drop",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_curtains_2",
+          "name": "Floor-to-Ceiling",
+          "size": "up to 12ft drop",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_curtains_3",
+          "name": "Custom",
+          "size": "measured on site",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "curtain-hardware",
@@ -52,7 +329,54 @@
       "category": "Interior Décor",
       "description": "Motorised and manual tracks, poles and finials in brushed brass, matte black and wood finishes — sized for large hotel window walls or fitted neatly into a single home window.",
       "image": "https://images.unsplash.com/photo-1671328920741-ea6f4233dc07?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Motorised and manual tracks, poles and finials.",
+      "material": "Powder-coated aluminium tracks and steel poles in brushed brass, matte black and wood finishes.",
+      "care": "Wipe with a dry cloth. Keep tracks free of dust so gliders run smoothly.",
+      "highlights": [
+        "Motorised tracks with remote or wall switch for tall hotel window walls",
+        "Ceiling and wall mounting, including bay and corner runs",
+        "Silent glide systems — worth it in bedrooms",
+        "Finish-matched brackets, finials and tie-back hooks"
+      ],
+      "colors": [
+        "Brushed Brass",
+        "Matte Black",
+        "Antique Bronze",
+        "Natural Wood"
+      ],
+      "featured": false,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_curtaintracksandrods_0",
+          "name": "Manual Track",
+          "size": "cut to width",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_curtaintracksandrods_1",
+          "name": "Decorative Pole",
+          "size": "cut to width",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_curtaintracksandrods_2",
+          "name": "Motorised Track",
+          "size": "cut to width",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "carpets",
@@ -61,7 +385,64 @@
       "category": "Interior Décor",
       "description": "Hand-selected wall-to-wall and area carpets in durable, high-traffic weaves for hotel corridors and lobbies, or softer pile options that anchor a living room at home.",
       "image": "https://images.unsplash.com/photo-1652634213812-f0deeb1de78e?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Wall-to-wall and area carpets in high-traffic commercial weaves.",
+      "material": "Solution-dyed nylon, polypropylene and wool-blend piles over a felt or rubber backing.",
+      "care": "Vacuum twice weekly in busy areas. Professional hot-water extraction once or twice a year.",
+      "highlights": [
+        "Commercial-rated piles that hold up in corridors and lobbies",
+        "Stain-resistant treatments as standard on synthetic ranges",
+        "Fitted, seamed and finished on site by our installers",
+        "Softer wool blends for bedrooms and living rooms at home"
+      ],
+      "colors": [
+        "Sand",
+        "Taupe",
+        "Slate",
+        "Deep Blue",
+        "Burgundy"
+      ],
+      "featured": true,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_carpets_0",
+          "name": "Wall-to-Wall",
+          "size": "measured per room",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_carpets_1",
+          "name": "Area Carpet",
+          "size": "5ft × 8ft",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_carpets_2",
+          "name": "Area Carpet",
+          "size": "8ft × 10ft",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_carpets_3",
+          "name": "Stair Runner",
+          "size": "cut to length",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "blinds",
@@ -70,7 +451,64 @@
       "category": "Interior Décor",
       "description": "Roller, roman and venetian blinds in blackout, dim-out and light-filtering fabrics — balancing natural light with privacy for both guest rooms and home offices.",
       "image": "https://images.unsplash.com/photo-1711006295130-406e8e9057f2?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Roller, roman, venetian and zebra blinds in blackout and light-filtering fabrics.",
+      "material": "Polyester screen fabrics, PVC and aluminium slats, and wood-look composite venetians.",
+      "care": "Dust slats regularly; wipe fabric blinds with a barely damp cloth.",
+      "highlights": [
+        "Blackout, dim-out and sunscreen fabrics to suit the room's use",
+        "Chain, cord and motorised controls",
+        "Child-safe fittings available — worth specifying for family homes",
+        "Compact stack, useful where curtains would crowd the window"
+      ],
+      "colors": [
+        "White",
+        "Cream",
+        "Grey",
+        "Espresso",
+        "Natural"
+      ],
+      "featured": false,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_blinds_0",
+          "name": "Roller Blind",
+          "size": "made to measure",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_blinds_1",
+          "name": "Roman Blind",
+          "size": "made to measure",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_blinds_2",
+          "name": "Venetian Blind",
+          "size": "made to measure",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_blinds_3",
+          "name": "Zebra Blind",
+          "size": "made to measure",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "rugs",
@@ -79,7 +517,64 @@
       "category": "Interior Décor",
       "description": "Artisanal area rugs in wool, jute and synthetic blends, chosen for character underfoot in a lobby seating area or as the finishing layer in a family living room.",
       "image": "https://images.unsplash.com/photo-1660338183700-12388dc9aa4f?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Hand-knotted and machine-woven rugs that anchor a room.",
+      "material": "Wool, viscose-blend and durable polypropylene pile in hand-knotted and power-loomed constructions.",
+      "care": "Rotate twice a year for even wear. Professional cleaning; blot spills immediately.",
+      "highlights": [
+        "Traditional Nepali motifs alongside plain and abstract modern designs",
+        "Hand-knotted wool for reception areas that need to make an impression",
+        "Easy-clean synthetic options for family rooms",
+        "Custom sizes and shapes cut to order"
+      ],
+      "colors": [
+        "Ivory",
+        "Charcoal",
+        "Rust",
+        "Indigo",
+        "Moss"
+      ],
+      "featured": false,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_rugs_0",
+          "name": "Accent",
+          "size": "3ft × 5ft",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_rugs_1",
+          "name": "Standard",
+          "size": "5ft × 8ft",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_rugs_2",
+          "name": "Large",
+          "size": "8ft × 10ft",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_rugs_3",
+          "name": "Runner",
+          "size": "2.5ft × 8ft",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "sofa-covers",
@@ -88,7 +583,64 @@
       "category": "Interior Décor",
       "description": "Tailored, washable sofa and cushion covers that refresh a lobby lounge or living room instantly — a practical way for hotels to protect upholstery between deep cleans.",
       "image": "https://images.unsplash.com/photo-1731399211410-e3ffe1560310?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Tailored sofa, chair and cushion covers, including full reupholstery.",
+      "material": "Cotton-linen, chenille, velvet and performance weaves with soil-resistant finishes.",
+      "care": "Removable covers wash cool and line dry. Fixed upholstery should be professionally cleaned.",
+      "highlights": [
+        "Loose covers or complete reupholstery of existing frames",
+        "Performance fabrics that survive lobby and restaurant use",
+        "Piping, welt and contrast trims to your specification",
+        "Cushion inserts in feather and hollow-fibre fills"
+      ],
+      "colors": [
+        "Natural Linen",
+        "Stone",
+        "Forest",
+        "Teal",
+        "Charcoal"
+      ],
+      "featured": false,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_sofaandcushioncovers_0",
+          "name": "Cushion Cover",
+          "size": "40 × 40 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_sofaandcushioncovers_1",
+          "name": "Cushion Cover",
+          "size": "50 × 50 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_sofaandcushioncovers_2",
+          "name": "2-Seat Sofa Cover",
+          "size": "made to measure",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_sofaandcushioncovers_3",
+          "name": "3-Seat Sofa Cover",
+          "size": "made to measure",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "table-linen",
@@ -97,7 +649,64 @@
       "category": "Interior Décor",
       "description": "Tablecloths, runners, napkins and kitchen textiles in durable, easy-care fabrics — set for a hotel breakfast room or dressed simply for everyday family dining.",
       "image": "https://images.unsplash.com/photo-1619043518800-7f14be467dca?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Tablecloths, runners, napkins and kitchen textiles for daily service.",
+      "material": "Spun polyester and cotton-rich blends with soil-release finishes; damask weaves for banqueting.",
+      "care": "Wash hot with an oxygen-based stain remover. Tumble dry low; press while slightly damp.",
+      "highlights": [
+        "Sized for round, rectangular and banquet tables",
+        "Soil-release finishes lift food and oil stains in a normal wash",
+        "Matching napkins, runners and skirting for events",
+        "Aprons, oven gloves and kitchen cloths in the same range"
+      ],
+      "colors": [
+        "White",
+        "Ivory",
+        "Black",
+        "Burgundy",
+        "Sage"
+      ],
+      "featured": false,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_tablelinenandkitchentextiles_0",
+          "name": "Round Tablecloth",
+          "size": "180 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_tablelinenandkitchentextiles_1",
+          "name": "Rectangular Tablecloth",
+          "size": "180 × 300 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_tablelinenandkitchentextiles_2",
+          "name": "Table Runner",
+          "size": "40 × 180 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_tablelinenandkitchentextiles_3",
+          "name": "Napkin Set",
+          "size": "45 × 45 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "towels",
@@ -106,7 +715,73 @@
       "category": "Hospitality Essentials",
       "description": "Spa-grade, highly absorbent cotton towels in bath, hand and face sizes, woven for the repeated wash cycles of hotel laundry while staying soft enough for daily home use.",
       "image": "https://images.unsplash.com/photo-1760722974657-f64bce2f9cc5?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Homes & Hotels"
+      "idealFor": "Homes & Hotels",
+      "shortDescription": "Absorbent cotton towels in weights from guest bath to pool.",
+      "material": "500–650 GSM ring-spun and combed cotton, double-stitched hems, low-lint finish.",
+      "care": "Wash warm without fabric softener — softener coats the pile and cuts absorbency.",
+      "highlights": [
+        "GSM graded so bath, hand, face and pool towels can be specified separately",
+        "Colour-fast and chlorine-resistant options for pool and spa areas",
+        "Reinforced hems built for commercial laundry cycles",
+        "Bath mats and pool towels available to match"
+      ],
+      "colors": [
+        "White",
+        "Ivory",
+        "Grey",
+        "Navy",
+        "Sage"
+      ],
+      "featured": true,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_towels_0",
+          "name": "Face Towel",
+          "size": "30 × 30 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_towels_1",
+          "name": "Hand Towel",
+          "size": "40 × 60 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_towels_2",
+          "name": "Bath Towel",
+          "size": "70 × 140 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_towels_3",
+          "name": "Bath Sheet",
+          "size": "90 × 170 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_towels_4",
+          "name": "Bath Mat",
+          "size": "50 × 80 cm",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "bath-robes",
@@ -115,7 +790,71 @@
       "category": "Hospitality Essentials",
       "description": "Waffle-weave and terry bath robes with matching slippers — a signature guest amenity for resorts and boutique hotels, also available for a spa-style touch at home.",
       "image": "https://images.unsplash.com/photo-1747257574419-290e1e535d92?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Hotels"
+      "idealFor": "Hotels",
+      "shortDescription": "Waffle and terry robes with disposable or reusable slippers.",
+      "material": "Cotton terry, velour and lightweight waffle weave; slippers in cotton terry and coral fleece.",
+      "care": "Wash robes warm; avoid softener on terry. Reusable slippers wash cool in a laundry bag.",
+      "highlights": [
+        "Waffle robes for warmer months, terry for winter and spa use",
+        "Unisex sizing with adjustable belts keeps stockholding simple",
+        "Open-toe and closed-toe slippers, disposable or reusable",
+        "Embroidery available for property branding"
+      ],
+      "colors": [
+        "White",
+        "Ivory",
+        "Grey"
+      ],
+      "featured": false,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_bathrobesandslippers_0",
+          "name": "Waffle Robe",
+          "size": "S/M",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_bathrobesandslippers_1",
+          "name": "Waffle Robe",
+          "size": "L/XL",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_bathrobesandslippers_2",
+          "name": "Terry Robe",
+          "size": "S/M",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_bathrobesandslippers_3",
+          "name": "Terry Robe",
+          "size": "L/XL",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_bathrobesandslippers_4",
+          "name": "Slippers",
+          "size": "one size",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     },
     {
       "id": "hotel-furnishings",
@@ -124,7 +863,60 @@
       "category": "Hospitality Essentials",
       "description": "Complete furnishing packages for hotels and resorts — mattresses to linens, curtains to carpets — coordinated by room type and delivered turnkey, floor by floor.",
       "image": "https://images.unsplash.com/photo-1646991761123-d83ce47c30c9?auto=format&fit=crop&w=1200&q=80",
-      "idealFor": "Hotels"
+      "idealFor": "Hotels",
+      "shortDescription": "Room-ready furnishing packages specified and installed per property.",
+      "material": "Coordinated textile and furniture packages sourced to your brief and budget.",
+      "care": "Care guidance is supplied per item as part of the handover pack.",
+      "highlights": [
+        "Whole-room packages — bed, linen, window treatment, flooring and soft furnishings",
+        "Consistent specification across every room in a property",
+        "Phased delivery so floors can be refitted without closing the hotel",
+        "Single point of contact from specification through installation"
+      ],
+      "colors": [
+        "Specified per project"
+      ],
+      "featured": false,
+      "inStock": true,
+      "currency": "NPR",
+      "variants": [
+        {
+          "id": "var_hotelfurnishings_0",
+          "name": "Standard Room Package",
+          "size": "per room",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_hotelfurnishings_1",
+          "name": "Deluxe Room Package",
+          "size": "per room",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_hotelfurnishings_2",
+          "name": "Suite Package",
+          "size": "per suite",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        },
+        {
+          "id": "var_hotelfurnishings_3",
+          "name": "Full Property Fit-Out",
+          "size": "quoted per project",
+          "color": null,
+          "sku": null,
+          "price": null,
+          "inStock": true
+        }
+      ]
     }
   ]
 }

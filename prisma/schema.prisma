@@ -61,16 +61,63 @@ model SiteSettings {
 }
 
 model Product {
-  id          String   @id @default(cuid())
-  slug        String   @unique
+  id          String @id @default(cuid())
+  slug        String @unique
   name        String
   category    String
   description String
   image       String
   idealFor    String
-  order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+
+  /// One-line summary used on cards and in meta descriptions.
+  shortDescription String?
+  /// Fabric / construction notes, e.g. "300TC long-staple cotton sateen".
+  material         String?
+  /// Washing and upkeep guidance.
+  care             String?
+  /// Selling points rendered as a bullet list on the detail page.
+  highlights       String[] @default([])
+  /// Colourways offered, shown as swatched pills.
+  colors           String[] @default([])
+
+  /// Minor units (paisa). Null until pricing is published — the storefront
+  /// hides price UI entirely when this is unset.
+  basePrice Int?
+  currency  String  @default("NPR")
+  inStock   Boolean @default(true)
+  /// Curated for the homepage rather than simply the first by `order`.
+  featured  Boolean @default(false)
+
+  variants ProductVariant[]
+
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([featured])
+}
+
+/// Size/colour permutations of a Product. Carries its own SKU, price and stock
+/// flag so a cart and inventory can be layered on without reshaping Product.
+model ProductVariant {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  name  String
+  size  String?
+  color String?
+  sku   String? @unique
+  /// Minor units. Falls back to Product.basePrice when null.
+  price Int?
+
+  inStock   Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
 }
 
 model Service {

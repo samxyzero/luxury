@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import ProductsGrid from "@/components/ProductsGrid";
 import PageShell from "@/components/PageShell";
@@ -27,8 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ProductsPage() {
-  const site = await getSiteSettings();
-  const products = await getProducts();
+  const [site, products] = await Promise.all([getSiteSettings(), getProducts()]);
 
   return (
     <PageShell trail={[{ name: "Products", path: "/products" }]}>
@@ -38,13 +38,17 @@ export default async function ProductsPage() {
           `${site.businessName} Products`
         )}
       />
-      <ProductsGrid
-        products={products}
-        as="h1"
-        eyebrow="Our Catalogue"
-        heading="Furnishings for Every Room and Every Guest"
-        intro="Every category below is curated for both family homes and working hospitality spaces — built to look considered on day one and hold up years later."
-      />
+      {/* ProductsGrid reads ?category= via useSearchParams, which needs a
+          Suspense boundary for this page to stay statically pre-rendered. */}
+      <Suspense fallback={null}>
+        <ProductsGrid
+          products={products}
+          as="h1"
+          eyebrow="Our Catalogue"
+          heading="Furnishings for Every Room and Every Guest"
+          intro="Every category below is curated for both family homes and working hospitality spaces — built to look considered on day one and hold up years later."
+        />
+      </Suspense>
     </PageShell>
   );
 }

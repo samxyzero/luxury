@@ -7,6 +7,7 @@ import type {
   Review,
   FaqItem,
   Partner,
+  ProductCategory,
 } from "@/types/content";
 import fallbackSite from "@/content/fallback/site.json";
 import fallbackProducts from "@/content/fallback/products.json";
@@ -75,9 +76,17 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   }
 }
 
+/** Variants always travel with their product, ordered for display. */
+const withVariants = {
+  variants: { orderBy: { order: "asc" } },
+} as const;
+
 export async function getProducts(): Promise<Product[]> {
   try {
-    const rows = await prisma.product.findMany({ orderBy: { order: "asc" } });
+    const rows = await prisma.product.findMany({
+      orderBy: { order: "asc" },
+      include: withVariants,
+    });
     return rows.map((r) => ({ ...r, idealFor: r.idealFor as Product["idealFor"] }));
   } catch (error) {
     console.error("[content] getProducts: falling back to static content —", error);
@@ -87,7 +96,10 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
-    const row = await prisma.product.findUnique({ where: { slug } });
+    const row = await prisma.product.findUnique({
+      where: { slug },
+      include: withVariants,
+    });
     if (!row) return null;
     return { ...row, idealFor: row.idealFor as Product["idealFor"] };
   } catch (error) {
@@ -96,6 +108,37 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       (fallbackProducts as { items: Product[] }).items.find((p) => p.slug === slug) ?? null
     );
   }
+}
+
+/**
+ * Homepage selection. Falls back to the first `limit` products so the section
+ * is never empty if nobody has flagged anything as featured yet.
+ */
+export async function getFeaturedProducts(limit = 4): Promise<Product[]> {
+  const products = await getProducts();
+  const featured = products.filter((p) => p.featured);
+  return (featured.length > 0 ? featured : products).slice(0, limit);
+}
+
+/** Derived from products rather than stored, so categories stay self-maintaining. */
+export async function getProductCategories(): Promise<ProductCategory[]> {
+  const products = await getProducts();
+  const byName = new Map<string, ProductCategory>();
+
+  for (const product of products) {
+    const existing = byName.get(product.category);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      byName.set(product.category, {
+        name: product.category,
+        count: 1,
+        image: product.image,
+      });
+    }
+  }
+
+  return [...byName.values()];
 }
 
 export async function getServices(): Promise<Service[]> {
