@@ -25,6 +25,9 @@ const nextConfig: NextConfig = {
     return [
       { source: "/reviews", destination: "/#reviews", permanent: true },
       { source: "/faq", destination: "/contact", permanent: true },
+      // "Gallery" renamed to "Projects" — reads as capability rather than a
+      // photo dump, which matters more for the trade side of the business.
+      { source: "/gallery", destination: "/projects", permanent: true },
     ];
   },
   experimental: {

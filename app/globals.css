@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f4ee;
-  --foreground: #1c1b18;
+  --background: #f5f2ea;
+  --foreground: #171717;
 
   /* Editorial palette — warm white, deep navy, charcoal, muted gold (used sparingly) */
-  --color-paper: #f7f4ee;
-  --color-paper-dim: #f0ece3;
-  --color-ink: #1c1b18;
-  --color-ink-muted: #6b675e;
-  --color-navy: #10203a;
-  --color-navy-dim: #182c4c;
-  --color-gold: #a9895a;
+  --color-paper: #f5f2ea;
+  --color-paper-dim: #efebe1;
+  --color-ink: #171717;
+  --color-ink-muted: #6e6a62;
+  --color-navy: #10243d;
+  --color-navy-dim: #18304f;
+  --color-gold: #a98a57;
   --color-gold-dim: #8a7048;
-  --color-stone: #e4dfd3;
-  --color-stone-on-navy: rgba(247, 244, 238, 0.16);
+  --color-stone: #e6e1d5;
+  --color-stone-on-navy: rgba(245, 242, 234, 0.16);
 }
 
 @theme inline {

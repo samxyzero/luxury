@@ -33,10 +33,10 @@ export default function Gallery({ items, as: Heading = "h2", footerLink }: Galle
         <Reveal className="max-w-2xl">
           <div className="flex items-center gap-3">
             <span className="h-px w-8 bg-gold" />
-            <span className="label text-ink-muted">Gallery</span>
+            <span className="label text-ink-muted">Selected Work</span>
           </div>
           <Heading className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
-            Projects We&apos;re Proud Of
+            Homes, Hotels &amp; Resorts We&apos;ve Furnished
           </Heading>
         </Reveal>
 

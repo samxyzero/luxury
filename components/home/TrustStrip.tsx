@@ -31,7 +31,9 @@ export default function TrustStrip({ stats, partners }: TrustStripProps) {
 
         {partners.length > 0 && (
           <Reveal delay={0.2} className="mt-14 border-t border-stone pt-8">
-            <p className="label text-center text-ink-muted/70">Trusted Brand Partners</p>
+            {/* These are suppliers we stock, not clients — calling them
+                "trusted by" would misrepresent the relationship. */}
+            <p className="label text-center text-ink-muted/70">Brands We Work With</p>
             <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-3">
               {partners.map((partner) => (
                 <li

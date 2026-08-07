@@ -9,11 +9,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const categories = Array.from(new Set(items.map((i) => i.category)));
 
   return pageMetadata({
-    title: "Gallery",
+    title: "Projects",
     description: `Recent furnishing work across ${categories.join(
       ", "
     )} — bedrooms, lobbies, guest rooms and living spaces furnished by Luxury Enterprises in Pokhara, Nepal.`,
-    path: "/gallery",
+    path: "/projects",
     image: items[0]?.image,
     keywords: [
       "furnishing gallery Pokhara",
@@ -27,7 +27,7 @@ export default async function GalleryPage() {
   const items = await getGallery();
 
   return (
-    <PageShell trail={[{ name: "Gallery", path: "/gallery" }]}>
+    <PageShell trail={[{ name: "Projects", path: "/projects" }]}>
       <Gallery items={items} as="h1" />
     </PageShell>
   );

@@ -42,8 +42,10 @@ export default function StatCounter({
 
   return (
     <div ref={ref}>
+      {/* The figure is the point — the label is support, so it runs smaller and
+          with less tracking than the site's standard .label treatment. */}
       <div
-        className={`font-display text-4xl sm:text-5xl font-medium ${
+        className={`font-display text-5xl font-medium leading-none sm:text-6xl ${
           tone === "ink" ? "text-ink" : "text-paper"
         }`}
       >
@@ -51,7 +53,7 @@ export default function StatCounter({
         <span className="text-gold">{suffix}</span>
       </div>
       <p
-        className={`label mt-3 max-w-[14rem] ${
+        className={`mt-4 max-w-[9rem] text-xs font-semibold uppercase leading-snug tracking-[0.08em] ${
           tone === "ink" ? "text-ink-muted" : "text-paper/55"
         }`}
       >

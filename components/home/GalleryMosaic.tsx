@@ -37,7 +37,7 @@ export default function GalleryMosaic({ items }: GalleryMosaicProps) {
             </h2>
           </div>
           <Link
-            href="/gallery"
+            href="/projects"
             className="group label inline-flex items-center gap-2 border-b border-stone-on-navy pb-2 text-paper transition-colors duration-300 hover:border-gold hover:text-gold"
           >
             Full Gallery
@@ -52,7 +52,7 @@ export default function GalleryMosaic({ items }: GalleryMosaicProps) {
               delay={i * 0.06}
               className={`relative overflow-hidden ${spans[i] ?? ""}`}
             >
-              <Link href="/gallery" className="group block h-full w-full">
+              <Link href="/projects" className="group block h-full w-full">
                 <Image
                   src={item.image}
                   alt={item.caption}
