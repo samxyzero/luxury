@@ -65,15 +65,67 @@ function mapSiteSettings(row: SiteSettingsRow): SiteSettings {
   };
 }
 
-export async function getSiteSettings(): Promise<SiteSettings> {
-  try {
-    const row = await prisma.siteSettings.findUnique({ where: { id: 1 } });
-    if (!row) throw new Error("SiteSettings row not found in database");
-    return mapSiteSettings(row);
-  } catch (error) {
-    console.error("[content] getSiteSettings: falling back to static content —", error);
-    return fallbackSite as SiteSettings;
+/**
+ * Connection-level failures rather than genuine query errors. Neon suspends
+ * idle compute, so the first request after a quiet spell can land on a socket
+ * the server has already closed — retrying wakes it and succeeds.
+ */
+const TRANSIENT_CODES = new Set([
+  "P1001", // can't reach database server
+  "P1002", // reached but timed out
+  "P1017", // server has closed the connection
+  "ECONNRESET",
+  "ETIMEDOUT",
+  "EPIPE",
+]);
+
+const TRANSIENT_MESSAGE =
+  /server has closed the connection|connection terminated|connection is closed|socket hang up|timed out fetching a new connection|econnreset/i;
+
+function isTransient(error: unknown): boolean {
+  const code = (error as { code?: string })?.code;
+  if (code && TRANSIENT_CODES.has(code)) return true;
+  const message = error instanceof Error ? error.message : String(error);
+  return TRANSIENT_MESSAGE.test(message);
+}
+
+/**
+ * Runs a database read, retrying once on a dropped connection before giving up
+ * to the bundled static snapshot. Without the retry a single recycled socket
+ * served a visitor stale content for that whole request.
+ */
+async function fromDb<T>(
+  label: string,
+  run: () => Promise<T>,
+  fallback: () => T
+): Promise<T> {
+  const attempts = 2;
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    try {
+      return await run();
+    } catch (error) {
+      if (attempt < attempts && isTransient(error)) {
+        console.warn(`[content] ${label}: connection dropped, retrying…`);
+        await new Promise((resolve) => setTimeout(resolve, 150));
+        continue;
+      }
+      console.error(`[content] ${label}: falling back to static content —`, error);
+      return fallback();
+    }
   }
+  return fallback();
+}
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  return fromDb(
+    "getSiteSettings",
+    async () => {
+      const row = await prisma.siteSettings.findUnique({ where: { id: 1 } });
+      if (!row) throw new Error("SiteSettings row not found in database");
+      return mapSiteSettings(row);
+    },
+    () => fallbackSite as SiteSettings
+  );
 }
 
 /** Variants always travel with their product, ordered for display. */
@@ -82,32 +134,33 @@ const withVariants = {
 } as const;
 
 export async function getProducts(): Promise<Product[]> {
-  try {
-    const rows = await prisma.product.findMany({
-      orderBy: { order: "asc" },
-      include: withVariants,
-    });
-    return rows.map((r) => ({ ...r, idealFor: r.idealFor as Product["idealFor"] }));
-  } catch (error) {
-    console.error("[content] getProducts: falling back to static content —", error);
-    return (fallbackProducts as { items: Product[] }).items;
-  }
+  return fromDb(
+    "getProducts",
+    async () => {
+      const rows = await prisma.product.findMany({
+        orderBy: { order: "asc" },
+        include: withVariants,
+      });
+      return rows.map((r) => ({ ...r, idealFor: r.idealFor as Product["idealFor"] }));
+    },
+    () => (fallbackProducts as { items: Product[] }).items
+  );
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  try {
-    const row = await prisma.product.findUnique({
-      where: { slug },
-      include: withVariants,
-    });
-    if (!row) return null;
-    return { ...row, idealFor: row.idealFor as Product["idealFor"] };
-  } catch (error) {
-    console.error("[content] getProductBySlug: falling back to static content —", error);
-    return (
+  return fromDb(
+    "getProductBySlug",
+    async () => {
+      const row = await prisma.product.findUnique({
+        where: { slug },
+        include: withVariants,
+      });
+      if (!row) return null;
+      return { ...row, idealFor: row.idealFor as Product["idealFor"] };
+    },
+    () =>
       (fallbackProducts as { items: Product[] }).items.find((p) => p.slug === slug) ?? null
-    );
-  }
+  );
 }
 
 /**
@@ -142,46 +195,41 @@ export async function getProductCategories(): Promise<ProductCategory[]> {
 }
 
 export async function getServices(): Promise<Service[]> {
-  try {
-    return await prisma.service.findMany({ orderBy: { order: "asc" } });
-  } catch (error) {
-    console.error("[content] getServices: falling back to static content —", error);
-    return (fallbackServices as { items: Service[] }).items;
-  }
+  return fromDb(
+    "getServices",
+    () => prisma.service.findMany({ orderBy: { order: "asc" } }),
+    () => (fallbackServices as { items: Service[] }).items
+  );
 }
 
 export async function getGallery(): Promise<GalleryItem[]> {
-  try {
-    return await prisma.galleryItem.findMany({ orderBy: { order: "asc" } });
-  } catch (error) {
-    console.error("[content] getGallery: falling back to static content —", error);
-    return (fallbackGallery as { items: GalleryItem[] }).items;
-  }
+  return fromDb(
+    "getGallery",
+    () => prisma.galleryItem.findMany({ orderBy: { order: "asc" } }),
+    () => (fallbackGallery as { items: GalleryItem[] }).items
+  );
 }
 
 export async function getReviews(): Promise<Review[]> {
-  try {
-    return await prisma.review.findMany({ orderBy: { order: "asc" } });
-  } catch (error) {
-    console.error("[content] getReviews: falling back to static content —", error);
-    return (fallbackReviews as { items: Review[] }).items;
-  }
+  return fromDb(
+    "getReviews",
+    () => prisma.review.findMany({ orderBy: { order: "asc" } }),
+    () => (fallbackReviews as { items: Review[] }).items
+  );
 }
 
 export async function getFaqs(): Promise<FaqItem[]> {
-  try {
-    return await prisma.faqItem.findMany({ orderBy: { order: "asc" } });
-  } catch (error) {
-    console.error("[content] getFaqs: falling back to static content —", error);
-    return (fallbackFaq as { items: FaqItem[] }).items;
-  }
+  return fromDb(
+    "getFaqs",
+    () => prisma.faqItem.findMany({ orderBy: { order: "asc" } }),
+    () => (fallbackFaq as { items: FaqItem[] }).items
+  );
 }
 
 export async function getPartners(): Promise<Partner[]> {
-  try {
-    return await prisma.partner.findMany({ orderBy: { order: "asc" } });
-  } catch (error) {
-    console.error("[content] getPartners: falling back to static content —", error);
-    return (fallbackPartners as { items: Partner[] }).items;
-  }
+  return fromDb(
+    "getPartners",
+    () => prisma.partner.findMany({ orderBy: { order: "asc" } }),
+    () => (fallbackPartners as { items: Partner[] }).items
+  );
 }
