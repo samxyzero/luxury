@@ -6,15 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-const NAV_LINKS = [
-  { label: "About", href: "/about" },
-  { label: "Products", href: "/products" },
-  { label: "Services", href: "/services" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "/contact" },
-];
+import { PRIMARY_NAV as NAV_LINKS } from "@/lib/navigation";
 
 interface NavbarProps {
   businessName: string;

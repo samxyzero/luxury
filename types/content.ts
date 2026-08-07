@@ -77,7 +77,13 @@ export interface Product {
   /** Washing and upkeep guidance. */
   care?: string | null;
   highlights?: string[];
-  colors?: string[];
+
+  /** What we stock for households, and how it differs from the trade range. */
+  homesSummary?: string | null;
+  homesPoints?: string[];
+  /** The equivalent for hotels, resorts, apartments and other trade buyers. */
+  hotelsSummary?: string | null;
+  hotelsPoints?: string[];
 
   /**
    * Minor units (paisa). Null until pricing is published — storefront price UI

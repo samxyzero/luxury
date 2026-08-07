@@ -5,21 +5,17 @@
       "slug": "mattresses",
       "name": "Mattresses",
       "category": "Sleep Comfort",
-      "description": "Orthopedic, memory foam and hybrid mattresses engineered for restorative sleep. Available in single, queen and king sizes with firmness options suited to family bedrooms and hotel-grade nightly turnover alike.",
+      "description": "Orthopaedic, memory-foam and pocket-spring mattresses in every standard Nepali bed size. Softer comfort grades for family bedrooms, and denser medium-firm builds for guest rooms that change occupant nightly.",
       "image": "https://images.unsplash.com/photo-1631049552057-403cdb8f0658?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Orthopaedic, memory-foam and hybrid mattresses built for nightly use.",
-      "material": "High-density PU foam, cooling memory foam and pocket-spring cores, finished with a quilted knit or damask cover.",
-      "care": "Rotate head-to-toe every three months. Spot clean only — never soak. Use a mattress protector in guest rooms.",
+      "shortDescription": "Orthopaedic, memory-foam and pocket-spring mattresses in every standard Nepali bed size.",
+      "material": "High-density PU foam, cooling gel-memory foam and individually pocketed spring cores. Covers are quilted knit or damask, and the spring ranges use a reinforced perimeter so the edge doesn't collapse when you sit on it.",
+      "care": "Rotate head-to-toe every three months — foam and spring both settle unevenly otherwise. Spot clean only; never soak a foam core. A fitted protector is worth it in any bed that sees guests.",
       "highlights": [
-        "Firmness graded soft, medium and firm so guest rooms can be matched room by room",
-        "Pocket-spring options isolate movement — a practical choice for shared beds",
-        "Breathable covers suited to Pokhara's humid monsoon months",
-        "Bulk pricing and staged delivery available for hotel refits"
-      ],
-      "colors": [
-        "Ivory",
-        "Pearl Grey"
+        "Soft, medium and firm grades, so you can match the sleeper rather than the room",
+        "Pocket springs isolate movement — the practical pick for a shared bed",
+        "Breathable knit covers, chosen for Pokhara's humid monsoon months",
+        "Old mattress removal on delivery"
       ],
       "featured": true,
       "inStock": true,
@@ -61,6 +57,19 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "For family bedrooms we lean towards medium and soft grades with a plusher comfort layer — a mattress you'll keep eight to ten years and actually enjoy sleeping on.",
+      "homesPoints": [
+        "Memory-foam and hybrid comfort layers for pressure relief",
+        "Single and double sizes for children's and guest rooms",
+        "Try the firmness grades side by side in the showroom"
+      ],
+      "hotelsSummary": "Properties get the firmer, denser builds. Guests vary hugely in weight and preference, so a medium-firm pocket spring is the safe specification, and it survives a nightly change of occupant far better.",
+      "hotelsPoints": [
+        "Medium-firm pocket spring as the standard guest-room specification",
+        "Consistent build across every room, with stock held for replacements",
+        "Waterproof protectors supplied as standard on trade orders",
+        "Phased delivery floor by floor so rooms stay sellable"
       ]
     },
     {
@@ -68,24 +77,17 @@
       "slug": "bedsheets",
       "name": "Bedsheets",
       "category": "Sleep Comfort",
-      "description": "Fine cotton and premium cotton-blend bedsheets in timeless weaves — crisp percale for hotel freshness, or soft sateen for a cosier home feel, in a refined, easy-to-coordinate colour palette.",
+      "description": "Two distinct ranges from one supplier: printed and dyed cotton for households who want colour on the bed, and plain white hotel-weight cotton and linen for properties that need bleach-tolerant stock they can match years later.",
       "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Percale and sateen bedsheet sets in hotel-grade cotton.",
-      "material": "200–300 thread-count long-staple cotton and cotton-rich blends. Percale for a crisp, cool hand; sateen for a softer sheen.",
-      "care": "Machine wash warm with like colours. Tumble dry low. Wash before first use to set the weave.",
+      "shortDescription": "Printed cotton sets for homes; plain hotel-weight cotton and linen for properties.",
+      "material": "200–300 thread-count long-staple cotton in percale (crisp, cool, matte) and sateen (softer, slight sheen), plus washed linen and cotton-linen blends in the trade range.",
+      "care": "Wash before first use to set the weave. Warm wash with like colours, tumble dry low. Skip fabric softener on percale — it flattens the crispness people buy it for.",
       "highlights": [
-        "Sold as fitted sheet, flat sheet and pillowcase sets, or as individual replacements",
-        "Deep-pocket fitted sheets stay put on thicker hotel mattresses",
-        "Colour-fast dyes hold up to repeated commercial laundering",
-        "Neutral palette designed to coordinate across an entire property"
-      ],
-      "colors": [
-        "White",
-        "Ivory",
-        "Stone",
-        "Sage",
-        "Charcoal"
+        "Sold as full sets or as individual replacements when one piece wears out",
+        "Deep-pocket fitted sheets that stay on thicker mattresses",
+        "Reactive dyes that survive repeated hot washes without greying",
+        "Sizes cut for Nepali bed dimensions, not generic imports"
       ],
       "featured": true,
       "inStock": true,
@@ -127,6 +129,21 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "Households get the colour and the pattern — printed and dyed cotton in florals, geometrics and plain brights, in the softer sateen finishes that feel good on a bed you're not changing daily.",
+      "homesPoints": [
+        "Printed and colourful cotton in a wide seasonal range",
+        "Softer sateen finishes for everyday comfort",
+        "Coordinated pillowcases, and matching duvet covers where available",
+        "Single through king, including children's prints"
+      ],
+      "hotelsSummary": "Hotels, resorts and serviced apartments get plain white and ivory in cotton and linen. Undyed and bleach-tolerant, so a stained sheet can be recovered rather than written off, and one damaged piece is replaceable from stock years later.",
+      "hotelsPoints": [
+        "Plain white and ivory only — no dye to fade unevenly across a floor",
+        "Bleach-tolerant construction for commercial laundry cycles",
+        "Linen and cotton-linen for resorts wanting a relaxed, textured look",
+        "Reinforced hems and consistent sizing for flat-sheet presentation",
+        "Held as an ongoing stock line so replacements match"
       ]
     },
     {
@@ -134,21 +151,17 @@
       "slug": "duvets",
       "name": "Duvets",
       "category": "Sleep Comfort",
-      "description": "Plush, temperature-balanced duvets and comforters in a range of warmth ratings, from light all-season options for guest rooms to heavier fills for Pokhara's cooler winter months at home.",
+      "description": "Microfibre and down-alternative duvets, baffle-box stitched so the fill stays put. Heavier winter weights for unheated Pokhara bedrooms, and a mid-weight white specification for properties running one duvet type year-round.",
       "image": "https://images.unsplash.com/photo-1728614669329-29e10a0698ea?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Temperature-balanced duvets, comforters and protective covers.",
-      "material": "Microfibre and down-alternative fills in a cotton cambric shell, baffle-box stitched to stop the filling migrating.",
-      "care": "Use a washable duvet cover. Air regularly; professional cleaning once a season.",
+      "shortDescription": "Microfibre and down-alternative duvets in all-season and winter weights.",
+      "material": "Siliconised hollow-fibre and down-alternative fills in a downproof cotton cambric shell, baffle-box stitched so the filling can't migrate to the corners.",
+      "care": "Always use a washable cover. Air it in sunlight every few weeks; full cleaning once a season is plenty.",
       "highlights": [
-        "All-season and winter weights — the heavier fill suits Pokhara's cooler months",
-        "Hypoallergenic fills, an easy default for guest rooms",
-        "Baffle-box construction keeps loft even after repeated washing",
-        "Matching covers available in the bedsheet palette"
-      ],
-      "colors": [
-        "White",
-        "Ivory"
+        "All-season and winter weights — Pokhara genuinely needs both",
+        "Baffle-box construction holds loft after repeated washing",
+        "Hypoallergenic fills throughout",
+        "Covers available in the matching bedsheet ranges"
       ],
       "featured": false,
       "inStock": true,
@@ -190,6 +203,19 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "For homes we pair a warm winter-weight duvet with decorative covers you can change with the season, so one duvet works year-round with a lighter cover in spring.",
+      "homesPoints": [
+        "Heavier winter fills for unheated Pokhara bedrooms",
+        "Printed and coloured covers to match your bedsheets",
+        "Single through king, including children's sizes"
+      ],
+      "hotelsSummary": "Properties get white, washable and identical across every room. We specify a mid-weight fill that suits most guests year-round and keeps housekeeping to one duvet type rather than a seasonal swap.",
+      "hotelsPoints": [
+        "White only, with plain white covers for a clean turndown",
+        "Mid-weight fill that works across seasons — one SKU, not two",
+        "Machine-washable at commercial temperatures",
+        "Spare stock held so a soiled duvet is swapped, not the room lost"
       ]
     },
     {
@@ -197,21 +223,17 @@
       "slug": "pillows-and-covers",
       "name": "Pillows & Covers",
       "category": "Sleep Comfort",
-      "description": "Supportive pillows in soft, medium and firm fills, paired with elegant covers — sized and finished to hotel housekeeping standards or a softer, personal touch for the home.",
+      "description": "Fibre, memory-foam and latex pillows with zippered protectors. Matched to the individual sleeper at home, or set up as a two-option pillow menu for guest rooms.",
       "image": "https://images.unsplash.com/photo-1600414428640-f78a67c2aa3b?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Fibre, memory-foam and latex pillows with protective covers.",
-      "material": "Siliconised hollow-fibre, moulded memory foam and natural latex in cotton casings.",
-      "care": "Fibre pillows are machine washable; foam and latex should be spot cleaned and aired.",
+      "shortDescription": "Fibre, memory-foam and latex pillows with zippered protectors.",
+      "material": "Siliconised hollow-fibre, moulded memory foam and natural latex, in cotton or cotton-blend casings. Protectors are zippered cotton with a fine-gauge closure.",
+      "care": "Fibre pillows machine wash and need a thorough dry. Foam and latex are spot clean and air only — washing breaks the core down.",
       "highlights": [
-        "Soft, medium and firm lofts so guests can be offered a pillow menu",
-        "Zippered protectors extend pillow life in high-turnover rooms",
-        "Memory foam holds neck support through the night",
-        "Bolsters and decorative cushions available to match soft furnishings"
-      ],
-      "colors": [
-        "White",
-        "Ivory"
+        "Soft, medium and firm lofts across the range",
+        "Zippered protectors, the single biggest factor in pillow lifespan",
+        "Latex options for anyone who overheats on foam",
+        "Bolsters and decorative cushions to match soft furnishings"
       ],
       "featured": false,
       "inStock": true,
@@ -253,6 +275,19 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "At home it's about the individual sleeper — we'll match loft and fill to how you actually sleep, plus decorative cushions and bolsters that tie the bed into the room.",
+      "homesPoints": [
+        "Fill and loft matched to side, back or front sleepers",
+        "Decorative cushions and bolsters in coordinating fabrics",
+        "Try the lofts in the showroom before committing"
+      ],
+      "hotelsSummary": "For properties we set up a pillow menu — typically a soft and a firm option per bed — so guests self-select without housekeeping stocking six variants.",
+      "hotelsPoints": [
+        "Two-option pillow menu: one soft, one firm, per bed",
+        "White protectors on every pillow as standard",
+        "Uniform loft across rooms so beds present identically",
+        "Bulk replacement stock on an agreed reorder cycle"
       ]
     },
     {
@@ -260,25 +295,17 @@
       "slug": "curtains",
       "name": "Curtains",
       "category": "Interior Décor",
-      "description": "Statement drapery in silk, velvet and linen, made to measure for every window — blackout linings available for guest rooms, and lighter sheers for airy living spaces at home.",
+      "description": "Made-to-measure drapery, measured and installed by our own fitters. Patterned and textured fabrics for homes; three-pass blackout with overlapping closures for guest rooms that need to stay dark at 6am.",
       "image": "https://images.unsplash.com/photo-1769784123040-751bbe038003?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Made-to-measure drapery in silk, velvet, linen and sheer weaves.",
-      "material": "Faux silk, cotton-linen, velvet and polyester sheers, with optional blackout or dim-out lining.",
-      "care": "Vacuum on a low setting monthly. Dry clean lined and velvet panels; wash unlined cotton cool.",
+      "shortDescription": "Made-to-measure drapery, measured and installed by our own fitters.",
+      "material": "Faux silk, cotton-linen, velvet, jacquard and polyester sheers. Linings run from standard cotton through dim-out to full three-pass blackout.",
+      "care": "Vacuum on low monthly — dust is what ages curtains. Dry clean anything lined or velvet; unlined cotton washes cool and should be rehung slightly damp.",
       "highlights": [
-        "Measured, stitched and installed by our own team",
-        "Blackout linings for guest rooms; light-filtering sheers for living spaces",
+        "Measured on site, stitched to size, and hung by the people who quoted it",
         "Pinch pleat, eyelet, rod pocket and wave headings",
-        "Coordinated with tracks, rods and tie-backs from the same range"
-      ],
-      "colors": [
-        "Ivory",
-        "Champagne",
-        "Dusty Rose",
-        "Olive",
-        "Navy",
-        "Charcoal"
+        "Blackout, dim-out and light-filtering linings",
+        "Supplied with matched tracks, rods and tie-backs"
       ],
       "featured": true,
       "inStock": true,
@@ -320,6 +347,21 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "Homes get the decorative end of the range — patterned jacquards, textured linens and layered sheers, chosen to suit the room rather than to a fixed spec.",
+      "homesPoints": [
+        "Patterned, textured and jacquard fabrics",
+        "Layered sheer-plus-drape treatments for living rooms",
+        "Decorative poles, finials and tie-backs",
+        "Single windows and bay runs both handled"
+      ],
+      "hotelsSummary": "Guest rooms need blackout that genuinely blacks out, in one fabric repeated across every room. We specify heavier three-pass linings and overlapping centre closures so light doesn't leak down the middle at 6am.",
+      "hotelsPoints": [
+        "Three-pass blackout lining with overlapping centre closure",
+        "One specification repeated across every room on a floor",
+        "Heavier headers and reinforced stitching for daily operation",
+        "Fire-retardant fabric options for public areas",
+        "Sheers for lobbies and restaurants where light is wanted"
       ]
     },
     {
@@ -327,23 +369,17 @@
       "slug": "curtain-tracks-and-rods",
       "name": "Curtain Tracks & Rods",
       "category": "Interior Décor",
-      "description": "Motorised and manual tracks, poles and finials in brushed brass, matte black and wood finishes — sized for large hotel window walls or fitted neatly into a single home window.",
+      "description": "Manual, corded and motorised tracks alongside decorative poles and finials. Hardware on show for homes, concealed ceiling track and motorised runs for properties.",
       "image": "https://images.unsplash.com/photo-1671328920741-ea6f4233dc07?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Motorised and manual tracks, poles and finials.",
-      "material": "Powder-coated aluminium tracks and steel poles in brushed brass, matte black and wood finishes.",
-      "care": "Wipe with a dry cloth. Keep tracks free of dust so gliders run smoothly.",
+      "shortDescription": "Manual, corded and motorised tracks, plus decorative poles and finials.",
+      "material": "Powder-coated aluminium track profiles and steel poles, finished in brushed brass, matte black, antique bronze and wood-effect.",
+      "care": "Keep the track channel free of dust so gliders run silently. Wipe poles with a dry cloth — solvents strip the finish.",
       "highlights": [
-        "Motorised tracks with remote or wall switch for tall hotel window walls",
         "Ceiling and wall mounting, including bay and corner runs",
-        "Silent glide systems — worth it in bedrooms",
-        "Finish-matched brackets, finials and tie-back hooks"
-      ],
-      "colors": [
-        "Brushed Brass",
-        "Matte Black",
-        "Antique Bronze",
-        "Natural Wood"
+        "Silent-glide systems, noticeably better in bedrooms",
+        "Motorised options with remote or wall switch",
+        "Brackets, finials and tie-back hooks matched to the finish"
       ],
       "featured": false,
       "inStock": true,
@@ -376,6 +412,19 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "Homes usually want the hardware on show — decorative poles with finials in a finish that suits the room, in manual operation.",
+      "homesPoints": [
+        "Decorative poles and finials in four finishes",
+        "Simple manual operation, no cords to manage",
+        "Cut to width on site, including bay windows"
+      ],
+      "hotelsSummary": "Properties get concealed ceiling track so the hardware disappears, with motorisation on the tall window walls where a guest can't reach the top of the drape.",
+      "hotelsPoints": [
+        "Concealed ceiling track — hardware out of sight",
+        "Motorised runs for floor-to-ceiling and window-wall glazing",
+        "Heavy-duty gliders rated for daily operation",
+        "Cord-free options where child safety is a requirement"
       ]
     },
     {
@@ -383,24 +432,17 @@
       "slug": "carpets",
       "name": "Carpets",
       "category": "Interior Décor",
-      "description": "Hand-selected wall-to-wall and area carpets in durable, high-traffic weaves for hotel corridors and lobbies, or softer pile options that anchor a living room at home.",
+      "description": "Wall-to-wall and area carpets, fitted and finished on site. Wool and wool blends where underfoot comfort matters, and solution-dyed commercial nylon rated for corridors and lobbies.",
       "image": "https://images.unsplash.com/photo-1652634213812-f0deeb1de78e?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Wall-to-wall and area carpets in high-traffic commercial weaves.",
-      "material": "Solution-dyed nylon, polypropylene and wool-blend piles over a felt or rubber backing.",
-      "care": "Vacuum twice weekly in busy areas. Professional hot-water extraction once or twice a year.",
+      "shortDescription": "Wall-to-wall and area carpets, fitted and finished on site.",
+      "material": "Solution-dyed nylon and polypropylene in commercial weights, plus wool and wool-blend piles for residential use. Felt or rubber backing depending on subfloor.",
+      "care": "Vacuum twice weekly in anything busy. Hot-water extraction once or twice a year; blot spills immediately rather than rubbing.",
       "highlights": [
-        "Commercial-rated piles that hold up in corridors and lobbies",
-        "Stain-resistant treatments as standard on synthetic ranges",
-        "Fitted, seamed and finished on site by our installers",
-        "Softer wool blends for bedrooms and living rooms at home"
-      ],
-      "colors": [
-        "Sand",
-        "Taupe",
-        "Slate",
-        "Deep Blue",
-        "Burgundy"
+        "Commercial-rated piles for corridors and lobbies",
+        "Solution-dyed fibre — colour runs through, so it doesn't bleach out",
+        "Fitted, seamed and edge-finished by our installers",
+        "Underlay specified to the subfloor, not sold as an afterthought"
       ],
       "featured": true,
       "inStock": true,
@@ -442,6 +484,19 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "At home the priority is underfoot feel, so we point people towards wool and wool-blend piles in bedrooms and living rooms, in warmer, deeper textures.",
+      "homesPoints": [
+        "Wool and wool-blend piles for warmth and softness",
+        "Bedroom and living-room weights",
+        "Area carpets if you'd rather not fit wall-to-wall"
+      ],
+      "hotelsSummary": "Corridors and lobbies are a wear problem, not a comfort one. We specify solution-dyed commercial nylon with a heavy-traffic rating and a pattern that disguises tracking between the lift and the rooms.",
+      "hotelsPoints": [
+        "Heavy-traffic commercial rating for corridors and lobbies",
+        "Patterned designs that disguise wear and foot tracking",
+        "Stain-resistant treatment applied as standard",
+        "Fitted overnight or floor by floor to keep the property trading"
       ]
     },
     {
@@ -449,24 +504,17 @@
       "slug": "blinds",
       "name": "Blinds",
       "category": "Interior Décor",
-      "description": "Roller, roman and venetian blinds in blackout, dim-out and light-filtering fabrics — balancing natural light with privacy for both guest rooms and home offices.",
+      "description": "Roller, roman, venetian and zebra blinds made to measure. Wipeable finishes for kitchens and bathrooms at home; blackout rollers behind drapes and sunscreen fabric for public areas in properties.",
       "image": "https://images.unsplash.com/photo-1711006295130-406e8e9057f2?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Roller, roman, venetian and zebra blinds in blackout and light-filtering fabrics.",
-      "material": "Polyester screen fabrics, PVC and aluminium slats, and wood-look composite venetians.",
-      "care": "Dust slats regularly; wipe fabric blinds with a barely damp cloth.",
+      "shortDescription": "Roller, roman, venetian and zebra blinds, made to measure.",
+      "material": "Polyester screen fabrics in sunscreen, dim-out and blackout grades; aluminium and PVC slats; wood-effect composite venetians.",
+      "care": "Dust slats along their length regularly. Fabric blinds take a barely damp cloth — soaking leaves a tide mark.",
       "highlights": [
-        "Blackout, dim-out and sunscreen fabrics to suit the room's use",
+        "Blackout, dim-out and sunscreen fabrics graded by room use",
         "Chain, cord and motorised controls",
-        "Child-safe fittings available — worth specifying for family homes",
-        "Compact stack, useful where curtains would crowd the window"
-      ],
-      "colors": [
-        "White",
-        "Cream",
-        "Grey",
-        "Espresso",
-        "Natural"
+        "Child-safe fittings available and worth specifying with young children",
+        "Compact stack where curtains would crowd the window"
       ],
       "featured": false,
       "inStock": true,
@@ -508,6 +556,19 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "Homes tend to want blinds where curtains don't suit — kitchens, bathrooms and home offices — so we lean on wipeable PVC and wood-effect venetians, plus roman blinds where a softer look is wanted.",
+      "homesPoints": [
+        "Wipeable PVC and aluminium for kitchens and bathrooms",
+        "Roman blinds in fabric for a softer finish",
+        "Wood-effect venetians for studies and living rooms"
+      ],
+      "hotelsSummary": "In properties blinds usually sit behind a drape as the blackout layer, or handle glare in restaurants and meeting rooms. Specification is uniform and operation has to survive guests.",
+      "hotelsPoints": [
+        "Blackout roller behind drapes as the light-control layer",
+        "Sunscreen fabric for restaurants, lobbies and meeting rooms",
+        "Robust mechanisms rated for guest operation",
+        "Cord-free and motorised options for safety compliance"
       ]
     },
     {
@@ -515,24 +576,17 @@
       "slug": "rugs",
       "name": "Rugs",
       "category": "Interior Décor",
-      "description": "Artisanal area rugs in wool, jute and synthetic blends, chosen for character underfoot in a lobby seating area or as the finishing layer in a family living room.",
+      "description": "Hand-knotted Tibetan and Nepali wool alongside power-loomed synthetics. A decorative anchor in a living room, or a bespoke statement piece sized to a hotel reception.",
       "image": "https://images.unsplash.com/photo-1660338183700-12388dc9aa4f?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Hand-knotted and machine-woven rugs that anchor a room.",
-      "material": "Wool, viscose-blend and durable polypropylene pile in hand-knotted and power-loomed constructions.",
-      "care": "Rotate twice a year for even wear. Professional cleaning; blot spills immediately.",
+      "shortDescription": "Hand-knotted and machine-woven rugs, including custom sizes.",
+      "material": "Hand-knotted Tibetan and Nepali wool, wool-viscose blends for sheen, and power-loomed polypropylene where durability matters more than fibre.",
+      "care": "Rotate twice a year so wear and sunlight even out. Use a pad underneath — it stops slipping and roughly doubles the life of the pile.",
       "highlights": [
-        "Traditional Nepali motifs alongside plain and abstract modern designs",
-        "Hand-knotted wool for reception areas that need to make an impression",
-        "Easy-clean synthetic options for family rooms",
-        "Custom sizes and shapes cut to order"
-      ],
-      "colors": [
-        "Ivory",
-        "Charcoal",
-        "Rust",
-        "Indigo",
-        "Moss"
+        "Traditional Nepali and Tibetan knotting alongside plain modern designs",
+        "Custom sizes and shapes cut and bound to order",
+        "Wool for longevity, synthetics for spill-heavy rooms",
+        "Anti-slip pads supplied with every rug"
       ],
       "featured": false,
       "inStock": true,
@@ -574,6 +628,18 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "In a home a rug is usually doing a decorative job — anchoring a seating area or warming a floor — so we show wool for longevity and easy-clean synthetics for rooms with children or pets.",
+      "homesPoints": [
+        "Living-room sizes that anchor a seating arrangement",
+        "Easy-clean synthetic pile for family rooms",
+        "Runners for hallways and stairs"
+      ],
+      "hotelsSummary": "For properties a rug is usually a statement in reception or a suite, so hand-knotted wool earns its cost. We can also produce a custom design and size for a specific space.",
+      "hotelsPoints": [
+        "Hand-knotted wool for reception and suite floors",
+        "Custom sizes, shapes and designs to a brief",
+        "Dense pile constructions that recover from furniture indentation"
       ]
     },
     {
@@ -581,24 +647,17 @@
       "slug": "sofa-and-cushion-covers",
       "name": "Sofa & Cushion Covers",
       "category": "Interior Décor",
-      "description": "Tailored, washable sofa and cushion covers that refresh a lobby lounge or living room instantly — a practical way for hotels to protect upholstery between deep cleans.",
+      "description": "Loose covers, cushion covers and full reupholstery of frames you already own. Patterned fabrics for homes, and rub-tested performance weaves for lobby and restaurant seating.",
       "image": "https://images.unsplash.com/photo-1731399211410-e3ffe1560310?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Tailored sofa, chair and cushion covers, including full reupholstery.",
-      "material": "Cotton-linen, chenille, velvet and performance weaves with soil-resistant finishes.",
-      "care": "Removable covers wash cool and line dry. Fixed upholstery should be professionally cleaned.",
+      "shortDescription": "Loose covers, cushion covers and full reupholstery of existing frames.",
+      "material": "Cotton-linen, chenille, velvet and performance weaves with soil-resistant finishes. Cushion inserts in feather and hollow-fibre.",
+      "care": "Removable covers wash cool and should be put back slightly damp for a clean fit. Fixed upholstery needs professional cleaning.",
       "highlights": [
-        "Loose covers or complete reupholstery of existing frames",
-        "Performance fabrics that survive lobby and restaurant use",
-        "Piping, welt and contrast trims to your specification",
-        "Cushion inserts in feather and hollow-fibre fills"
-      ],
-      "colors": [
-        "Natural Linen",
-        "Stone",
-        "Forest",
-        "Teal",
-        "Charcoal"
+        "Loose covers or complete reupholstery of a frame you already own",
+        "Piping, welt and contrast trim to your specification",
+        "Templated on site so the fit is tailored, not approximate",
+        "Feather and hollow-fibre inserts"
       ],
       "featured": false,
       "inStock": true,
@@ -640,6 +699,19 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "Reupholstering a sofa you like is usually cheaper than replacing it, and it lets you change the room without changing the furniture. Cushion covers are the low-commitment version of the same idea.",
+      "homesPoints": [
+        "Reupholster an existing frame rather than replacing it",
+        "Seasonal cushion covers to refresh a room cheaply",
+        "Patterned and textured fabrics for living spaces"
+      ],
+      "hotelsSummary": "Lobby and restaurant seating takes constant use, so we specify performance fabrics with soil-resistant finishes and rub-test ratings suited to public areas, and can refit an entire lounge in one visit.",
+      "hotelsPoints": [
+        "Performance fabrics rated for public-area use",
+        "Soil and stain-resistant finishes as standard",
+        "Whole-lounge refits handled in a single scheduled visit",
+        "Matching cushions across a seating scheme"
       ]
     },
     {
@@ -647,24 +719,17 @@
       "slug": "table-linen-and-kitchen-textiles",
       "name": "Table Linen & Kitchen Textiles",
       "category": "Interior Décor",
-      "description": "Tablecloths, runners, napkins and kitchen textiles in durable, easy-care fabrics — set for a hotel breakfast room or dressed simply for everyday family dining.",
+      "description": "Tablecloths, runners, napkins and skirting. Coloured cotton-rich cloths for the dining table at home, and soil-release spun polyester sized to your covers for restaurant and banquet service.",
       "image": "https://images.unsplash.com/photo-1619043518800-7f14be467dca?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Tablecloths, runners, napkins and kitchen textiles for daily service.",
-      "material": "Spun polyester and cotton-rich blends with soil-release finishes; damask weaves for banqueting.",
-      "care": "Wash hot with an oxygen-based stain remover. Tumble dry low; press while slightly damp.",
+      "shortDescription": "Tablecloths, runners, napkins, skirting and kitchen textiles.",
+      "material": "Spun polyester and cotton-rich blends with soil-release finishes; damask weaves for banqueting; cotton drill for aprons and kitchen cloths.",
+      "care": "Wash hot with an oxygen stain remover. Tumble low and press slightly damp — polyester creases set hard if it's over-dried.",
       "highlights": [
         "Sized for round, rectangular and banquet tables",
-        "Soil-release finishes lift food and oil stains in a normal wash",
-        "Matching napkins, runners and skirting for events",
+        "Soil-release finishes that lift oil and food in a normal wash",
+        "Matching napkins, runners and skirting",
         "Aprons, oven gloves and kitchen cloths in the same range"
-      ],
-      "colors": [
-        "White",
-        "Ivory",
-        "Black",
-        "Burgundy",
-        "Sage"
       ],
       "featured": false,
       "inStock": true,
@@ -706,6 +771,19 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "For the dining table at home we stock cotton-rich cloths and runners in colours and prints — the sort of thing that comes out for guests and washes without ceremony.",
+      "homesPoints": [
+        "Coloured and printed cotton-rich cloths and runners",
+        "Standard dining-table sizes, six and eight seat",
+        "Matching napkin sets"
+      ],
+      "hotelsSummary": "Restaurant and banqueting linen is a laundry problem first. We specify soil-release spun polyester in white and house colours, sized precisely to your tables, with enough stock in rotation to cover turnaround.",
+      "hotelsPoints": [
+        "Sized precisely to your table dimensions, including banquet trestles",
+        "Soil-release spun polyester built for daily commercial laundering",
+        "Table skirting and overlays for events and conferencing",
+        "Stock depth calculated for your laundry turnaround"
       ]
     },
     {
@@ -713,24 +791,17 @@
       "slug": "towels",
       "name": "Towels",
       "category": "Hospitality Essentials",
-      "description": "Spa-grade, highly absorbent cotton towels in bath, hand and face sizes, woven for the repeated wash cycles of hotel laundry while staying soft enough for daily home use.",
+      "description": "Ring-spun cotton towels graded by GSM, from face cloth to pool sheet. The full colour range for homes; white only for properties, so stained stock can be bleached back rather than replaced.",
       "image": "https://images.unsplash.com/photo-1760722974657-f64bce2f9cc5?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Homes & Hotels",
-      "shortDescription": "Absorbent cotton towels in weights from guest bath to pool.",
-      "material": "500–650 GSM ring-spun and combed cotton, double-stitched hems, low-lint finish.",
-      "care": "Wash warm without fabric softener — softener coats the pile and cuts absorbency.",
+      "shortDescription": "Ring-spun cotton towels graded by GSM, from face cloth to pool sheet.",
+      "material": "500–650 GSM ring-spun and combed cotton with double-stitched hems and a low-lint finish. Higher GSM is heavier and more absorbent but slower to dry.",
+      "care": "Wash warm without fabric softener — softener coats the pile and is the usual reason towels stop absorbing. Tumble dry to lift the loops.",
       "highlights": [
         "GSM graded so bath, hand, face and pool towels can be specified separately",
-        "Colour-fast and chlorine-resistant options for pool and spa areas",
-        "Reinforced hems built for commercial laundry cycles",
-        "Bath mats and pool towels available to match"
-      ],
-      "colors": [
-        "White",
-        "Ivory",
-        "Grey",
-        "Navy",
-        "Sage"
+        "Double-stitched hems that survive commercial laundering",
+        "Chlorine-resistant options for pool and spa",
+        "Matching bath mats"
       ],
       "featured": true,
       "inStock": true,
@@ -781,6 +852,20 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "At home you can have the colour. We stock the full range in dyed cotton, and lean towards the higher GSM weights — a heavier towel is the one that feels expensive.",
+      "homesPoints": [
+        "Full colour range in dyed, colour-fast cotton",
+        "Heavier 600 GSM+ weights for a plush feel",
+        "Family sets in mixed sizes"
+      ],
+      "hotelsSummary": "Properties get white, because white can be bleached back and mismatched greying across a floor is the fastest way a bathroom looks tired. We grade GSM by area — lighter for pool, heavier for guest bathrooms.",
+      "hotelsPoints": [
+        "White only, so stained stock can be bleached rather than binned",
+        "GSM graded by area: pool, guest bathroom, spa",
+        "Chlorine-resistant construction for poolside",
+        "Reinforced hems for high-temperature commercial laundry",
+        "Ongoing stock line so replacements match existing inventory"
       ]
     },
     {
@@ -788,22 +873,17 @@
       "slug": "bath-robes-and-slippers",
       "name": "Bath Robes & Slippers",
       "category": "Hospitality Essentials",
-      "description": "Waffle-weave and terry bath robes with matching slippers — a signature guest amenity for resorts and boutique hotels, also available for a spa-style touch at home.",
+      "description": "Waffle and terry robes with matched slippers. Sold individually for personal use, or supplied in bulk with embroidered property branding and spa variants.",
       "image": "https://images.unsplash.com/photo-1747257574419-290e1e535d92?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Hotels",
       "shortDescription": "Waffle and terry robes with disposable or reusable slippers.",
-      "material": "Cotton terry, velour and lightweight waffle weave; slippers in cotton terry and coral fleece.",
-      "care": "Wash robes warm; avoid softener on terry. Reusable slippers wash cool in a laundry bag.",
+      "material": "Cotton terry, velour and lightweight waffle weave. Slippers in cotton terry, coral fleece and disposable non-woven, with anti-slip soles.",
+      "care": "Wash robes warm and skip softener on terry. Reusable slippers wash cool in a laundry bag to keep their shape.",
       "highlights": [
-        "Waffle robes for warmer months, terry for winter and spa use",
-        "Unisex sizing with adjustable belts keeps stockholding simple",
+        "Waffle for warm months, terry for winter and spa use",
+        "Unisex S/M and L/XL sizing keeps stockholding simple",
         "Open-toe and closed-toe slippers, disposable or reusable",
         "Embroidery available for property branding"
-      ],
-      "colors": [
-        "White",
-        "Ivory",
-        "Grey"
       ],
       "featured": false,
       "inStock": true,
@@ -854,6 +934,19 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "Mostly bought as a gift or for personal use at home — the heavier terry robes, in the same weights hotels use, without the branding.",
+      "homesPoints": [
+        "Heavier terry robes for everyday use",
+        "Sold individually rather than in bulk",
+        "Popular as a wedding or housewarming gift"
+      ],
+      "hotelsSummary": "A robe is a visible amenity, so it's worth getting right. Waffle reads lighter and dries faster; terry reads more luxurious. We supply either with embroidered branding and matched slippers.",
+      "hotelsPoints": [
+        "Embroidered with your property branding",
+        "Waffle for fast laundry turnaround, terry for a premium feel",
+        "Matched slippers, disposable for turnover or reusable for suites",
+        "Spa and pool variants alongside guest-room stock"
       ]
     },
     {
@@ -861,20 +954,17 @@
       "slug": "hotel-furnishings",
       "name": "Hotel Furnishings",
       "category": "Hospitality Essentials",
-      "description": "Complete furnishing packages for hotels and resorts — mattresses to linens, curtains to carpets — coordinated by room type and delivered turnkey, floor by floor.",
+      "description": "Whole-room furnishing packages — bed, linen, window treatment, flooring and soft furnishings specified together, priced per room, and repeatable across a floor or an entire property.",
       "image": "https://images.unsplash.com/photo-1646991761123-d83ce47c30c9?auto=format&fit=crop&w=1200&q=80",
       "idealFor": "Hotels",
-      "shortDescription": "Room-ready furnishing packages specified and installed per property.",
-      "material": "Coordinated textile and furniture packages sourced to your brief and budget.",
-      "care": "Care guidance is supplied per item as part of the handover pack.",
+      "shortDescription": "Whole-room furnishing packages specified, supplied and installed per property.",
+      "material": "Coordinated packages drawn from our own ranges and sourced lines, specified to your brief, budget and the wear the space will actually see.",
+      "care": "Every package ships with a per-item care and laundry guide for your housekeeping team.",
       "highlights": [
-        "Whole-room packages — bed, linen, window treatment, flooring and soft furnishings",
-        "Consistent specification across every room in a property",
-        "Phased delivery so floors can be refitted without closing the hotel",
-        "Single point of contact from specification through installation"
-      ],
-      "colors": [
-        "Specified per project"
+        "Bed, linen, window treatment, flooring and soft furnishings in one specification",
+        "Consistent across every room, and repeatable years later",
+        "Phased delivery so floors are refitted without closing",
+        "One point of contact from specification to handover"
       ],
       "featured": false,
       "inStock": true,
@@ -916,6 +1006,20 @@
           "price": null,
           "inStock": true
         }
+      ],
+      "homesSummary": "The same whole-room approach works for a house or apartment you'd rather not furnish piecemeal — we specify the room, supply it and fit it in one go.",
+      "homesPoints": [
+        "Whole-room packages for new builds and full renovations",
+        "One visit to measure everything, one delivery, one installation",
+        "Useful for rental apartments being fitted out to let"
+      ],
+      "hotelsSummary": "This is our core trade offering: a room specification you can repeat across a floor or a property, priced per room, with stock held so a replacement in year three still matches year one.",
+      "hotelsPoints": [
+        "Priced per room, so budgeting scales with the room count",
+        "Standard, deluxe and suite specifications",
+        "Held stock so later replacements match the original fit-out",
+        "Phased floor-by-floor delivery for properties still trading",
+        "Single contact from specification through to handover"
       ]
     }
   ]

@@ -8,13 +8,15 @@ export interface NavItem {
  * sitemap all read from here, so adding a route (a future /shop or /cart)
  * means editing one list.
  */
+/**
+ * Deliberately short. Reviews now sit on the homepage and FAQ is folded into
+ * /contact, which keeps the header to five items and no dropdowns.
+ */
 export const PRIMARY_NAV: NavItem[] = [
-  { label: "About", href: "/about" },
   { label: "Products", href: "/products" },
   { label: "Services", href: "/services" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "FAQ", href: "/faq" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 

@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import TrustStrip from "@/components/home/TrustStrip";
-import CategoryTiles from "@/components/home/CategoryTiles";
+import DualPath from "@/components/home/DualPath";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
-import AboutStrip from "@/components/home/AboutStrip";
 import ProcessSteps from "@/components/home/ProcessSteps";
-import Reviews from "@/components/Reviews";
+import GalleryMosaic from "@/components/home/GalleryMosaic";
+import AboutStrip from "@/components/home/AboutStrip";
+import ReviewsStrip from "@/components/home/ReviewsStrip";
 import CtaBand from "@/components/home/CtaBand";
 import {
   getSiteSettings,
   getFeaturedProducts,
-  getProductCategories,
+  getGallery,
   getReviews,
   getPartners,
 } from "@/lib/content";
@@ -29,10 +30,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [site, featured, categories, reviews, partners] = await Promise.all([
+  const [site, featured, gallery, reviews, partners] = await Promise.all([
     getSiteSettings(),
     getFeaturedProducts(4),
-    getProductCategories(),
+    getGallery(),
     getReviews(),
     getPartners(),
   ]);
@@ -46,15 +47,16 @@ export default async function Home() {
         stats={site.stats}
       />
 
-      {/* Deliberately lighter than before: the full About, Services, Gallery,
-          FAQ and Contact blocks now live on their own routes, so the homepage
-          is a route into them rather than a copy of them. */}
+      {/* Tone and layout shape alternate deliberately — thin light strip, dark
+          full-bleed split, light editorial grid, tinted timeline, dark mosaic —
+          so the page never reads as one card block repeated down the screen. */}
       <TrustStrip stats={site.stats} partners={partners} />
-      <CategoryTiles categories={categories} />
+      <DualPath />
       <FeaturedProducts products={featured} />
-      <AboutStrip about={site.about} />
       <ProcessSteps />
-      <Reviews reviews={reviews.slice(0, 3)} mapsUrl={site.address.mapsUrl} />
+      <GalleryMosaic items={gallery} />
+      <AboutStrip about={site.about} />
+      <ReviewsStrip reviews={reviews.slice(0, 3)} mapsUrl={site.address.mapsUrl} />
       <CtaBand site={site} />
     </>
   );

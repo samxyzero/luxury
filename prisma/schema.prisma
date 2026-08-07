@@ -77,8 +77,13 @@ model Product {
   care             String?
   /// Selling points rendered as a bullet list on the detail page.
   highlights       String[] @default([])
-  /// Colourways offered, shown as swatched pills.
-  colors           String[] @default([])
+
+  /// What we stock for households, and how it differs from the trade range.
+  homesSummary  String?
+  homesPoints   String[] @default([])
+  /// The equivalent for hotels, resorts, apartments and other trade buyers.
+  hotelsSummary String?
+  hotelsPoints  String[] @default([])
 
   /// Minor units (paisa). Null until pricing is published — the storefront
   /// hides price UI entirely when this is unset.

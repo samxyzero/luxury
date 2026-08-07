@@ -156,20 +156,69 @@ export default function ProductForm({ product }: ProductFormProps) {
         />
       </FormField>
 
-      <FormField
-        label="Colourways — one per line"
-        htmlFor="colors"
-        error={errors.colors}
-      >
-        <textarea
-          id="colors"
-          name="colors"
-          defaultValue={(product?.colors ?? []).join("\n")}
-          rows={4}
-          className={fieldInputClassName}
-          placeholder={"Ivory\nCharcoal\nNavy"}
-        />
-      </FormField>
+      <fieldset className="space-y-6 border-t border-stone pt-8">
+        <legend className="label mb-2 text-gold-dim">For Homes</legend>
+        <FormField
+          label="Summary — how the household range differs"
+          htmlFor="homesSummary"
+          error={errors.homesSummary}
+        >
+          <textarea
+            id="homesSummary"
+            name="homesSummary"
+            defaultValue={product?.homesSummary ?? ""}
+            rows={3}
+            className={fieldInputClassName}
+            placeholder="e.g. Households get the colour and the pattern — printed cotton in softer sateen finishes."
+          />
+        </FormField>
+        <FormField
+          label="Points — one per line"
+          htmlFor="homesPoints"
+          error={errors.homesPoints}
+        >
+          <textarea
+            id="homesPoints"
+            name="homesPoints"
+            defaultValue={(product?.homesPoints ?? []).join("\n")}
+            rows={4}
+            className={fieldInputClassName}
+            placeholder={"Printed and colourful cotton\nSofter sateen finishes"}
+          />
+        </FormField>
+      </fieldset>
+
+      <fieldset className="space-y-6 border-t border-stone pt-8">
+        <legend className="label mb-2 text-gold-dim">For Hotels, Resorts &amp; Apartments</legend>
+        <FormField
+          label="Summary — how the trade range differs"
+          htmlFor="hotelsSummary"
+          error={errors.hotelsSummary}
+        >
+          <textarea
+            id="hotelsSummary"
+            name="hotelsSummary"
+            defaultValue={product?.hotelsSummary ?? ""}
+            rows={3}
+            className={fieldInputClassName}
+            placeholder="e.g. Properties get plain white cotton and linen — bleach-tolerant and held as a stock line."
+          />
+        </FormField>
+        <FormField
+          label="Points — one per line"
+          htmlFor="hotelsPoints"
+          error={errors.hotelsPoints}
+        >
+          <textarea
+            id="hotelsPoints"
+            name="hotelsPoints"
+            defaultValue={(product?.hotelsPoints ?? []).join("\n")}
+            rows={4}
+            className={fieldInputClassName}
+            placeholder={"Plain white and ivory only\nBleach-tolerant for commercial laundry"}
+          />
+        </FormField>
+      </fieldset>
 
       <div className="flex flex-wrap gap-x-10 gap-y-4">
         <label htmlFor="featured" className="flex items-center gap-3 text-sm text-ink">

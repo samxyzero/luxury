@@ -49,7 +49,10 @@ const productSchema = z.object({
   material: z.string().trim().optional().transform((v) => v || null),
   care: z.string().trim().optional().transform((v) => v || null),
   highlights: z.string().optional().transform(splitLines),
-  colors: z.string().optional().transform(splitLines),
+  homesSummary: z.string().trim().optional().transform((v) => v || null),
+  homesPoints: z.string().optional().transform(splitLines),
+  hotelsSummary: z.string().trim().optional().transform((v) => v || null),
+  hotelsPoints: z.string().optional().transform(splitLines),
   // Unchecked checkboxes are absent from FormData, which coerces to false —
   // exactly the intended semantics, so no default is needed here.
   inStock: z.coerce.boolean(),

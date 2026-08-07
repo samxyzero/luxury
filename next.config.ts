@@ -18,6 +18,15 @@ const nextConfig: NextConfig = {
     ],
     formats: ["image/avif", "image/webp"],
   },
+  // /reviews and /faq were standalone pages before reviews moved onto the
+  // homepage and FAQ merged into contact. Redirect rather than 404 so existing
+  // links and anything already indexed still lands somewhere useful.
+  async redirects() {
+    return [
+      { source: "/reviews", destination: "/#reviews", permanent: true },
+      { source: "/faq", destination: "/contact", permanent: true },
+    ];
+  },
   experimental: {
     serverActions: {
       // Admin image uploads allow 5MB files. The limit applies to the whole
