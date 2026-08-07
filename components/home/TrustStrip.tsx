@@ -16,6 +16,14 @@ export default function TrustStrip({ stats, partners }: TrustStripProps) {
   return (
     <section className="border-b border-stone bg-paper-dim py-16 sm:py-20">
       <Container>
+        {/* Moved down from the hero, which now carries only the statement and
+            the photograph. The sectors read as the first line of the proof. */}
+        <Reveal className="mb-12 border-b border-stone pb-8">
+          <p className="label text-ink-muted">
+            Residential &middot; Hotels &middot; Resorts &middot; Hospitality
+          </p>
+        </Reveal>
+
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4">
           {stats.map((stat, i) => (
             <Reveal key={stat.id} delay={i * 0.06}>

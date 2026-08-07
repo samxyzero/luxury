@@ -40,12 +40,7 @@ export default async function Home() {
 
   return (
     <>
-      <Hero
-        hero={site.hero}
-        whatsapp={site.whatsapp}
-        mapsUrl={site.address.mapsUrl}
-        stats={site.stats}
-      />
+      <Hero hero={site.hero} whatsapp={site.whatsapp} mapsUrl={site.address.mapsUrl} />
 
       {/* Tone and layout shape alternate deliberately — thin light strip, dark
           full-bleed split, light editorial grid, tinted timeline, dark mosaic —
