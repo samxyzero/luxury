@@ -9,9 +9,20 @@ import type { Product } from "@/types/content";
 
 interface ProductCardProps {
   product: Product;
+  /**
+   * Swaps the card copy to the matching range. Most products serve both
+   * audiences, so the useful thing a filter can do is change *what it says*
+   * about each one, not just hide the two hotel-only lines.
+   */
+  audience?: "all" | "homes" | "hotels";
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, audience = "all" }: ProductCardProps) {
+  const copy =
+    (audience === "homes" ? product.homesSummary : null) ??
+    (audience === "hotels" ? product.hotelsSummary : null) ??
+    product.shortDescription ??
+    product.description;
   return (
     <motion.div
       layout
@@ -45,9 +56,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <h3 className="mt-1.5 font-display text-xl font-medium text-paper">
             {product.name}
           </h3>
-          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-paper/55">
-            {product.description}
-          </p>
+          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-paper/55">{copy}</p>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-paper/80 transition-colors duration-300 group-hover:text-gold">
             View Details
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

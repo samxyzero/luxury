@@ -85,7 +85,7 @@ export default function Hero({ hero, whatsapp, mapsUrl, stats }: HeroProps) {
               href={quoteHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="label border border-ink px-7 py-4 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
+              className="label border border-navy px-7 py-4 text-navy transition-colors duration-300 hover:bg-navy hover:text-paper"
             >
               {hero.ctaPrimaryLabel}
             </a>

@@ -16,7 +16,7 @@ export default async function PartnersListPage() {
         </div>
         <Link
           href="/admin/partners/new"
-          className="label border border-ink px-6 py-3 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
+          className="label border border-navy px-6 py-3 text-navy transition-colors duration-300 hover:bg-navy hover:text-paper"
         >
           + New Partner
         </Link>

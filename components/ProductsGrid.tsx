@@ -5,8 +5,18 @@ import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
+import { Building2, Home, LayoutGrid } from "lucide-react";
 import type { Product } from "@/types/content";
 import SectionLink from "@/components/SectionLink";
+
+type Audience = "all" | "homes" | "hotels";
+
+/** `match` is tested against Product.idealFor, which may read "Homes & Hotels". */
+const AUDIENCE: Record<Audience, { label: string; match: string; icon: typeof Home }> = {
+  all: { label: "Everything", match: "", icon: LayoutGrid },
+  homes: { label: "For Homes", match: "Homes", icon: Home },
+  hotels: { label: "For Hotels & Resorts", match: "Hotels", icon: Building2 },
+};
 
 interface ProductsGridProps {
   products: Product[];
@@ -35,19 +45,34 @@ export default function ProductsGrid({
     [products]
   );
 
-  // Read the filter client-side so /products stays statically pre-rendered —
+  // Read filters client-side so /products stays statically pre-rendered —
   // using searchParams in the page itself would force dynamic rendering.
-  // An unknown value falls back to "All" rather than rendering an empty grid.
-  const requested = useSearchParams().get("category");
+  // Unknown values fall back to "All" rather than rendering an empty grid.
+  const params = useSearchParams();
+  const requestedCategory = params.get("category");
+  const requestedAudience = params.get("for");
+
   const [active, setActive] = useState(() =>
-    requested && categories.includes(requested) ? requested : "All"
+    requestedCategory && categories.includes(requestedCategory) ? requestedCategory : "All"
+  );
+  const [audience, setAudience] = useState<Audience>(() =>
+    requestedAudience === "homes" || requestedAudience === "hotels"
+      ? requestedAudience
+      : "all"
   );
 
-  const filtered =
-    active === "All" ? products : products.filter((p) => p.category === active);
+  const filtered = useMemo(
+    () =>
+      products
+        // "Homes & Hotels" products belong to both ranges, so they survive
+        // either audience filter rather than being excluded from both.
+        .filter((p) => audience === "all" || p.idealFor.includes(AUDIENCE[audience].match))
+        .filter((p) => active === "All" || p.category === active),
+    [products, audience, active]
+  );
 
   return (
-    <section id="products" className="bg-navy py-24 sm:py-32 lg:py-40">
+    <section id="products" className="bg-navy py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <Reveal className="max-w-2xl">
           <div className="flex items-center gap-3">
@@ -61,7 +86,39 @@ export default function ProductsGrid({
         </Reveal>
 
         {showFilters && (
-          <Reveal delay={0.1} className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-b border-stone-on-navy py-5">
+          <Reveal delay={0.08} className="mt-12">
+            <p className="label text-paper/45">Who is it for?</p>
+            <div
+              role="group"
+              aria-label="Filter by who the range is for"
+              className="mt-4 flex flex-wrap gap-3"
+            >
+              {(Object.keys(AUDIENCE) as Audience[]).map((key) => {
+                const { label, icon: Icon } = AUDIENCE[key];
+                const selected = audience === key;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setAudience(key)}
+                    aria-pressed={selected}
+                    className={`label inline-flex items-center gap-2.5 border px-5 py-3.5 transition-colors duration-300 ${
+                      selected
+                        ? "border-gold bg-gold text-navy"
+                        : "border-stone-on-navy text-paper/70 hover:border-gold hover:text-gold"
+                    }`}
+                  >
+                    <Icon className="h-4 w-4" />
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          </Reveal>
+        )}
+
+        {showFilters && (
+          <Reveal delay={0.12} className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-b border-stone-on-navy py-5">
             {categories.map((category) => (
               <button
                 key={category}
@@ -83,16 +140,46 @@ export default function ProductsGrid({
           </Reveal>
         )}
 
-        <motion.div
-          layout
-          className="mt-14 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4"
-        >
-          <AnimatePresence mode="popLayout">
-            {filtered.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        {showFilters && (
+          <p aria-live="polite" className="mt-6 text-sm text-paper/45">
+            {filtered.length} {filtered.length === 1 ? "range" : "ranges"}
+            {audience !== "all" && ` ${AUDIENCE[audience].label.toLowerCase()}`}
+            {active !== "All" && ` in ${active}`}
+          </p>
+        )}
+
+        {filtered.length === 0 ? (
+          <div className="mt-14 border border-stone-on-navy px-8 py-16 text-center">
+            <p className="font-display text-2xl font-medium text-paper">
+              Nothing matches that combination
+            </p>
+            <p className="mt-3 text-sm text-paper/55">
+              Try a different category, or clear the filters to see all {products.length}{" "}
+              ranges.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setAudience("all");
+                setActive("All");
+              }}
+              className="label mt-8 border border-stone-on-navy px-6 py-3.5 text-paper transition-colors duration-300 hover:border-gold hover:text-gold"
+            >
+              Clear Filters
+            </button>
+          </div>
+        ) : (
+          <motion.div
+            layout
+            className="mt-14 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            <AnimatePresence mode="popLayout">
+              {filtered.map((product) => (
+                <ProductCard key={product.id} product={product} audience={audience} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
 
         {footerLink && (
           <div className="mt-14">

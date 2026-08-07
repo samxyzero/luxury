@@ -18,7 +18,7 @@ export default function Faq({ faqs, as: Heading = "h2", footerLink }: FaqProps) 
   const [open, setOpen] = useState<string | null>(faqs[0]?.id ?? null);
 
   return (
-    <section id="faq" className="bg-paper py-24 sm:py-32 lg:py-40">
+    <section id="faq" className="bg-paper py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-3xl px-6 sm:px-8 lg:px-12">
         <Reveal className="text-center">
           <div className="flex items-center justify-center gap-3">

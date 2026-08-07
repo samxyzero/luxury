@@ -16,7 +16,7 @@ export default function SectionLink({ href, children, tone = "ink" }: SectionLin
   const palette =
     tone === "paper"
       ? "border-stone-on-navy text-paper hover:border-gold hover:text-gold"
-      : "border-ink text-ink hover:bg-ink hover:text-paper";
+      : "border-navy text-navy hover:bg-navy hover:text-paper";
 
   return (
     <Link

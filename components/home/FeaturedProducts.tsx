@@ -21,7 +21,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
   const [lead, ...rest] = products;
 
   return (
-    <section className="bg-paper py-24 sm:py-32">
+    <section className="bg-paper py-20 sm:py-24 lg:py-28">
       <Container>
         <Reveal className="flex flex-wrap items-end justify-between gap-8">
           <div className="max-w-xl">

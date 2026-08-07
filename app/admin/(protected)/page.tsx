@@ -72,7 +72,7 @@ export default async function AdminDashboard() {
 
       <Link
         href="/admin/settings"
-        className="label mt-8 inline-block border border-ink px-6 py-3 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
+        className="label mt-8 inline-block border border-navy px-6 py-3 text-navy transition-colors duration-300 hover:bg-navy hover:text-paper"
       >
         Edit Site Settings
       </Link>

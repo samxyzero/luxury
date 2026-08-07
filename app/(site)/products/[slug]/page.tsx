@@ -115,7 +115,7 @@ export default async function ProductDetailPage({
     >
       <JsonLd data={productJsonLd} />
 
-      <section className="bg-paper py-16 sm:py-20 lg:py-24">
+      <section className="bg-paper py-20 sm:py-24 lg:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <Reveal className="lg:col-span-7">
@@ -173,7 +173,7 @@ export default async function ProductDetailPage({
                   href={enquire("general enquiry")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="label border border-ink px-7 py-4 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
+                  className="label border border-navy px-7 py-4 text-navy transition-colors duration-300 hover:bg-navy hover:text-paper"
                 >
                   Enquire on WhatsApp
                 </a>

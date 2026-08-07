@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 type Variant = "solid" | "outline" | "outlineLight" | "gold" | "quiet";
 
 const VARIANT: Record<Variant, string> = {
-  solid: "border border-ink bg-ink text-paper hover:bg-transparent hover:text-ink",
-  outline: "border border-ink text-ink hover:bg-ink hover:text-paper",
+  solid: "border border-navy bg-navy text-paper hover:bg-transparent hover:text-navy",
+  outline: "border border-navy text-navy hover:bg-navy hover:text-paper",
   outlineLight: "border border-stone-on-navy text-paper hover:border-gold hover:text-gold",
   gold: "border border-gold bg-gold text-navy hover:bg-gold-dim hover:border-gold-dim",
   quiet: "border border-transparent text-ink hover:text-gold-dim",

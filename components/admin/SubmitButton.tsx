@@ -14,7 +14,7 @@ export default function SubmitButton({ children, pendingLabel = "Saving..." }: S
     <button
       type="submit"
       disabled={pending}
-      className="label border border-ink px-6 py-3 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper disabled:opacity-50"
+      className="label border border-navy px-6 py-3 text-navy transition-colors duration-300 hover:bg-navy hover:text-paper disabled:opacity-50"
     >
       {pending ? pendingLabel : children}
     </button>

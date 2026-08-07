@@ -28,7 +28,7 @@ export default function Reviews({ reviews, mapsUrl, as: Heading = "h2" }: Review
   const review = reviews[index];
 
   return (
-    <section id="reviews" className="bg-navy py-24 sm:py-32 lg:py-40">
+    <section id="reviews" className="bg-navy py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-3xl px-6 sm:px-8 lg:px-12">
         <Reveal className="text-center">
           <div className="flex items-center justify-center gap-3">

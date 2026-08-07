@@ -71,7 +71,7 @@ export default function ImageUploadField({
           <div className="flex items-center gap-3">
             <label
               htmlFor={fileInputId}
-              className="label inline-block cursor-pointer border border-ink px-4 py-2 text-ink transition-colors duration-300 hover:bg-ink hover:text-paper aria-disabled:pointer-events-none aria-disabled:opacity-50"
+              className="label inline-block cursor-pointer border border-navy px-4 py-2 text-navy transition-colors duration-300 hover:bg-navy hover:text-paper aria-disabled:pointer-events-none aria-disabled:opacity-50"
               aria-disabled={uploading}
             >
               {uploading ? "Uploading..." : "Upload Image"}

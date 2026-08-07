@@ -12,7 +12,7 @@ const PATHS = [
     title: "Furnishing You'll Live With",
     body: "Printed cottons, textured linens, wool underfoot and drapery cut to your windows. Colour and pattern you actually choose, not a fixed trade specification.",
     points: ["Colourful & printed cotton", "Wool and soft-pile carpets", "Decorative poles & tie-backs"],
-    href: "/products?category=Sleep%20Comfort",
+    href: "/products?for=homes",
     cta: "Furnish my home",
     image:
       "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1400&q=80",
@@ -24,7 +24,7 @@ const PATHS = [
     title: "Specified Once, Repeatable for Years",
     body: "Plain white cotton and linen, blackout that genuinely blacks out, commercial-rated carpet, and stock held so a replacement in year three still matches year one.",
     points: ["Plain white, bleach-tolerant linen", "Three-pass blackout drapery", "Phased floor-by-floor fitting"],
-    href: "/products?category=Hospitality%20Essentials",
+    href: "/products?for=hotels",
     cta: "Specify a property",
     image:
       "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1400&q=80",
@@ -38,7 +38,7 @@ const PATHS = [
  */
 export default function DualPath() {
   return (
-    <section className="bg-ink">
+    <section className="bg-navy">
       <Container className="py-20 sm:py-24">
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex items-center justify-center gap-3">
@@ -68,7 +68,7 @@ export default function DualPath() {
                 className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
                 sizes="(min-width: 1024px) 50vw, 100vw"
               />
-              <div className="absolute inset-0 bg-ink/75 transition-colors duration-500 group-hover:bg-ink/65" />
+              <div className="absolute inset-0 bg-navy/80 transition-colors duration-500 group-hover:bg-navy/65" />
 
               <div className="relative flex h-full flex-col justify-end p-8 sm:p-12 lg:p-14">
                 <path.icon className="h-7 w-7 text-gold" />

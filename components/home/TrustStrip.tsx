@@ -14,7 +14,7 @@ interface TrustStripProps {
  */
 export default function TrustStrip({ stats, partners }: TrustStripProps) {
   return (
-    <section className="border-b border-stone bg-paper-dim py-14 sm:py-16">
+    <section className="border-b border-stone bg-paper-dim py-16 sm:py-20">
       <Container>
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4">
           {stats.map((stat, i) => (

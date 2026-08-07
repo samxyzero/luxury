@@ -24,7 +24,7 @@ export default function GalleryMosaic({ items }: GalleryMosaicProps) {
   ];
 
   return (
-    <section className="bg-navy py-24 sm:py-28">
+    <section className="bg-navy py-20 sm:py-24 lg:py-28">
       <Container>
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-xl">

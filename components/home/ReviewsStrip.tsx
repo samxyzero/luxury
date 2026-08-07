@@ -19,7 +19,7 @@ export default function ReviewsStrip({ reviews, mapsUrl }: ReviewsStripProps) {
     reviews.reduce((sum, r) => sum + r.rating, 0) / Math.max(reviews.length, 1);
 
   return (
-    <section id="reviews" className="scroll-mt-24 bg-paper py-24 sm:py-28">
+    <section id="reviews" className="scroll-mt-24 border-y border-stone bg-paper-dim py-20 sm:py-24 lg:py-28">
       <Container>
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div>

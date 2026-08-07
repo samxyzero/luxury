@@ -14,7 +14,7 @@ interface AboutProps {
 
 export default function About({ about, as: Heading = "h2", footerLink }: AboutProps) {
   return (
-    <section id="about" className="bg-paper py-24 sm:py-32 lg:py-40">
+    <section id="about" className="bg-paper py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-16">
           <Reveal className="lg:col-span-5">

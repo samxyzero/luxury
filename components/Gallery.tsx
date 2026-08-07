@@ -28,7 +28,7 @@ export default function Gallery({ items, as: Heading = "h2", footerLink }: Galle
   const filtered = active === "All" ? items : items.filter((i) => i.category === active);
 
   return (
-    <section id="gallery" className="bg-paper py-24 sm:py-32 lg:py-40">
+    <section id="gallery" className="bg-paper py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <Reveal className="max-w-2xl">
           <div className="flex items-center gap-3">

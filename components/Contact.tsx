@@ -43,7 +43,7 @@ export default function Contact({ site, as: Heading = "h2" }: ContactProps) {
   }
 
   return (
-    <section id="contact" className="bg-navy py-24 sm:py-32 lg:py-40">
+    <section id="contact" className="bg-navy py-20 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <Reveal className="max-w-2xl">
           <div className="flex items-center gap-3">
