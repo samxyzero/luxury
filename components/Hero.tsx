@@ -2,67 +2,47 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowDown, MapPin } from "lucide-react";
 import Container from "@/components/ui/Container";
+import Magnetic from "@/components/fx/Magnetic";
 import type { SiteSettings } from "@/types/content";
 
 interface HeroProps {
   hero: SiteSettings["hero"];
   whatsapp: string;
   mapsUrl: string;
-  /** Shown as the photograph's caption — grounds the brand in a real place. */
+  /** Grounds the brand in a real place, set as the photograph's caption. */
   location: string;
 }
 
-const ease = [0.4, 0, 0.2, 1] as const;
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-/** Single staggered entrance: eyebrow, headline, paragraph, buttons, caption. */
+/** One staggered entrance shared by every element in the composition. */
 const rise = (step: number) => ({
-  initial: { opacity: 0, y: 12 },
+  initial: { opacity: 0, y: 18 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, delay: 0.08 * step, ease },
+  transition: { duration: 0.9, delay: 0.85 + step * 0.09, ease: EASE },
 });
 
-/** Hairline with a gold sliver travelling down it — the page's one loop. */
-function ScrollCue({
-  tone,
-  animate,
-  className = "",
-}: {
-  tone: "paper" | "ink";
-  animate: boolean;
-  className?: string;
-}) {
-  return (
-    <span aria-hidden className={`flex items-center gap-3 ${className}`}>
-      <span className={`label ${tone === "paper" ? "text-paper/75" : "text-ink-muted"}`}>
-        Scroll
-      </span>
-      <span
-        className={`relative block h-9 w-px overflow-hidden ${
-          tone === "paper" ? "bg-paper/25" : "bg-stone"
-        }`}
-      >
-        {animate && (
-          <motion.span
-            animate={{ y: ["-100%", "80%", "260%"], opacity: [0, 1, 0] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute inset-x-0 top-0 h-3 bg-gold"
-          />
-        )}
-      </span>
-    </span>
-  );
-}
+/**
+ * Folded cloth, drawn rather than photographed: alternating hard and soft
+ * stops make the light catch on ridges, so the panels read as hanging fabric
+ * instead of flat blocks sliding apart.
+ */
+const DRAPE =
+  "repeating-linear-gradient(90deg, #16130f 0px, #1f1a14 14px, #0b0a09 30px, #16130f 44px)";
 
 /**
- * Deliberately just the statement and the photograph — every figure and proof
- * point lives in the stats strip directly beneath, so the hero makes the promise
- * and the next section evidences it.
+ * The headline is a doorway.
  *
- * One set of markup, two treatments: mobile lays the copy over the photograph,
- * desktop moves it onto flat paper beside it. Keeping it to one block means the
- * page still has exactly one h1.
+ * "Spaces made for" sits above an arch-cropped photograph, "Comfort." crosses
+ * back over its lower edge, and on load two curtain panels draw apart to reveal
+ * the room behind — the business is furnishing, so the page opens the way a
+ * window treatment does.
+ *
+ * The arch is a `<span>` rather than a `<div>` so the whole composition can live
+ * inside the single `<h1>`: the accessible name still reads "Spaces made for
+ * Comfort.", uninterrupted.
  */
 export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
   const reduceMotion = useReducedMotion();
@@ -71,125 +51,180 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
     "Hi Luxury Enterprises, I'd like to get a quote."
   )}`;
 
+  // With motion suppressed the curtains would sit closed over the photograph
+  // forever, so they are simply never rendered.
+  const curtains = !reduceMotion;
+
   return (
-    <section id="top" className="relative isolate bg-paper">
-      <div className="group absolute inset-0 overflow-hidden lg:left-1/2">
-        <motion.div
-          initial={{ scale: 1.05 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.4, ease }}
-          className="relative h-full w-full"
-        >
-          <Image
-            src={hero.image}
-            alt="Bedroom furnished by Luxury Enterprises"
-            fill
-            priority
-            className="object-cover transition-transform duration-[1200ms] ease-out lg:group-hover:scale-[1.015]"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-          />
-        </motion.div>
+    <section id="top" className="bg-void relative isolate overflow-hidden">
+      {/* A single warm pool of light behind the arch. Everything else on the
+          page is flat, so this is what gives the hero depth. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[min(90vw,52rem)] w-[min(90vw,52rem)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-[100px]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(240,163,58,0.18) 0%, rgba(192,86,58,0.08) 45%, transparent 70%)",
+        }}
+      />
 
-        {/* Mobile only — resolves to solid navy under the copy so contrast comes
-            from the scrim, not from whatever the photograph is doing there. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-navy via-navy/85 to-navy/20 lg:hidden"
-        />
+      <Container className="flex min-h-svh flex-col pt-28 pb-8 sm:pt-32">
+        <div className="flex flex-1 flex-col items-center justify-center">
+          <motion.p
+            {...rise(0)}
+            className="mono-label text-ash flex items-center gap-2.5 text-center"
+          >
+            <span className="bg-saffron h-1 w-1 rounded-full" />
+            {hero.eyebrow}
+          </motion.p>
 
-        {/* Desktop only. The first feathers the paper→photograph seam so the two
-            halves read as one composition rather than a butt joint; the second
-            grounds the now full-height crop and carries the caption. */}
-        <div
-          aria-hidden
-          className="absolute inset-y-0 left-0 hidden w-20 bg-gradient-to-r from-paper/70 to-transparent lg:block"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-x-0 bottom-0 hidden h-56 bg-gradient-to-t from-navy/85 to-transparent lg:block"
-        />
-      </div>
+          <h1 className="mt-6 flex flex-col items-center text-center sm:mt-8">
+            <span className="mask-line block">
+              <motion.span
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, delay: 0.15, ease: EASE }}
+                className="font-display lead-tight text-bone block text-[clamp(2.5rem,8.5vw,6rem)] font-medium"
+              >
+                {hero.headline}
+              </motion.span>
+            </span>
 
-      <motion.p
-        {...rise(4)}
-        className="label absolute bottom-10 right-6 z-10 hidden items-center gap-2 text-paper/85 lg:flex lg:right-12"
-      >
-        <MapPin className="h-3.5 w-3.5 text-gold" />
-        {location}
-      </motion.p>
+            {/* The window. Height is viewport-relative so the whole composition
+                still fits one screen on a laptop without scrolling. */}
+            <span className="arch relative mt-5 block h-[clamp(13rem,38vh,25rem)] w-[clamp(11rem,26vw,22rem)] overflow-hidden sm:mt-7">
+              <motion.span
+                initial={{ scale: 1.25 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 2.4, delay: 0.5, ease: EASE }}
+                className="block h-full w-full"
+              >
+                <Image
+                  src={hero.image}
+                  alt="A bedroom furnished by Luxury Enterprises"
+                  fill
+                  priority
+                  sizes="(min-width: 640px) 32vw, 60vw"
+                  className="object-cover"
+                />
+              </motion.span>
 
-      <Container className="relative">
-        <div className="lg:grid lg:grid-cols-2">
-          {/* svh rather than vh so mobile browser chrome collapsing doesn't make
-              the hero jump. The lopsided desktop padding pushes the optical
-              centre below the fixed header instead of behind it. */}
-          <div className="relative flex min-h-svh flex-col justify-end pt-32 pb-28 lg:justify-center lg:pt-36 lg:pr-14 lg:pb-16">
-            <motion.div {...rise(0)} className="flex items-center gap-3">
-              <span className="h-px w-8 bg-gold" />
-              <span className="label text-gold lg:text-ink-muted">{hero.eyebrow}</span>
-            </motion.div>
+              {/* Warms the photograph into the palette and keeps the overlapping
+                  word legible whatever the crop happens to contain. */}
+              <span
+                aria-hidden
+                className="absolute inset-0 block"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(11,10,9,0.92) 0%, rgba(11,10,9,0.15) 45%, rgba(11,10,9,0.35) 100%)",
+                }}
+              />
 
-            <motion.h1
-              {...rise(1)}
-              className="mt-7 font-display text-[2.75rem] font-medium leading-[1.02] tracking-tight text-balance text-paper sm:text-5xl lg:text-[3.5rem] lg:text-ink xl:text-6xl 2xl:text-[4.5rem]"
-            >
-              {hero.headline}{" "}
-              {/* Own line, so the two halves of the statement read as a couplet
-                  rather than the accent landing wherever the text happens to wrap. */}
-              <em className="block font-normal italic text-gold lg:text-gold-dim">
+              {curtains && (
+                <>
+                  <motion.span
+                    aria-hidden
+                    initial={{ x: 0 }}
+                    animate={{ x: "-101%" }}
+                    transition={{ duration: 1.9, delay: 0.45, ease: EASE }}
+                    className="absolute inset-y-0 left-0 block w-1/2"
+                    style={{ backgroundImage: DRAPE }}
+                  />
+                  <motion.span
+                    aria-hidden
+                    initial={{ x: 0 }}
+                    animate={{ x: "101%" }}
+                    transition={{ duration: 1.9, delay: 0.45, ease: EASE }}
+                    className="absolute inset-y-0 right-0 block w-1/2"
+                    style={{ backgroundImage: DRAPE }}
+                  />
+                  {/* The seam catches the light for exactly as long as the
+                      panels are touching. */}
+                  <motion.span
+                    aria-hidden
+                    initial={{ opacity: 0.9, scaleY: 1 }}
+                    animate={{ opacity: 0, scaleY: 0.2 }}
+                    transition={{ duration: 1.1, delay: 0.5, ease: "easeOut" }}
+                    className="bg-saffron absolute inset-y-0 left-1/2 block w-px -translate-x-1/2"
+                  />
+                </>
+              )}
+
+              <span className="border-smoke arch pointer-events-none absolute inset-0 block border" />
+            </span>
+
+            {/* Crosses back over the photograph — the one place on the site
+                where type breaks the image plane. */}
+            <span className="mask-line relative z-10 block -mt-[0.42em]">
+              <motion.em
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, delay: 1.5, ease: EASE }}
+                className="font-display lead-tight text-saffron block text-[clamp(3rem,11vw,8rem)] font-normal italic"
+              >
                 {hero.highlight}
-              </em>
-            </motion.h1>
+              </motion.em>
+            </span>
+          </h1>
+        </div>
 
-            <motion.p
-              {...rise(2)}
-              className="mt-7 max-w-lg text-base leading-relaxed text-pretty text-paper/80 lg:text-ink-muted"
-            >
-              {hero.subheadline}
-            </motion.p>
+        {/* Everything transactional collects in one bar at the foot of the
+            screen, so the composition above it stays purely an image. */}
+        <div className="border-smoke mt-10 grid gap-8 border-t pt-8 lg:grid-cols-12 lg:items-center lg:gap-10">
+          <motion.p
+            {...rise(1)}
+            className="text-ash max-w-md text-sm leading-relaxed text-pretty lg:col-span-5"
+          >
+            {hero.subheadline}
+          </motion.p>
 
-            <motion.div
-              {...rise(3)}
-              className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3"
-            >
-              {/* max-lg / lg rather than a base value overridden at lg: the two
-                  never apply at once, so the result can't depend on cascade order. */}
+          <motion.div
+            {...rise(2)}
+            className="flex flex-wrap items-center gap-3 lg:col-span-4 lg:justify-center"
+          >
+            <Magnetic>
               <a
                 href={quoteHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="label inline-flex items-center gap-2 px-7 py-4 transition-colors duration-300 max-lg:border max-lg:border-gold max-lg:bg-gold max-lg:text-navy max-lg:hover:border-gold-dim max-lg:hover:bg-gold-dim lg:border lg:border-navy lg:bg-navy lg:text-paper lg:hover:border-navy-dim lg:hover:bg-navy-dim"
+                data-cursor="Chat"
+                className="mono-label bg-saffron text-void hover:bg-bone inline-flex items-center gap-2 rounded-full px-7 py-4 transition-colors duration-500"
               >
                 {hero.ctaPrimaryLabel}
               </a>
-              {/* py-3.5 keeps this bare link above the 44px tap-target minimum. */}
-              <a
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group label inline-flex items-center gap-2 py-3.5 text-paper transition-colors duration-300 hover:text-gold lg:text-ink lg:hover:text-gold-dim"
-              >
-                <MapPin className="h-4 w-4" />
-                {hero.ctaSecondaryLabel}
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
-            </motion.div>
+            </Magnetic>
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mono-label border-smoke text-bone hover:border-bone inline-flex items-center gap-2 rounded-full border px-7 py-4 transition-colors duration-500"
+            >
+              <MapPin className="h-3.5 w-3.5" />
+              {hero.ctaSecondaryLabel}
+            </a>
+          </motion.div>
 
-            {/* Quiet cue so a full-height hero hands off to the stats rather than
-                stopping dead. Sits on the photograph on mobile, on paper on desktop. */}
-            <motion.span
-              {...rise(5)}
-              className="absolute right-0 bottom-10 lg:hidden"
+          {/* The right padding is reserved for the floating WhatsApp button,
+              which is fixed to this corner and would otherwise sit on top of
+              the caption. */}
+          <motion.div
+            {...rise(3)}
+            className="flex items-center gap-5 lg:col-span-3 lg:justify-end lg:pr-20"
+          >
+            <a
+              href="#ranges"
+              aria-label="Skip to the ranges"
+              className="border-smoke text-ash hover:border-saffron hover:text-saffron flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-colors duration-500"
             >
-              <ScrollCue tone="paper" animate={!reduceMotion} />
-            </motion.span>
-            <motion.span
-              {...rise(5)}
-              className="absolute bottom-10 left-0 hidden lg:block"
-            >
-              <ScrollCue tone="ink" animate={!reduceMotion} />
-            </motion.span>
-          </div>
+              <motion.span
+                animate={reduceMotion ? undefined : { y: [0, 4, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <ArrowDown className="h-4 w-4" />
+              </motion.span>
+            </a>
+            <span className="mono-label text-slate hidden sm:block">{location}</span>
+          </motion.div>
         </div>
       </Container>
     </section>

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
-import TrustStrip from "@/components/home/TrustStrip";
+import Ribbon from "@/components/home/Ribbon";
 import DualPath from "@/components/home/DualPath";
+import Ledger from "@/components/home/Ledger";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import ProcessSteps from "@/components/home/ProcessSteps";
 import GalleryMosaic from "@/components/home/GalleryMosaic";
@@ -10,7 +11,9 @@ import ReviewsStrip from "@/components/home/ReviewsStrip";
 import CtaBand from "@/components/home/CtaBand";
 import {
   getSiteSettings,
+  getProducts,
   getFeaturedProducts,
+  getProductCategories,
   getGallery,
   getReviews,
   getPartners,
@@ -30,13 +33,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [site, featured, gallery, reviews, partners] = await Promise.all([
-    getSiteSettings(),
-    getFeaturedProducts(4),
-    getGallery(),
-    getReviews(),
-    getPartners(),
-  ]);
+  const [site, products, featured, categories, gallery, reviews, partners] =
+    await Promise.all([
+      getSiteSettings(),
+      getProducts(),
+      getFeaturedProducts(6),
+      getProductCategories(),
+      getGallery(),
+      getReviews(),
+      getPartners(),
+    ]);
 
   return (
     <>
@@ -47,12 +53,15 @@ export default async function Home() {
         location={`${site.address.line1}, ${site.address.city}`}
       />
 
-      {/* Tone and layout shape alternate deliberately — thin light strip, dark
-          full-bleed split, light editorial grid, tinted timeline, dark mosaic —
-          so the page never reads as one card block repeated down the screen. */}
-      <TrustStrip stats={site.stats} partners={partners} />
+      {/* Tone and layout shape alternate deliberately down the page — dark
+          composition, saffron sliver, full-bleed fork, a section of daylight,
+          a pinned horizontal rail, a stacking deck — so no two consecutive
+          blocks are the same shape and the scroll never settles into a rhythm
+          the visitor can stop looking at. */}
+      <Ribbon items={categories.map((c) => c.name)} />
       <DualPath />
-      <FeaturedProducts products={featured} />
+      <Ledger stats={site.stats} partners={partners} />
+      <FeaturedProducts products={featured} total={products.length} />
       <ProcessSteps />
       <GalleryMosaic items={gallery} />
       <AboutStrip about={site.about} />

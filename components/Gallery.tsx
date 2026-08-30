@@ -3,7 +3,10 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import CornerMarks from "@/components/CornerMarks";
+import { Expand } from "lucide-react";
+import Container from "@/components/ui/Container";
+import Eyebrow from "@/components/ui/Eyebrow";
+import RevealText from "@/components/fx/RevealText";
 import Reveal from "@/components/Reveal";
 import GalleryLightbox from "@/components/GalleryLightbox";
 import SectionLink from "@/components/SectionLink";
@@ -11,9 +14,8 @@ import type { GalleryItem } from "@/types/content";
 
 interface GalleryProps {
   items: GalleryItem[];
-  /** Rendered heading tag — pages pass "h1", homepage sections keep "h2". */
+  /** Rendered heading tag — pages pass "h1", sections within a page keep "h2". */
   as?: "h1" | "h2";
-  /** Homepage teaser CTA linking to the full page. */
   footerLink?: { href: string; label: string };
 }
 
@@ -28,71 +30,91 @@ export default function Gallery({ items, as: Heading = "h2", footerLink }: Galle
   const filtered = active === "All" ? items : items.filter((i) => i.category === active);
 
   return (
-    <section id="gallery" className="bg-paper py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-        <Reveal className="max-w-2xl">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-gold" />
-            <span className="label text-ink-muted">Selected Work</span>
-          </div>
-          <Heading className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
-            Homes, Hotels &amp; Resorts We&apos;ve Furnished
-          </Heading>
+    <section id="gallery" className="bg-void py-20 sm:py-28">
+      <Container>
+        <div className="max-w-3xl">
+          <Eyebrow>Selected Work</Eyebrow>
+          <RevealText
+            as={Heading}
+            text="Homes, hotels and resorts we have furnished"
+            accent={["furnished"]}
+            className="lead-tight font-display mt-6 text-[clamp(2.25rem,5.5vw,4.25rem)] font-medium text-balance"
+          />
+        </div>
+
+        <Reveal delay={0.1} className="mt-12 flex flex-wrap gap-2.5">
+          {categories.map((category) => {
+            const selected = active === category;
+            return (
+              <button
+                key={category}
+                onClick={() => setActive(category)}
+                aria-pressed={selected}
+                className={`mono-label relative rounded-full border px-5 py-3 transition-colors duration-500 ${
+                  selected
+                    ? "border-saffron text-void"
+                    : "border-smoke text-ash hover:border-bone hover:text-bone"
+                }`}
+              >
+                {selected && (
+                  <motion.span
+                    layoutId="gallery-pill"
+                    transition={{ type: "spring", stiffness: 400, damping: 34 }}
+                    className="bg-saffron absolute inset-0 rounded-full"
+                  />
+                )}
+                <span className="relative">{category}</span>
+              </button>
+            );
+          })}
         </Reveal>
 
-        <Reveal delay={0.1} className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-b border-stone py-5">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActive(category)}
-              className={`label relative pb-1 transition-colors duration-300 ${
-                active === category ? "text-ink" : "text-ink-muted/60 hover:text-ink-muted"
-              }`}
-            >
-              {category}
-              {active === category && (
-                <motion.span
-                  layoutId="gallery-tab-underline"
-                  className="absolute -bottom-[1px] left-0 h-px w-full bg-gold"
-                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                />
-              )}
-            </button>
-          ))}
-        </Reveal>
-
+        {/* CSS columns rather than a grid: the captions sit under images of
+            genuinely different heights, and masonry is the only layout that
+            does not either crop them all to one ratio or leave holes. */}
         <div className="mt-14 columns-1 gap-6 sm:columns-2 lg:columns-3">
           {filtered.map((item, i) => {
             const globalIndex = items.findIndex((g) => g.id === item.id);
+            const tall = i % 3 === 0;
             return (
               <motion.button
                 key={item.id}
                 layout
                 onClick={() => setActiveIndex(globalIndex)}
-                initial={{ opacity: 0, y: 16 }}
+                data-cursor="Open"
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.4, delay: (i % 6) * 0.05, ease: [0.4, 0, 0.2, 1] }}
-                className="group relative mb-6 block w-full break-inside-avoid text-left"
+                transition={{
+                  duration: 0.55,
+                  delay: (i % 6) * 0.06,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="group mb-8 block w-full break-inside-avoid text-left"
               >
-                <div className="relative overflow-hidden">
+                {/* Every third frame is arched, so the wall has a rhythm
+                    without needing a second layout. */}
+                <div
+                  className={`bg-char relative overflow-hidden ${
+                    tall ? "arch" : "rounded-[1.5rem]"
+                  }`}
+                >
                   <Image
                     src={item.image}
                     alt={item.caption}
                     width={700}
-                    height={i % 3 === 0 ? 900 : 560}
-                    className="w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                    height={tall ? 900 : 560}
+                    sizes="(min-width: 1024px) 32vw, (min-width: 640px) 48vw, 100vw"
+                    className="w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-navy/0 transition-colors duration-300 group-hover:bg-navy/25" />
-                  <CornerMarks
-                    tone="paper"
-                    inset={12}
-                    className="opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  />
+                  <div className="bg-void/0 group-hover:bg-void/35 absolute inset-0 transition-colors duration-500" />
+                  <span className="bg-bone text-void absolute right-4 bottom-4 flex h-10 w-10 translate-y-2 items-center justify-center rounded-full opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                    <Expand className="h-4 w-4" />
+                  </span>
                 </div>
-                <div className="mt-3 flex items-baseline justify-between gap-3">
-                  <span className="text-sm font-medium text-ink">{item.caption}</span>
-                  <span className="label shrink-0 text-ink-muted">{item.category}</span>
+                <div className="mt-3.5 flex items-baseline justify-between gap-3">
+                  <span className="text-bone text-sm font-medium">{item.caption}</span>
+                  <span className="mono-label text-slate shrink-0">{item.category}</span>
                 </div>
               </motion.button>
             );
@@ -101,12 +123,10 @@ export default function Gallery({ items, as: Heading = "h2", footerLink }: Galle
 
         {footerLink && (
           <div className="mt-14">
-            <SectionLink href={footerLink.href} tone="ink">
-              {footerLink.label}
-            </SectionLink>
+            <SectionLink href={footerLink.href}>{footerLink.label}</SectionLink>
           </div>
         )}
-      </div>
+      </Container>
 
       <GalleryLightbox
         items={items}

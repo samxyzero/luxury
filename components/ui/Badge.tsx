@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
 
-type Tone = "ink" | "paper" | "gold" | "muted";
+type Tone = "bone" | "void" | "saffron" | "ember" | "outline";
 
 const TONE: Record<Tone, string> = {
-  ink: "border-ink text-ink",
-  paper: "border-stone-on-navy text-paper",
-  gold: "border-gold text-gold-dim",
-  muted: "border-stone text-ink-muted",
+  bone: "bg-bone text-void",
+  void: "bg-void text-bone",
+  saffron: "bg-saffron text-void",
+  ember: "bg-ember text-bone",
+  outline: "border border-smoke text-ash",
 };
 
 interface BadgeProps {
@@ -15,9 +16,11 @@ interface BadgeProps {
   className?: string;
 }
 
-export default function Badge({ children, tone = "muted", className = "" }: BadgeProps) {
+export default function Badge({ children, tone = "outline", className = "" }: BadgeProps) {
   return (
-    <span className={`label inline-block border px-3 py-1.5 ${TONE[tone]} ${className}`}>
+    <span
+      className={`mono-label inline-flex items-center rounded-full px-3.5 py-1.5 ${TONE[tone]} ${className}`}
+    >
       {children}
     </span>
   );

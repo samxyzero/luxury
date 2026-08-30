@@ -10,9 +10,12 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
+import Container from "@/components/ui/Container";
+import Eyebrow from "@/components/ui/Eyebrow";
+import RevealText from "@/components/fx/RevealText";
 import Reveal from "@/components/Reveal";
-import type { Service } from "@/types/content";
 import SectionLink from "@/components/SectionLink";
+import type { Service } from "@/types/content";
 
 const ICONS: Record<string, LucideIcon> = {
   home: Home,
@@ -28,41 +31,60 @@ const ICONS: Record<string, LucideIcon> = {
 
 interface ServicesProps {
   services: Service[];
-  /** Rendered heading tag — pages pass "h1", homepage sections keep "h2". */
+  /** Rendered heading tag — pages pass "h1", sections within a page keep "h2". */
   as?: "h1" | "h2";
-  /** Homepage teaser CTA linking to the full page. */
   footerLink?: { href: string; label: string };
 }
 
-export default function Services({ services, as: Heading = "h2", footerLink }: ServicesProps) {
+export default function Services({
+  services,
+  as: Heading = "h2",
+  footerLink,
+}: ServicesProps) {
   return (
-    <section id="services" className="bg-paper py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-        <Reveal className="max-w-2xl">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-8 bg-gold" />
-            <span className="label text-ink-muted">Our Services</span>
-          </div>
-          <Heading className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
-            Full-Service Furnishing, Start to Finish
-          </Heading>
-          <p className="mt-6 text-base leading-relaxed text-ink-muted sm:text-lg">
-            We don&apos;t just supply furnishings — we guide every step, from first
-            consultation to final installation.
-          </p>
-        </Reveal>
+    <section id="services" className="bg-void py-20 sm:py-28">
+      <Container>
+        <div className="max-w-3xl">
+          <Eyebrow>Our Services</Eyebrow>
+          <RevealText
+            as={Heading}
+            text="Full-service furnishing, start to finish"
+            accent={["start", "to", "finish"]}
+            className="lead-tight font-display mt-6 text-[clamp(2.25rem,5.5vw,4.25rem)] font-medium text-balance"
+          />
+          <Reveal delay={0.12}>
+            <p className="text-ash mt-7 text-lg leading-relaxed text-pretty">
+              We don&apos;t just supply furnishings — we guide every step, from first
+              consultation to final installation.
+            </p>
+          </Reveal>
+        </div>
 
-        <div className="mt-16 grid grid-cols-1 border-t border-l border-stone sm:grid-cols-2 lg:grid-cols-3">
+        {/* Hairline cells made from one-pixel gaps over a dark fill, so the grid
+            never doubles its borders where cells meet. */}
+        <div className="bg-smoke mt-14 grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => {
             const Icon = ICONS[service.icon] ?? Home;
             return (
-              <Reveal key={service.id} delay={(i % 3) * 0.08}>
-                <div className="h-full border-r border-b border-stone p-8 sm:p-10">
-                  <Icon className="h-6 w-6 text-gold-dim" strokeWidth={1.5} />
-                  <h3 className="mt-6 font-display text-xl font-medium text-ink">
+              <Reveal
+                key={service.id}
+                delay={(i % 3) * 0.08}
+                className="bg-void group hover:bg-char h-full transition-colors duration-500"
+              >
+                <div className="flex h-full flex-col p-8 sm:p-10">
+                  <div className="flex items-center justify-between">
+                    <Icon
+                      className="text-saffron h-6 w-6 transition-transform duration-500 group-hover:-translate-y-0.5"
+                      strokeWidth={1.5}
+                    />
+                    <span className="mono-label text-slate">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-bone mt-8 text-2xl font-medium">
                     {service.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">
+                  <p className="text-ash mt-3 text-sm leading-relaxed">
                     {service.description}
                   </p>
                 </div>
@@ -73,12 +95,10 @@ export default function Services({ services, as: Heading = "h2", footerLink }: S
 
         {footerLink && (
           <div className="mt-14">
-            <SectionLink href={footerLink.href} tone="ink">
-              {footerLink.label}
-            </SectionLink>
+            <SectionLink href={footerLink.href}>{footerLink.label}</SectionLink>
           </div>
         )}
-      </div>
+      </Container>
     </section>
   );
 }

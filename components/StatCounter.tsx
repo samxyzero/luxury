@@ -7,15 +7,15 @@ interface StatCounterProps {
   value: number;
   suffix?: string;
   label: string;
-  /** Inverts the palette for light backgrounds. */
-  tone?: "paper" | "ink";
+  /** Inverts the palette for the light sections. */
+  tone?: "bone" | "void";
 }
 
 export default function StatCounter({
   value,
   suffix = "",
   label,
-  tone = "paper",
+  tone = "bone",
 }: StatCounterProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
@@ -34,27 +34,27 @@ export default function StatCounter({
   useEffect(() => {
     if (!isInView) return;
     const controls = animate(count, value, {
-      duration: 0.9,
-      ease: [0.4, 0, 0.2, 1],
+      duration: 1.4,
+      ease: [0.16, 1, 0.3, 1],
     });
     return controls.stop;
   }, [isInView, value, count]);
 
   return (
     <div ref={ref}>
-      {/* The figure is the point — the label is support, so it runs smaller and
-          with less tracking than the site's standard .label treatment. */}
+      {/* Tabular figures so the numeral does not jostle its own layout while it
+          counts — without them every digit change nudges the suffix sideways. */}
       <div
-        className={`font-display text-5xl font-medium leading-none sm:text-6xl ${
-          tone === "ink" ? "text-ink" : "text-paper"
+        className={`font-display lead-tight text-[clamp(3.5rem,7vw,6.5rem)] font-medium tabular-nums ${
+          tone === "void" ? "text-void" : "text-bone"
         }`}
       >
         {isInView ? <motion.span>{rounded}</motion.span> : <span>{settled}</span>}
-        <span className="text-gold">{suffix}</span>
+        <span className={tone === "void" ? "text-ember" : "text-saffron"}>{suffix}</span>
       </div>
       <p
-        className={`mt-4 max-w-[9rem] text-xs font-semibold uppercase leading-snug tracking-[0.08em] ${
-          tone === "ink" ? "text-ink-muted" : "text-paper/55"
+        className={`mono-label mt-4 max-w-[11rem] leading-snug ${
+          tone === "void" ? "text-slate" : "text-ash"
         }`}
       >
         {label}

@@ -1,14 +1,34 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type Variant = "solid" | "outline" | "outlineLight" | "gold" | "quiet";
+type Variant = "saffron" | "bone" | "ghost" | "ghostDark";
 
-const VARIANT: Record<Variant, string> = {
-  solid: "border border-navy bg-navy text-paper hover:bg-transparent hover:text-navy",
-  outline: "border border-navy text-navy hover:bg-navy hover:text-paper",
-  outlineLight: "border border-stone-on-navy text-paper hover:border-gold hover:text-gold",
-  gold: "border border-gold bg-gold text-navy hover:bg-gold-dim hover:border-gold-dim",
-  quiet: "border border-transparent text-ink hover:text-gold-dim",
+/**
+ * `base` is the resting state; `wipe` is the colour that floods up from the
+ * bottom on hover. Splitting them this way means every variant animates
+ * identically and only its two colours differ.
+ */
+const VARIANT: Record<Variant, { base: string; wipe: string; hover: string }> = {
+  saffron: {
+    base: "bg-saffron text-void",
+    wipe: "bg-bone",
+    hover: "group-hover:text-void",
+  },
+  bone: {
+    base: "bg-bone text-void",
+    wipe: "bg-saffron",
+    hover: "group-hover:text-void",
+  },
+  ghost: {
+    base: "border border-smoke text-bone",
+    wipe: "bg-bone",
+    hover: "group-hover:text-void",
+  },
+  ghostDark: {
+    base: "border border-void/25 text-void",
+    wipe: "bg-void",
+    hover: "group-hover:text-bone",
+  },
 };
 
 interface BaseProps {
@@ -19,7 +39,7 @@ interface BaseProps {
 
 interface LinkProps extends BaseProps {
   href: string;
-  /** Renders a plain <a> for external/tel/mailto targets. */
+  /** Renders a plain <a> for external, tel and mailto targets. */
   external?: boolean;
   type?: never;
 }
@@ -31,31 +51,55 @@ interface ButtonProps extends BaseProps {
 }
 
 /**
- * One button surface for the whole site. `href` renders a link (internal via
- * next/link, external via <a>), otherwise a <button>.
+ * One button surface for the whole site: a pill whose fill wipes up from the
+ * bottom edge on hover. `href` renders a link (internal via next/link, external
+ * via <a>), otherwise a <button>.
  */
 export default function Button(props: LinkProps | ButtonProps) {
-  const { children, variant = "outline", className = "" } = props;
-  const classes = `label inline-flex items-center justify-center gap-2 px-6 py-3.5 transition-colors duration-300 ${VARIANT[variant]} ${className}`;
+  const { children, variant = "saffron", className = "" } = props;
+  const v = VARIANT[variant];
+
+  const shell = `group relative isolate inline-flex items-center justify-center overflow-hidden rounded-full px-7 py-4 transition-colors duration-500 ${v.base} ${className}`;
+
+  const inner = (
+    <>
+      {/* Scales from the bottom edge, so the fill reads as liquid rising rather
+          than a rectangle fading in. */}
+      <span
+        aria-hidden
+        className={`absolute inset-0 -z-10 origin-bottom scale-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100 ${v.wipe}`}
+      />
+      <span
+        className={`mono-label flex items-center gap-2.5 transition-colors duration-500 ${v.hover}`}
+      >
+        {children}
+      </span>
+    </>
+  );
 
   if ("href" in props && props.href) {
     if (props.external) {
       return (
-        <a href={props.href} target="_blank" rel="noopener noreferrer" className={classes}>
-          {children}
+        <a
+          href={props.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={shell}
+        >
+          {inner}
         </a>
       );
     }
     return (
-      <Link href={props.href} className={classes}>
-        {children}
+      <Link href={props.href} className={shell}>
+        {inner}
       </Link>
     );
   }
 
   return (
-    <button type={("type" in props && props.type) || "button"} className={classes}>
-      {children}
+    <button type={("type" in props && props.type) || "button"} className={shell}>
+      {inner}
     </button>
   );
 }

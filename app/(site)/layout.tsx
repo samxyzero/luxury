@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import Cursor from "@/components/fx/Cursor";
 import { getSiteSettings, getReviews, getProductCategories } from "@/lib/content";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://luxuryenterprises.com.np";
@@ -82,6 +83,8 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ScrollProgress />
+      {/* Mounts itself only where a real pointer exists, so touch devices skip it. */}
+      <Cursor />
       <Navbar
         businessName={site.businessName}
         phoneDisplay={site.phoneDisplay}

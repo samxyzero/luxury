@@ -1,49 +1,79 @@
 import Container from "@/components/ui/Container";
+import Eyebrow from "@/components/ui/Eyebrow";
+import RevealText from "@/components/fx/RevealText";
 import Reveal from "@/components/Reveal";
 import { PROCESS_STEPS } from "@/lib/navigation";
 
 /**
- * Horizontal timeline with oversized numerals — a different visual rhythm from
- * the card grids above and below it, so the page doesn't read as one repeated
- * layout.
+ * The four stages of a job, as a deck of cards that stacks up rather than a
+ * timeline that scrolls past.
+ *
+ * Each step sticks a little lower than the one before it, so by the last stage
+ * all four are on screen at once with their edges showing — the visitor can see
+ * the whole process assembled instead of remembering it. Pure CSS: sticky
+ * positioning with a stepped offset, no scroll listeners at all.
  */
 export default function ProcessSteps() {
   return (
-    <section className="border-y border-stone bg-paper-dim py-20 sm:py-24 lg:py-28">
+    <section className="bg-char border-smoke border-y py-24 sm:py-32">
       <Container>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <Reveal className="lg:col-span-4">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-gold" />
-              <span className="label text-ink-muted">How It Works</span>
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-32">
+              <Eyebrow index={4}>How It Works</Eyebrow>
+              <RevealText
+                as="h2"
+                text="One team, first call to final fitting"
+                accent={["final", "fitting"]}
+                className="lead-tight font-display mt-6 text-[clamp(2.25rem,4.5vw,3.5rem)] font-medium"
+              />
+              <p className="text-ash mt-6 text-sm leading-relaxed">
+                No handing off to third-party fitters, and no guessing at sizes. The
+                people who quote the job are the people who finish it.
+              </p>
             </div>
-            <h2 className="mt-6 font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl">
-              One Team, First Call to Final Fitting
-            </h2>
-            <p className="mt-6 text-base leading-relaxed text-ink-muted">
-              No handing off to third-party fitters, and no guessing at sizes. The people who
-              quote the job are the people who finish it.
-            </p>
-          </Reveal>
+          </div>
 
           <div className="lg:col-span-8">
-            <ol className="relative">
+            <ol>
               {PROCESS_STEPS.map((step, i) => (
-                <Reveal key={step.title} delay={i * 0.08}>
-                  <li className="group relative flex gap-6 border-t border-stone py-7 sm:gap-10">
-                    <span className="font-display text-5xl font-medium leading-none text-stone transition-colors duration-500 group-hover:text-gold sm:text-6xl">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="pt-1">
-                      <h3 className="font-display text-2xl font-medium text-ink">
-                        {step.title}
-                      </h3>
-                      <p className="mt-2 max-w-lg text-sm leading-relaxed text-ink-muted">
-                        {step.body}
-                      </p>
+                <li
+                  key={step.title}
+                  // Each card parks 2.5rem below the previous one. The offset is
+                  // what leaves the stack's edges visible at the end.
+                  className="sticky"
+                  style={{ top: `calc(7rem + ${i * 2.5}rem)` }}
+                >
+                  <Reveal
+                    y={24}
+                    className="border-smoke bg-void mb-6 rounded-[2rem] border p-7 sm:p-10"
+                  >
+                    <div className="flex items-start gap-6 sm:gap-10">
+                      <span className="font-display stroked text-[3.5rem] leading-none font-medium sm:text-[5rem]">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div className="pt-1.5 sm:pt-3">
+                        <h3 className="font-display text-bone text-2xl font-medium sm:text-3xl">
+                          {step.title}
+                        </h3>
+                        <p className="text-ash mt-3 max-w-lg text-sm leading-relaxed">
+                          {step.body}
+                        </p>
+                      </div>
                     </div>
-                  </li>
-                </Reveal>
+
+                    {/* Fills in step by step, so the stack reads as progress
+                        rather than four interchangeable panels. */}
+                    <div className="bg-smoke mt-8 h-px w-full overflow-hidden">
+                      <span
+                        className="bg-saffron block h-px"
+                        style={{
+                          width: `${((i + 1) / PROCESS_STEPS.length) * 100}%`,
+                        }}
+                      />
+                    </div>
+                  </Reveal>
+                </li>
               ))}
             </ol>
           </div>

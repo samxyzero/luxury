@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import CornerMarks from "@/components/CornerMarks";
 import type { Product } from "@/types/content";
 
 interface ProductCardProps {
@@ -15,51 +14,56 @@ interface ProductCardProps {
    * about each one, not just hide the two hotel-only lines.
    */
   audience?: "all" | "homes" | "hotels";
+  index?: number;
 }
 
-export default function ProductCard({ product, audience = "all" }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  audience = "all",
+  index = 0,
+}: ProductCardProps) {
   const copy =
     (audience === "homes" ? product.homesSummary : null) ??
     (audience === "hotels" ? product.hotelsSummary : null) ??
     product.shortDescription ??
     product.description;
+
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 16 }}
-      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+      exit={{ opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className="group"
     >
       <Link href={`/products/${product.slug}`} className="block">
-        <div className="relative aspect-[4/5] overflow-hidden">
+        <div className="arch bg-char relative aspect-[4/5] overflow-hidden">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+            className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           />
-          <span className="label absolute left-0 top-0 z-10 bg-paper px-3 py-1.5 text-navy">
+          <div aria-hidden className="scrim-b absolute inset-x-0 bottom-0 h-1/3" />
+          <span className="mono-label bg-bone text-void absolute top-5 left-1/2 -translate-x-1/2 rounded-full px-3.5 py-1.5 whitespace-nowrap">
             {product.idealFor}
           </span>
-          <CornerMarks
-            tone="paper"
-            inset={12}
-            className="opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          />
+          <span className="mono-label text-bone/45 absolute bottom-4 left-5">
+            {String(index + 1).padStart(2, "0")}
+          </span>
         </div>
 
-        <div className="mt-5 border-t border-stone-on-navy pt-4">
-          <p className="label text-gold">{product.category}</p>
-          <h3 className="mt-1.5 font-display text-xl font-medium text-paper">
+        <div className="border-smoke mt-5 border-t pt-4">
+          <p className="mono-label text-saffron">{product.category}</p>
+          <h3 className="font-display text-bone mt-2 text-xl font-medium">
             {product.name}
           </h3>
-          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-paper/55">{copy}</p>
-          <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-paper/80 transition-colors duration-300 group-hover:text-gold">
+          <p className="text-ash mt-2 line-clamp-3 text-sm leading-relaxed">{copy}</p>
+          <span className="mono-label text-slate group-hover:text-saffron mt-4 inline-flex items-center gap-1.5 transition-colors duration-500">
             View Details
-            <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </span>
         </div>
       </Link>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useEffect } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
@@ -20,14 +21,34 @@ export default function GalleryLightbox({
 }: GalleryLightboxProps) {
   const item = activeIndex !== null ? items[activeIndex] : null;
 
-  const goPrev = () => {
+  const goPrev = useCallback(() => {
     if (activeIndex === null) return;
     onNavigate((activeIndex - 1 + items.length) % items.length);
-  };
-  const goNext = () => {
+  }, [activeIndex, items.length, onNavigate]);
+
+  const goNext = useCallback(() => {
     if (activeIndex === null) return;
     onNavigate((activeIndex + 1) % items.length);
-  };
+  }, [activeIndex, items.length, onNavigate]);
+
+  // Arrow keys and Escape — the obvious controls for a full-screen viewer, and
+  // the only ones available to anyone not using a mouse.
+  useEffect(() => {
+    if (activeIndex === null) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") goPrev();
+      if (e.key === "ArrowRight") goNext();
+    };
+
+    document.documentElement.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.documentElement.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [activeIndex, onClose, goPrev, goNext]);
 
   return (
     <AnimatePresence>
@@ -36,49 +57,51 @@ export default function GalleryLightbox({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-navy p-4 sm:p-10"
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={item.caption}
+          className="bg-pitch/97 fixed inset-0 z-[90] flex items-center justify-center p-4 backdrop-blur-md sm:p-10"
           onClick={onClose}
         >
-          <button
-            aria-label="Close gallery"
-            onClick={onClose}
-            className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center border border-stone-on-navy text-paper transition-colors duration-300 hover:bg-paper hover:text-navy"
-          >
-            <X className="h-5 w-5" />
-          </button>
+          {[
+            { label: "Close gallery", onClick: onClose, Icon: X, pos: "top-5 right-5" },
+            {
+              label: "Previous image",
+              onClick: goPrev,
+              Icon: ChevronLeft,
+              pos: "top-1/2 left-3 -translate-y-1/2 sm:left-6",
+            },
+            {
+              label: "Next image",
+              onClick: goNext,
+              Icon: ChevronRight,
+              pos: "top-1/2 right-3 -translate-y-1/2 sm:right-6",
+            },
+          ].map(({ label, onClick, Icon, pos }) => (
+            <button
+              key={label}
+              aria-label={label}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClick();
+              }}
+              className={`border-smoke text-bone hover:bg-bone hover:text-void absolute z-10 flex h-12 w-12 items-center justify-center rounded-full border transition-colors duration-300 ${pos}`}
+            >
+              <Icon className="h-5 w-5" />
+            </button>
+          ))}
 
-          <button
-            aria-label="Previous image"
-            onClick={(e) => {
-              e.stopPropagation();
-              goPrev();
-            }}
-            className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-stone-on-navy text-paper transition-colors duration-300 hover:bg-paper hover:text-navy sm:left-6"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            aria-label="Next image"
-            onClick={(e) => {
-              e.stopPropagation();
-              goNext();
-            }}
-            className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-stone-on-navy text-paper transition-colors duration-300 hover:bg-paper hover:text-navy sm:right-6"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-
-          <motion.div
+          <motion.figure
             key={item.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 12 }}
-            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
             className="w-full max-w-4xl"
           >
-            <div className="relative aspect-[4/3] w-full">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[1.5rem]">
               <Image
                 src={item.image}
                 alt={item.caption}
@@ -87,11 +110,13 @@ export default function GalleryLightbox({
                 sizes="(min-width: 1024px) 900px, 100vw"
               />
             </div>
-            <div className="flex items-baseline justify-between gap-4 border-t border-stone-on-navy py-4">
-              <p className="font-display text-lg text-paper">{item.caption}</p>
-              <p className="label shrink-0 text-gold">{item.category}</p>
-            </div>
-          </motion.div>
+            <figcaption className="border-smoke flex items-baseline justify-between gap-4 border-t py-4">
+              <p className="font-display text-bone text-lg">{item.caption}</p>
+              <p className="mono-label text-saffron shrink-0">
+                {(activeIndex ?? 0) + 1} / {items.length} · {item.category}
+              </p>
+            </figcaption>
+          </motion.figure>
         </motion.div>
       )}
     </AnimatePresence>

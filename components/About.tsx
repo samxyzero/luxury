@@ -1,82 +1,104 @@
 import Image from "next/image";
+import Container from "@/components/ui/Container";
+import Eyebrow from "@/components/ui/Eyebrow";
+import RevealText from "@/components/fx/RevealText";
 import Reveal from "@/components/Reveal";
-import CornerMarks from "@/components/CornerMarks";
-import type { SiteSettings } from "@/types/content";
+import Parallax from "@/components/fx/Parallax";
+import CircleBadge from "@/components/fx/CircleBadge";
 import SectionLink from "@/components/SectionLink";
+import type { SiteSettings } from "@/types/content";
 
 interface AboutProps {
   about: SiteSettings["about"];
-  /** Rendered heading tag — pages pass "h1", homepage sections keep "h2". */
+  /** Rendered heading tag — pages pass "h1", sections within a page keep "h2". */
   as?: "h1" | "h2";
-  /** Homepage teaser CTA linking to the full page. */
   footerLink?: { href: string; label: string };
 }
 
 export default function About({ about, as: Heading = "h2", footerLink }: AboutProps) {
   return (
-    <section id="about" className="bg-paper py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-        <div className="grid gap-y-16 lg:grid-cols-12 lg:gap-x-16">
-          <Reveal className="lg:col-span-5">
-            <div className="relative aspect-[4/5]">
-              <Image
-                src={about.image}
-                alt="Luxury Enterprises furnished interior"
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 40vw, 100vw"
+    <section id="about" className="bg-void py-20 sm:py-28">
+      <Container>
+        <div className="max-w-4xl">
+          <Eyebrow>{about.eyebrow}</Eyebrow>
+          <RevealText
+            as={Heading}
+            text={about.heading}
+            accent={["Comfort", "Elegance"]}
+            className="lead-tight font-display mt-6 text-[clamp(2.25rem,5.5vw,4.25rem)] font-medium text-balance"
+          />
+        </div>
+
+        <div className="mt-16 grid gap-14 lg:grid-cols-12 lg:gap-20">
+          <Reveal className="relative lg:col-span-5">
+            <Parallax distance={70} className="arch aspect-[4/5] w-full">
+              <div className="relative -top-[8%] h-[116%] w-full">
+                <Image
+                  src={about.image}
+                  alt="An interior furnished by Luxury Enterprises"
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                />
+              </div>
+            </Parallax>
+
+            <div className="bg-saffron text-void absolute -right-3 -bottom-8 flex h-28 w-28 items-center justify-center rounded-full sm:-right-6 sm:h-36 sm:w-36">
+              <CircleBadge
+                text={`Est. ${new Date().getFullYear() - about.yearsExperience} · Pokhara`}
+                centre={`${about.yearsExperience}`}
+                className="h-full w-full"
               />
-              <CornerMarks tone="gold" inset={14} />
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} className="lg:col-span-7">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-gold" />
-              <span className="label text-ink-muted">{about.eyebrow}</span>
-            </div>
+          <div className="lg:col-span-7">
+            <Reveal>
+              <div className="space-y-6">
+                {about.body.map((paragraph) => (
+                  <p key={paragraph} className="text-ash text-lg leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
 
-            <Heading className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
-              {about.heading}
-            </Heading>
+            <Reveal delay={0.1}>
+              <ul className="border-smoke mt-12 grid border-t sm:grid-cols-2">
+                {about.highlights.map((item, i) => (
+                  <li
+                    key={item}
+                    className="border-smoke flex items-baseline gap-4 border-b py-4"
+                  >
+                    <span className="mono-label text-saffron">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-bone text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
 
-            <div className="mt-8 max-w-2xl space-y-5">
-              {about.body.map((paragraph) => (
-                <p key={paragraph} className="text-base leading-relaxed text-ink-muted sm:text-lg">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-
-            <ul className="mt-10 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-              {about.highlights.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-ink sm:text-base">
-                  <span className="mt-2.5 h-px w-3 shrink-0 bg-gold" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-14 flex items-baseline gap-6 border-t border-stone pt-8">
-              <span className="font-display text-5xl font-medium text-ink">
-                {about.yearsExperience}
-                <span className="text-gold-dim">+</span>
-              </span>
-              <span className="label max-w-[10rem] text-ink-muted">
-                Years furnishing homes &amp; hotels across Nepal
-              </span>
-            </div>
-          </Reveal>
+            <Reveal delay={0.16}>
+              <div className="mt-12 flex items-baseline gap-6">
+                <span className="font-display text-bone text-[5rem] leading-none font-medium">
+                  {about.yearsExperience}
+                  <span className="text-saffron">+</span>
+                </span>
+                <span className="mono-label text-ash max-w-[12rem] leading-snug">
+                  Years furnishing homes &amp; hotels across Nepal
+                </span>
+              </div>
+            </Reveal>
+          </div>
         </div>
 
         {footerLink && (
           <div className="mt-14">
-            <SectionLink href={footerLink.href} tone="ink">
-              {footerLink.label}
-            </SectionLink>
+            <SectionLink href={footerLink.href}>{footerLink.label}</SectionLink>
           </div>
         )}
-      </div>
+      </Container>
     </section>
   );
 }

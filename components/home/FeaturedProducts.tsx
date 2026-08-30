@@ -1,109 +1,179 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Container from "@/components/ui/Container";
-import CornerMarks from "@/components/CornerMarks";
-import Reveal from "@/components/Reveal";
+import Eyebrow from "@/components/ui/Eyebrow";
+import RevealText from "@/components/fx/RevealText";
+import { useMediaQuery } from "@/lib/hooks";
 import type { Product } from "@/types/content";
 
 interface FeaturedProductsProps {
   products: Product[];
+  /** Shown on the trailing card so the link states the real catalogue size. */
+  total: number;
+}
+
+/** One card, shared by both the pinned rail and the mobile swipe track. */
+function RangeCard({ product, index }: { product: Product; index: number }) {
+  return (
+    <Link
+      href={`/products/${product.slug}`}
+      className="group block w-[78vw] shrink-0 sm:w-[24rem]"
+    >
+      <div className="arch bg-char relative aspect-[3/4] overflow-hidden">
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          sizes="(min-width: 640px) 24rem, 78vw"
+          className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+        />
+        <div aria-hidden className="scrim-b absolute inset-x-0 bottom-0 h-1/2" />
+        <span className="mono-label bg-bone text-void absolute top-5 left-1/2 -translate-x-1/2 rounded-full px-3.5 py-1.5">
+          {product.idealFor}
+        </span>
+        <span className="mono-label text-bone/50 absolute bottom-5 left-6">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+
+      <div className="border-smoke mt-5 flex items-start justify-between gap-4 border-t pt-5">
+        <div className="min-w-0">
+          <p className="mono-label text-saffron">{product.category}</p>
+          <h3 className="font-display text-bone mt-2 text-2xl font-medium">
+            {product.name}
+          </h3>
+          <p className="text-ash mt-2 line-clamp-2 text-sm leading-relaxed">
+            {product.shortDescription ?? product.description}
+          </p>
+        </div>
+        <ArrowUpRight className="text-slate group-hover:text-saffron mt-1 h-5 w-5 shrink-0 transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      </div>
+    </Link>
+  );
+}
+
+function AllRangesCard({ total }: { total: number }) {
+  return (
+    <Link
+      href="/products"
+      className="group border-smoke hover:border-saffron flex h-full min-h-[22rem] w-[78vw] shrink-0 flex-col justify-between gap-8 rounded-[2rem] border p-8 transition-colors duration-500 sm:w-[20rem]"
+    >
+      <span className="mono-label text-slate">The Full Catalogue</span>
+      <span>
+        <span className="font-display text-bone group-hover:text-saffron block text-[4rem] leading-none font-medium transition-colors duration-500">
+          {total}
+        </span>
+        <span className="mono-label text-ash mt-3 block">Ranges in stock</span>
+      </span>
+      <span className="mono-label text-bone group-hover:text-saffron inline-flex items-center gap-2 transition-colors duration-500">
+        Browse everything
+        <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1.5" />
+      </span>
+    </Link>
+  );
 }
 
 /**
- * Editorial layout rather than a uniform grid: the first product runs tall
- * across two rows, the rest stack beside it. Server-rendered — the filterable
- * grid lives on /products.
+ * On a wide screen this section pins to the viewport and turns the page's
+ * vertical scroll into horizontal travel along the ranges — the catalogue is
+ * laid out the way a bolt of cloth actually unrolls, and it is the one moment
+ * on the site where scrolling does something other than what you expect.
+ *
+ * The distance is measured rather than guessed: the section is made exactly as
+ * tall as the track is wide, so one pixel of scroll is one pixel of travel and
+ * the rail never finishes early or runs out of runway.
+ *
+ * Below `lg` the pinning is dropped entirely for a plain swipe track. Taking
+ * over the scroll of a device whose only scroll gesture is a finger drag is a
+ * good way to trap someone on a page.
  */
-export default function FeaturedProducts({ products }: FeaturedProductsProps) {
+export default function FeaturedProducts({ products, total }: FeaturedProductsProps) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [distance, setDistance] = useState(0);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track || !isDesktop) {
+      setDistance(0);
+      return;
+    }
+    const measure = () =>
+      setDistance(Math.max(0, track.scrollWidth - window.innerWidth + 96));
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(track);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [isDesktop, products.length]);
+
   if (products.length === 0) return null;
 
-  const [lead, ...rest] = products;
+  const header = (
+    <Container className="flex flex-wrap items-end justify-between gap-6">
+      <div className="max-w-xl">
+        <Eyebrow index={3}>Signature Ranges</Eyebrow>
+        <RevealText
+          as="h2"
+          text="What we are known for"
+          accent={["known", "for"]}
+          className="lead-tight font-display mt-6 text-[clamp(2.25rem,5vw,4rem)] font-medium"
+        />
+      </div>
+      <p className="mono-label text-slate hidden items-center gap-3 lg:flex">
+        <span className="bg-smoke h-px w-10" />
+        Scroll to travel the rail
+      </p>
+    </Container>
+  );
 
   return (
-    <section className="bg-paper py-20 sm:py-24 lg:py-28">
-      <Container>
-        <Reveal className="flex flex-wrap items-end justify-between gap-8">
-          <div className="max-w-xl">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-gold" />
-              <span className="label text-ink-muted">Signature Ranges</span>
+    <div
+      ref={sectionRef}
+      // Extra viewport height is the runway the sticky child rides down.
+      style={isDesktop && distance ? { height: distance + window.innerHeight } : undefined}
+      className="bg-void relative"
+    >
+      <section className="flex flex-col justify-center overflow-hidden py-24 sm:py-32 lg:sticky lg:top-0 lg:h-svh lg:py-0">
+        {header}
+
+        <motion.div
+          ref={trackRef}
+          style={isDesktop ? { x } : undefined}
+          // Two mutually exclusive width utilities would collide in one class
+          // list, so the branch picks exactly one.
+          className={`mt-12 flex items-stretch gap-6 px-5 sm:gap-8 sm:px-8 lg:mt-14 lg:px-14 ${
+            isDesktop
+              ? "w-max"
+              : "snap-x snap-mandatory overflow-x-auto pb-4 [scrollbar-width:none]"
+          }`}
+        >
+          {products.map((product, i) => (
+            <div key={product.id} className="snap-start">
+              <RangeCard product={product} index={i} />
             </div>
-            <h2 className="mt-6 font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl">
-              What We&apos;re Known For
-            </h2>
+          ))}
+          <div className="snap-start self-stretch">
+            <AllRangesCard total={total} />
           </div>
-          <Link
-            href="/products"
-            className="group label inline-flex items-center gap-2 border-b border-ink pb-2 text-ink transition-colors duration-300 hover:border-gold hover:text-gold-dim"
-          >
-            All 14 Ranges
-            <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </Link>
-        </Reveal>
-
-        <div className="mt-16 grid gap-8 lg:grid-cols-12">
-          {/* Lead product — tall, given room to breathe. */}
-          <Reveal className="lg:col-span-6">
-            <Link href={`/products/${lead.slug}`} className="group block h-full">
-              <div className="relative aspect-[4/5] overflow-hidden lg:aspect-auto lg:h-[34rem]">
-                <Image
-                  src={lead.image}
-                  alt={lead.name}
-                  fill
-                  className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                />
-                <CornerMarks tone="paper" inset={16} />
-                <span className="label absolute left-0 top-0 bg-paper px-4 py-2 text-navy">
-                  {lead.category}
-                </span>
-              </div>
-              <div className="mt-6 flex items-start justify-between gap-6 border-t border-stone pt-5">
-                <div>
-                  <h3 className="font-display text-2xl font-medium text-ink">{lead.name}</h3>
-                  <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-muted">
-                    {lead.shortDescription ?? lead.description}
-                  </p>
-                </div>
-                <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-ink-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold" />
-              </div>
-            </Link>
-          </Reveal>
-
-          {/* Supporting products — wide, low cards for contrast with the lead. */}
-          <div className="grid gap-8 sm:grid-cols-2 lg:col-span-6 lg:grid-cols-1 lg:gap-6">
-            {rest.map((product, i) => (
-              <Reveal key={product.id} delay={0.08 * (i + 1)}>
-                <Link
-                  href={`/products/${product.slug}`}
-                  className="group flex items-center gap-6 border-b border-stone pb-6"
-                >
-                  <div className="relative h-28 w-28 shrink-0 overflow-hidden sm:h-32 sm:w-32">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                      sizes="128px"
-                    />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="label text-gold">{product.category}</p>
-                    <h3 className="mt-1.5 font-display text-xl font-medium text-ink">
-                      {product.name}
-                    </h3>
-                    <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-ink-muted">
-                      {product.shortDescription ?? product.description}
-                    </p>
-                  </div>
-                  <ArrowUpRight className="ml-auto h-5 w-5 shrink-0 text-ink-muted transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold" />
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </Container>
-    </section>
+        </motion.div>
+      </section>
+    </div>
   );
 }

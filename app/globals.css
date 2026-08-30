@@ -1,77 +1,160 @@
 @import "tailwindcss";
 
-:root {
-  --background: #f5f2ea;
-  --foreground: #171717;
+/**
+ * "Night showroom" — the site is lit like a shop after hours: a warm near-black
+ * room, bone-white cloth, and one saffron light source. Every token below is
+ * used; nothing here is aspirational.
+ */
+@theme {
+  /* Canvas, darkest to lightest. `void` is the page, `char` a raised panel,
+     `smoke` the only hairline colour used on dark. */
+  --color-void: #0b0a09;
+  --color-pitch: #050404;
+  --color-char: #16130f;
+  --color-smoke: #2a241d;
 
-  /* Editorial palette — warm white, deep navy, charcoal, muted gold (used sparingly) */
-  --color-paper: #f5f2ea;
-  --color-paper-dim: #efebe1;
-  --color-ink: #171717;
-  --color-ink-muted: #6e6a62;
-  --color-navy: #10243d;
-  --color-navy-dim: #18304f;
-  --color-gold: #a98a57;
-  --color-gold-dim: #8a7048;
-  --color-stone: #e6e1d5;
-  --color-stone-on-navy: rgba(245, 242, 234, 0.16);
-}
+  /* Cloth — the light surfaces and the text that sits on dark. */
+  --color-bone: #f2ece0;
+  --color-linen: #e7ddca;
+  --color-ash: #9b9084;
+  --color-slate: #6a6157;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
-  --color-paper: var(--color-paper);
-  --color-paper-dim: var(--color-paper-dim);
-  --color-ink: var(--color-ink);
-  --color-ink-muted: var(--color-ink-muted);
-  --color-navy: var(--color-navy);
-  --color-navy-dim: var(--color-navy-dim);
-  --color-gold: var(--color-gold);
-  --color-gold-dim: var(--color-gold-dim);
-  --color-stone: var(--color-stone);
-  --color-stone-on-navy: var(--color-stone-on-navy);
+  /* Two accents, deliberately warm: saffron carries every call to action,
+     ember marks the trade/hospitality side so the two ranges read apart. */
+  --color-saffron: #f0a33a;
+  --color-saffron-deep: #c9832a;
+  --color-ember: #c0563a;
 
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-archivo);
+  --font-mono: var(--font-jet);
 
-  --radius-none: 0px;
+  /* One easing for the whole site. Long, soft settle — cloth, not clicks. */
+  --ease-cloth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--color-void);
 }
 
 [id] {
-  scroll-margin-top: 96px;
+  scroll-margin-top: 7rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-void);
+  color: var(--color-bone);
   font-family: var(--font-sans), system-ui, sans-serif;
-}
-
-/* Sharp corners everywhere — no rounded elements in the brand UI */
-*,
-*::before,
-*::after {
-  border-radius: 0 !important;
+  overflow-x: hidden;
 }
 
 ::selection {
-  background: var(--color-gold);
-  color: var(--color-paper);
+  background: var(--color-saffron);
+  color: var(--color-void);
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-paper);
+  background: var(--color-void);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-ink);
+  background: var(--color-smoke);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-saffron-deep);
+}
+
+/* Fraunces has a "wonk" axis that skews selected letterforms. Dialled up only
+   for display type, where the quirk reads as character rather than as an error. */
+@layer base {
+  .font-display {
+    font-variation-settings:
+      "SOFT" 30,
+      "WONK" 1;
+  }
+}
+
+@layer utilities {
+  /**
+   * The site's recurring shape. A radius that large always clamps to half the
+   * width, so the top of the box is a true semicircle at any size — an arch,
+   * not a rounded rectangle. Used to frame every hero-scale photograph.
+   */
+  .arch {
+    border-radius: 100vw 100vw 0.25rem 0.25rem;
+  }
+  .arch-full {
+    border-radius: 100vw;
+  }
+
+  /* Technical micro-caption. Mono is the counterweight to the display serif —
+     it makes figures and labels read as specification rather than decoration. */
+  .mono-label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Display type large enough that normal leading opens gaps between lines. */
+  .lead-tight {
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+
+  /* Outlined display type — used once per page at most, as a counterpoint to
+     a solid headline sitting beside it. */
+  .stroked {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--color-smoke);
+  }
+
+  /**
+   * Reveals a headline by sliding it out from behind its own overflow edge.
+   * The wrapper clips; the child is animated by framer-motion.
+   *
+   * Deliberately sets no `display`: callers pair it with `block` (one clip per
+   * line) or `inline-block` (one clip per word, so the headline still wraps as
+   * prose). Declaring a default here would collide with those at equal
+   * specificity and the winner would come down to stylesheet order.
+   *
+   * The padding/margin pair gives descenders room inside the clip without
+   * adding any height to the line.
+   */
+  .mask-line {
+    overflow: hidden;
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+
+  .edge {
+    border-color: var(--color-smoke);
+  }
+
+  /* Warm vignette used behind full-bleed photography so bone text stays legible
+     over an unpredictable image without flattening it to a grey scrim. */
+  .scrim-b {
+    background: linear-gradient(
+      to top,
+      var(--color-void) 0%,
+      color-mix(in srgb, var(--color-void) 82%, transparent) 28%,
+      color-mix(in srgb, var(--color-void) 20%, transparent) 70%,
+      transparent 100%
+    );
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -85,28 +168,5 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-@layer utilities {
-  /* Flat, neutral depth — soft shadow, no color glow */
-  .shadow-soft {
-    box-shadow:
-      0 1px 2px rgba(28, 27, 24, 0.04),
-      0 12px 28px -14px rgba(28, 27, 24, 0.16);
-  }
-  .shadow-soft-lg {
-    box-shadow:
-      0 2px 4px rgba(28, 27, 24, 0.05),
-      0 24px 48px -16px rgba(28, 27, 24, 0.2);
-  }
-
-  /* Editorial eyebrow label */
-  .label {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
   }
 }

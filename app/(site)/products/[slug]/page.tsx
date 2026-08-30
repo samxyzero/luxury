@@ -3,12 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, Building2, Check, Home, MapPin, Phone } from "lucide-react";
-import CornerMarks from "@/components/CornerMarks";
 import PageShell from "@/components/PageShell";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import Badge from "@/components/ui/Badge";
 import Container from "@/components/ui/Container";
+import Eyebrow from "@/components/ui/Eyebrow";
+import RevealText from "@/components/fx/RevealText";
+import Parallax from "@/components/fx/Parallax";
 import { getSiteSettings, getProducts, getProductBySlug } from "@/lib/content";
 import { pageMetadata, siteUrl } from "@/lib/seo";
 import { truncate } from "@/lib/format";
@@ -115,90 +117,93 @@ export default async function ProductDetailPage({
     >
       <JsonLd data={productJsonLd} />
 
-      <section className="bg-paper py-20 sm:py-24 lg:py-28">
+      <section className="bg-void py-16 sm:py-24">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <Reveal className="lg:col-span-7">
-              <div className="relative aspect-[4/3] w-full">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 58vw, 100vw"
-                />
-                <CornerMarks tone="gold" inset={16} />
-              </div>
+            {/* The arch again, at product scale — the same frame the hero uses,
+                so a range reads as part of the same collection. */}
+            <Reveal className="lg:col-span-6">
+              <Parallax distance={50} className="arch aspect-[4/5] w-full">
+                <div className="relative -top-[6%] h-[112%] w-full">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 48vw, 100vw"
+                  />
+                </div>
+              </Parallax>
             </Reveal>
 
-            <Reveal delay={0.1} className="lg:col-span-5">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-gold" />
-                <span className="label text-ink-muted">{product.category}</span>
-              </div>
+            <div className="lg:col-span-6 lg:pt-8">
+              <Eyebrow>{product.category}</Eyebrow>
 
-              <h1 className="mt-6 font-display text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:text-5xl">
-                {product.name}
-              </h1>
+              <RevealText
+                as="h1"
+                text={product.name}
+                className="lead-tight font-display mt-6 text-[clamp(2.5rem,5.5vw,4.5rem)] font-medium"
+              />
 
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Badge tone="muted">{product.idealFor}</Badge>
-                {product.inStock === false ? (
-                  <Badge tone="muted" className="opacity-70">
-                    Made to order
-                  </Badge>
-                ) : (
-                  <Badge tone="gold">In stock</Badge>
+              <Reveal delay={0.12}>
+                <div className="mt-6 flex flex-wrap items-center gap-2.5">
+                  <Badge tone="outline">{product.idealFor}</Badge>
+                  {product.inStock === false ? (
+                    <Badge tone="outline">Made to order</Badge>
+                  ) : (
+                    <Badge tone="saffron">In stock</Badge>
+                  )}
+                </div>
+
+                <p className="text-ash mt-7 text-lg leading-relaxed text-pretty">
+                  {product.description}
+                </p>
+
+                {highlights.length > 0 && (
+                  <ul className="border-smoke mt-8 space-y-3 border-t pt-6">
+                    {highlights.map((item) => (
+                      <li key={item} className="text-ash flex items-start gap-3 text-sm">
+                        <Check className="text-saffron mt-0.5 h-4 w-4 shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 )}
-              </div>
 
-              <p className="mt-6 text-base leading-relaxed text-ink-muted sm:text-lg">
-                {product.description}
-              </p>
+                <div className="mt-10 flex flex-wrap items-center gap-3">
+                  <a
+                    href={enquire("general enquiry")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor="Chat"
+                    className="mono-label bg-saffron text-void hover:bg-bone inline-flex items-center gap-2 rounded-full px-7 py-4 transition-colors duration-500"
+                  >
+                    Enquire on WhatsApp
+                  </a>
+                  <a
+                    href={`tel:${site.phone}`}
+                    className="mono-label border-smoke text-bone hover:border-bone inline-flex items-center gap-2 rounded-full border px-7 py-4 transition-colors duration-500"
+                  >
+                    <Phone className="h-4 w-4" />
+                    {site.phoneDisplay}
+                  </a>
+                </div>
 
-              {highlights.length > 0 && (
-                <ul className="mt-8 space-y-3 border-t border-stone pt-6">
-                  {highlights.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-ink-muted">
-                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
-                <a
-                  href={enquire("general enquiry")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="label border border-navy px-7 py-4 text-navy transition-colors duration-300 hover:bg-navy hover:text-paper"
-                >
-                  Enquire on WhatsApp
-                </a>
-                <a
-                  href={`tel:${site.phone}`}
-                  className="group label inline-flex items-center gap-2 text-ink transition-colors duration-300 hover:text-gold-dim"
-                >
-                  <Phone className="h-4 w-4" />
-                  {site.phoneDisplay}
-                </a>
-              </div>
-
-              <div className="mt-10 border-t border-stone pt-6">
-                <a
-                  href={site.address.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 text-sm text-ink-muted transition-colors duration-300 hover:text-gold-dim"
-                >
-                  <MapPin className="h-4 w-4 text-gold" />
-                  See it in our {site.address.city} showroom
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-              </div>
-            </Reveal>
+                <div className="border-smoke mt-10 border-t pt-6">
+                  <a
+                    href={site.address.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group text-ash hover:text-saffron inline-flex items-center gap-2 text-sm transition-colors duration-300"
+                  >
+                    <MapPin className="text-saffron h-4 w-4" />
+                    See it in our {site.address.city} showroom
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                </div>
+              </Reveal>
+            </div>
           </div>
         </Container>
       </section>
@@ -206,24 +211,25 @@ export default async function ProductDetailPage({
       {/* The household and trade ranges genuinely differ — spelling that out is
           the main job of this page for someone deciding which they need. */}
       {hasSplit && (
-        <section className="bg-navy py-20 sm:py-24 lg:py-28">
+        <section className="bg-char border-smoke border-y py-20 sm:py-28">
           <Container>
-            <Reveal className="max-w-2xl">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-gold" />
-                <span className="label text-paper/55">Two Ranges</span>
-              </div>
-              <h2 className="mt-6 font-display text-3xl font-medium leading-[1.1] tracking-tight text-paper sm:text-4xl">
-                What We Stock for Homes, and What We Stock for Properties
-              </h2>
-            </Reveal>
+            <div className="max-w-2xl">
+              <Eyebrow>Two Ranges</Eyebrow>
+              <RevealText
+                as="h2"
+                text="What we stock for homes, and what we stock for properties"
+                accent={["properties"]}
+                className="lead-tight font-display mt-6 text-[clamp(1.9rem,4vw,3rem)] font-medium text-balance"
+              />
+            </div>
 
-            <div className="mt-12 grid gap-px overflow-hidden border border-stone-on-navy bg-stone-on-navy lg:grid-cols-2">
+            <div className="bg-smoke mt-12 grid gap-px lg:grid-cols-2">
               {[
                 {
                   key: "homes",
                   icon: Home,
                   label: "For Homes",
+                  accent: "text-saffron",
                   summary: product.homesSummary,
                   points: homesPoints,
                   cta: "Enquire for my home",
@@ -233,6 +239,7 @@ export default async function ProductDetailPage({
                   key: "hotels",
                   icon: Building2,
                   label: "For Hotels, Resorts & Apartments",
+                  accent: "text-ember",
                   summary: product.hotelsSummary,
                   points: hotelsPoints,
                   cta: "Enquire for a property",
@@ -241,22 +248,19 @@ export default async function ProductDetailPage({
               ]
                 .filter((col) => col.summary)
                 .map((col, i) => (
-                  <Reveal key={col.key} delay={i * 0.1} className="bg-navy p-8 sm:p-10">
+                  <Reveal key={col.key} delay={i * 0.1} className="bg-char p-8 sm:p-10">
                     <div className="flex items-center gap-3">
-                      <col.icon className="h-5 w-5 text-gold" />
-                      <h3 className="label text-gold">{col.label}</h3>
+                      <col.icon className={`h-5 w-5 ${col.accent}`} />
+                      <h3 className={`mono-label ${col.accent}`}>{col.label}</h3>
                     </div>
 
-                    <p className="mt-5 text-base leading-relaxed text-paper/75">{col.summary}</p>
+                    <p className="text-bone/75 mt-5 leading-relaxed">{col.summary}</p>
 
                     {col.points.length > 0 && (
-                      <ul className="mt-7 space-y-3 border-t border-stone-on-navy pt-6">
+                      <ul className="border-smoke mt-7 space-y-3 border-t pt-6">
                         {col.points.map((point) => (
-                          <li
-                            key={point}
-                            className="flex items-start gap-3 text-sm text-paper/60"
-                          >
-                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                          <li key={point} className="text-ash flex items-start gap-3 text-sm">
+                            <Check className="text-saffron mt-0.5 h-4 w-4 shrink-0" />
                             {point}
                           </li>
                         ))}
@@ -267,10 +271,10 @@ export default async function ProductDetailPage({
                       href={enquire(col.context)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group label mt-8 inline-flex items-center gap-2 border border-stone-on-navy px-5 py-3 text-paper transition-colors duration-300 hover:border-gold hover:text-gold"
+                      className="group mono-label border-smoke text-bone hover:border-saffron hover:text-saffron mt-8 inline-flex items-center gap-2 rounded-full border px-5 py-3 transition-colors duration-500"
                     >
                       {col.cta}
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </a>
                   </Reveal>
                 ))}
@@ -279,48 +283,58 @@ export default async function ProductDetailPage({
         </section>
       )}
 
+      {/* Specifications sit on bone: this is the reference part of the page, and
+          it should read like a printed spec sheet rather than more showroom. */}
       {(variants.length > 0 || product.material || product.care) && (
-        <section className="border-t border-stone bg-paper-dim py-16 sm:py-20">
+        <section className="bg-bone text-void py-16 sm:py-24">
           <Container>
-            <h2 className="font-display text-3xl font-medium tracking-tight text-ink sm:text-4xl">
-              Specifications
-            </h2>
+            <Eyebrow tone="void">Specifications</Eyebrow>
 
             <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
               {variants.length > 0 && (
                 <div className="lg:col-span-7">
-                  <h3 className="label text-ink-muted">Sizes &amp; Options</h3>
-                  <div className="mt-4 overflow-x-auto">
-                    <table className="w-full min-w-[26rem] border-collapse text-left text-sm">
+                  <h2 className="font-display text-3xl font-medium">Sizes &amp; Options</h2>
+                  <div className="mt-6 overflow-x-auto">
+                    <table className="w-full min-w-[26rem] border-collapse text-left">
                       <thead>
-                        <tr className="border-b border-stone">
-                          <th scope="col" className="label py-3 pr-4 font-semibold text-ink">
-                            Option
-                          </th>
-                          <th scope="col" className="label py-3 pr-4 font-semibold text-ink">
-                            Size
-                          </th>
-                          <th scope="col" className="label py-3 font-semibold text-ink">
-                            Availability
-                          </th>
+                        <tr className="border-void/25 border-b">
+                          {["Option", "Size", "Availability"].map((head) => (
+                            <th
+                              key={head}
+                              scope="col"
+                              className="mono-label text-slate py-3 pr-4"
+                            >
+                              {head}
+                            </th>
+                          ))}
                         </tr>
                       </thead>
                       <tbody>
                         {variants.map((variant) => (
-                          <tr key={variant.id} className="border-b border-stone/60">
-                            <td className="py-3 pr-4 font-medium text-ink">{variant.name}</td>
-                            <td className="py-3 pr-4 text-ink-muted">{variant.size ?? "—"}</td>
-                            <td className="py-3 text-ink-muted">
-                              {variant.inStock ? "In stock" : "To order"}
+                          <tr key={variant.id} className="border-void/12 border-b">
+                            <td className="text-void py-3.5 pr-4 font-medium">
+                              {variant.name}
+                            </td>
+                            <td className="text-slate py-3.5 pr-4 tabular-nums">
+                              {variant.size ?? "—"}
+                            </td>
+                            <td className="py-3.5">
+                              <span
+                                className={`mono-label ${
+                                  variant.inStock ? "text-ember" : "text-slate"
+                                }`}
+                              >
+                                {variant.inStock ? "In stock" : "To order"}
+                              </span>
                             </td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
-                  <p className="mt-4 text-sm text-ink-muted">
-                    Custom sizes are available on most ranges — send us the measurements and
-                    we&apos;ll confirm what&apos;s possible.
+                  <p className="text-slate mt-4 text-sm">
+                    Custom sizes are available on most ranges — send us the measurements
+                    and we&apos;ll confirm what&apos;s possible.
                   </p>
                 </div>
               )}
@@ -328,16 +342,14 @@ export default async function ProductDetailPage({
               <div className="space-y-8 lg:col-span-5">
                 {product.material && (
                   <div>
-                    <h3 className="label text-ink-muted">Materials &amp; Quality</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-                      {product.material}
-                    </p>
+                    <h2 className="mono-label text-ember">Materials &amp; Quality</h2>
+                    <p className="text-slate mt-3 leading-relaxed">{product.material}</p>
                   </div>
                 )}
                 {product.care && (
-                  <div className="border-t border-stone pt-8">
-                    <h3 className="label text-ink-muted">Care</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-ink-muted">{product.care}</p>
+                  <div className="border-void/15 border-t pt-8">
+                    <h2 className="mono-label text-ember">Care</h2>
+                    <p className="text-slate mt-3 leading-relaxed">{product.care}</p>
                   </div>
                 )}
               </div>
@@ -347,40 +359,37 @@ export default async function ProductDetailPage({
       )}
 
       {related.length > 0 && (
-        <section className="border-t border-stone bg-paper py-20 sm:py-24">
+        <section className="bg-void py-20 sm:py-28">
           <Container>
             <div className="flex flex-wrap items-end justify-between gap-6">
-              <h2 className="font-display text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+              <h2 className="font-display text-bone text-[clamp(1.9rem,4vw,3rem)] font-medium">
                 More in {product.category}
               </h2>
               <Link
                 href="/products"
-                className="group label inline-flex items-center gap-2 text-ink transition-colors duration-300 hover:text-gold-dim"
+                className="group mono-label border-smoke text-bone hover:border-saffron hover:text-saffron inline-flex items-center gap-2 rounded-full border px-6 py-3.5 transition-colors duration-500"
               >
                 All Products
-                <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
 
-            <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((item) => (
                 <Link key={item.id} href={`/products/${item.slug}`} className="group block">
-                  <div className="relative aspect-[4/5] overflow-hidden">
+                  <div className="arch bg-char relative aspect-[4/5] overflow-hidden">
                     <Image
                       src={item.image}
                       alt={item.name}
                       fill
-                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                      className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     />
-                    <CornerMarks
-                      tone="paper"
-                      inset={12}
-                      className="opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    />
                   </div>
-                  <h3 className="mt-5 font-display text-xl font-medium text-ink">{item.name}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-ink-muted">
+                  <h3 className="font-display text-bone mt-5 text-xl font-medium">
+                    {item.name}
+                  </h3>
+                  <p className="text-ash mt-2 line-clamp-2 text-sm leading-relaxed">
                     {item.shortDescription ?? item.description}
                   </p>
                 </Link>

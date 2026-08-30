@@ -2,15 +2,18 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Plus } from "lucide-react";
+import Container from "@/components/ui/Container";
+import Eyebrow from "@/components/ui/Eyebrow";
+import RevealText from "@/components/fx/RevealText";
 import Reveal from "@/components/Reveal";
-import type { FaqItem } from "@/types/content";
 import SectionLink from "@/components/SectionLink";
+import type { FaqItem } from "@/types/content";
 
 interface FaqProps {
   faqs: FaqItem[];
-  /** Rendered heading tag — pages pass "h1", homepage sections keep "h2". */
+  /** Rendered heading tag — pages pass "h1", sections within a page keep "h2". */
   as?: "h1" | "h2";
-  /** Homepage teaser CTA linking to the full page. */
   footerLink?: { href: string; label: string };
 }
 
@@ -18,65 +21,86 @@ export default function Faq({ faqs, as: Heading = "h2", footerLink }: FaqProps) 
   const [open, setOpen] = useState<string | null>(faqs[0]?.id ?? null);
 
   return (
-    <section id="faq" className="bg-paper py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-3xl px-6 sm:px-8 lg:px-12">
-        <Reveal className="text-center">
-          <div className="flex items-center justify-center gap-3">
-            <span className="h-px w-8 bg-gold" />
-            <span className="label text-ink-muted">FAQ</span>
-            <span className="h-px w-8 bg-gold" />
+    <section id="faq" className="bg-char border-smoke border-t py-20 sm:py-28">
+      <Container>
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-32">
+              <Eyebrow>FAQ</Eyebrow>
+              <RevealText
+                as={Heading}
+                text="Questions, answered"
+                accent={["answered"]}
+                className="lead-tight font-display mt-6 text-[clamp(2.25rem,4.5vw,3.5rem)] font-medium"
+              />
+            </div>
           </div>
-          <Heading className="mt-6 font-display text-4xl font-medium leading-[1.1] tracking-tight text-ink sm:text-5xl">
-            Questions, Answered
-          </Heading>
-        </Reveal>
 
-        <div className="mt-14 border-t border-stone">
-          {faqs.map((faq, i) => {
-            const isOpen = open === faq.id;
-            return (
-              <Reveal key={faq.id} delay={i * 0.04}>
-                <div className="border-b border-stone">
-                  <button
-                    onClick={() => setOpen(isOpen ? null : faq.id)}
-                    className="flex w-full items-center justify-between gap-4 py-6 text-left"
-                  >
-                    <span className="font-display text-lg font-medium text-ink sm:text-xl">
-                      {faq.question}
-                    </span>
-                    <span className="shrink-0 font-display text-2xl font-normal text-gold-dim">
-                      {isOpen ? "−" : "+"}
-                    </span>
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                        className="overflow-hidden"
+          <div className="lg:col-span-8">
+            <div className="border-smoke border-t">
+              {faqs.map((faq, i) => {
+                const isOpen = open === faq.id;
+                return (
+                  <Reveal key={faq.id} delay={i * 0.04}>
+                    <div className="border-smoke border-b">
+                      <button
+                        onClick={() => setOpen(isOpen ? null : faq.id)}
+                        aria-expanded={isOpen}
+                        aria-controls={`faq-panel-${faq.id}`}
+                        className="group flex w-full items-center justify-between gap-6 py-6 text-left"
                       >
-                        <p className="max-w-xl pb-6 text-sm leading-relaxed text-ink-muted sm:text-base">
-                          {faq.answer}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
+                        <span
+                          className={`font-display text-xl font-medium transition-colors duration-300 sm:text-2xl ${
+                            isOpen ? "text-saffron" : "text-bone group-hover:text-ash"
+                          }`}
+                        >
+                          {faq.question}
+                        </span>
+                        {/* One glyph rotated into the other — no icon swap, so
+                            the transition is continuous. */}
+                        <motion.span
+                          animate={{ rotate: isOpen ? 135 : 0 }}
+                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
+                            isOpen
+                              ? "border-saffron text-saffron"
+                              : "border-smoke text-ash"
+                          }`}
+                        >
+                          <Plus className="h-4 w-4" />
+                        </motion.span>
+                      </button>
 
-        {footerLink && (
-          <div className="mt-14">
-            <SectionLink href={footerLink.href} tone="ink">
-              {footerLink.label}
-            </SectionLink>
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            id={`faq-panel-${faq.id}`}
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <p className="text-ash max-w-2xl pb-7 leading-relaxed">
+                              {faq.answer}
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
+
+            {footerLink && (
+              <div className="mt-12">
+                <SectionLink href={footerLink.href}>{footerLink.label}</SectionLink>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      </Container>
     </section>
   );
 }
