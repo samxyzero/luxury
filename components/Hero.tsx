@@ -35,14 +35,14 @@ const DRAPE =
 /**
  * The headline is a doorway.
  *
- * "Spaces made for" sits above an arch-cropped photograph, "Comfort." crosses
- * back over its lower edge, and on load two curtain panels draw apart to reveal
- * the room behind — the business is furnishing, so the page opens the way a
- * window treatment does.
+ * "We dress rooms for" sits above an arch-cropped photograph, "Stillness."
+ * crosses back over its lower edge, and on load two curtain panels draw apart
+ * to reveal the room behind — the business is furnishing, so the page opens the
+ * way a window treatment does.
  *
  * The arch is a `<span>` rather than a `<div>` so the whole composition can live
- * inside the single `<h1>`: the accessible name still reads "Spaces made for
- * Comfort.", uninterrupted.
+ * inside the single `<h1>`: the accessible name still reads "We dress rooms for
+ * Stillness.", uninterrupted.
  */
 export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
   const reduceMotion = useReducedMotion();
@@ -68,7 +68,7 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
         }}
       />
 
-      <Container className="flex min-h-svh flex-col pt-24 pb-8 sm:pt-32">
+      <Container className="flex min-h-svh flex-col pt-24 pb-7 sm:pt-[6.5rem]">
         <div className="flex flex-1 flex-col items-center justify-center">
           {/* Wraps rather than running to the gutters: the full eyebrow is
               wider than a 360px phone, and the whole composition is centred. */}
@@ -80,22 +80,24 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
             {hero.eyebrow}
           </motion.p>
 
-          <h1 className="mt-6 flex flex-col items-center text-center sm:mt-8">
+          <h1 className="mt-5 flex flex-col items-center text-center sm:mt-7">
             <span className="mask-line block">
               <motion.span
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 0.15, ease: EASE }}
-                className="font-display lead-tight text-bone block text-[clamp(2.5rem,8.5vw,6rem)] font-medium"
+                className="font-display lead-tight text-bone block text-[clamp(2rem,min(9.5vw,10vh),6rem)] font-medium"
               >
                 {hero.headline}
               </motion.span>
             </span>
 
-            {/* The window. Height is viewport-relative so the whole composition
-                — statement, photograph and the enquiry bar beneath it — still
-                lands on one screen, on a phone as well as a laptop. */}
-            <span className="arch relative mt-5 block h-[clamp(11rem,30vh,25rem)] w-[clamp(10rem,26vw,22rem)] overflow-hidden sm:mt-7 sm:h-[clamp(13rem,38vh,25rem)] sm:w-[clamp(11rem,26vw,22rem)]">
+            {/* The window, and the largest thing on the page. Both axes are
+                viewport-relative and capped, so it takes all the screen it can
+                while the whole composition — statement, photograph and the
+                enquiry bar beneath it — still lands on one screen, on a phone
+                as well as a laptop. */}
+            <span className="arch relative mt-4 block h-[clamp(14rem,37vh,26rem)] w-[clamp(15rem,68vw,26rem)] overflow-hidden sm:mt-5 sm:h-[clamp(16rem,min(40vh,46vw),32rem)] sm:w-[clamp(17rem,30vw,28rem)]">
               <motion.span
                 initial={{ scale: 1.25 }}
                 animate={{ scale: 1 }}
@@ -107,7 +109,7 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
                   alt="A bedroom furnished by Luxury Enterprises"
                   fill
                   priority
-                  sizes="(min-width: 640px) 32vw, 60vw"
+                  sizes="(min-width: 640px) 34vw, 72vw"
                   className="object-cover"
                 />
               </motion.span>
@@ -158,12 +160,12 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
 
             {/* Crosses back over the photograph — the one place on the site
                 where type breaks the image plane. */}
-            <span className="mask-line relative z-10 block -mt-[0.42em]">
+            <span className="mask-line relative z-10 block -mt-[0.65em]">
               <motion.em
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 1.5, ease: EASE }}
-                className="font-display lead-tight text-saffron block text-[clamp(3rem,11vw,8rem)] font-normal italic"
+                className="font-display lead-tight text-saffron block text-[clamp(3.25rem,min(16vw,15vh),9.5rem)] font-normal italic"
               >
                 {hero.highlight}
               </motion.em>
@@ -173,7 +175,7 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
 
         {/* Everything transactional collects in one bar at the foot of the
             screen, so the composition above it stays purely an image. */}
-        <div className="border-smoke mt-8 grid gap-6 border-t pt-6 sm:mt-10 sm:gap-8 sm:pt-8 lg:grid-cols-12 lg:items-center lg:gap-10">
+        <div className="border-smoke mt-7 grid gap-6 border-t pt-6 sm:gap-8 lg:grid-cols-12 lg:items-center lg:gap-10">
           <motion.p
             {...rise(1)}
             className="text-ash max-w-md text-sm leading-relaxed text-pretty lg:col-span-5"
