@@ -68,13 +68,15 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
         }}
       />
 
-      <Container className="flex min-h-svh flex-col pt-28 pb-8 sm:pt-32">
+      <Container className="flex min-h-svh flex-col pt-24 pb-8 sm:pt-32">
         <div className="flex flex-1 flex-col items-center justify-center">
+          {/* Wraps rather than running to the gutters: the full eyebrow is
+              wider than a 360px phone, and the whole composition is centred. */}
           <motion.p
             {...rise(0)}
-            className="mono-label text-ash flex items-center gap-2.5 text-center"
+            className="mono-label text-ash flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-center"
           >
-            <span className="bg-saffron h-1 w-1 rounded-full" />
+            <span className="bg-saffron h-1 w-1 shrink-0 rounded-full" />
             {hero.eyebrow}
           </motion.p>
 
@@ -91,8 +93,9 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
             </span>
 
             {/* The window. Height is viewport-relative so the whole composition
-                still fits one screen on a laptop without scrolling. */}
-            <span className="arch relative mt-5 block h-[clamp(13rem,38vh,25rem)] w-[clamp(11rem,26vw,22rem)] overflow-hidden sm:mt-7">
+                — statement, photograph and the enquiry bar beneath it — still
+                lands on one screen, on a phone as well as a laptop. */}
+            <span className="arch relative mt-5 block h-[clamp(11rem,30vh,25rem)] w-[clamp(10rem,26vw,22rem)] overflow-hidden sm:mt-7 sm:h-[clamp(13rem,38vh,25rem)] sm:w-[clamp(11rem,26vw,22rem)]">
               <motion.span
                 initial={{ scale: 1.25 }}
                 animate={{ scale: 1 }}
@@ -170,7 +173,7 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
 
         {/* Everything transactional collects in one bar at the foot of the
             screen, so the composition above it stays purely an image. */}
-        <div className="border-smoke mt-10 grid gap-8 border-t pt-8 lg:grid-cols-12 lg:items-center lg:gap-10">
+        <div className="border-smoke mt-8 grid gap-6 border-t pt-6 sm:mt-10 sm:gap-8 sm:pt-8 lg:grid-cols-12 lg:items-center lg:gap-10">
           <motion.p
             {...rise(1)}
             className="text-ash max-w-md text-sm leading-relaxed text-pretty lg:col-span-5"
@@ -178,9 +181,12 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
             {hero.subheadline}
           </motion.p>
 
+          {/* Tighter padding below sm so both calls to action stay on one row —
+              wrapping them is what pushed the enquiry below the fold on a
+              phone, which is the last thing this bar should do. */}
           <motion.div
             {...rise(2)}
-            className="flex flex-wrap items-center gap-3 lg:col-span-4 lg:justify-center"
+            className="flex flex-wrap items-center gap-2.5 sm:gap-3 lg:col-span-4 lg:justify-center"
           >
             <Magnetic>
               <a
@@ -188,7 +194,7 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="Chat"
-                className="mono-label bg-saffron text-void hover:bg-bone inline-flex items-center gap-2 rounded-full px-7 py-4 transition-colors duration-500"
+                className="mono-label bg-saffron text-void hover:bg-bone inline-flex items-center gap-2 rounded-full px-5 py-4 transition-colors duration-500 sm:px-7"
               >
                 {hero.ctaPrimaryLabel}
               </a>
@@ -197,9 +203,9 @@ export default function Hero({ hero, whatsapp, mapsUrl, location }: HeroProps) {
               href={mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mono-label border-smoke text-bone hover:border-bone inline-flex items-center gap-2 rounded-full border px-7 py-4 transition-colors duration-500"
+              className="mono-label border-smoke text-bone hover:border-bone inline-flex items-center gap-2 rounded-full border px-5 py-4 transition-colors duration-500 sm:px-7"
             >
-              <MapPin className="h-3.5 w-3.5" />
+              <MapPin className="h-3.5 w-3.5 shrink-0" />
               {hero.ctaSecondaryLabel}
             </a>
           </motion.div>

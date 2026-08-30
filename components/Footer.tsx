@@ -151,7 +151,9 @@ export default function Footer({ site, categories = [] }: FooterProps) {
           site signs off at the scale of a shopfront rather than a byline. It is
           decorative here — the accessible name is already on every page. */}
       <div aria-hidden className="mt-20 overflow-hidden px-5 sm:px-8 lg:px-14">
-        <span className="font-display text-smoke block w-full text-center leading-[0.8] font-medium tracking-tight text-[13.5vw] select-none">
+        {/* Sized in vw and held to one line, so it spans the page at every
+            width instead of breaking into an accidental two-line stack. */}
+        <span className="font-display text-smoke block w-full text-center text-[8.5vw] leading-[0.9] font-medium tracking-tight whitespace-nowrap select-none">
           {site.businessName}
         </span>
       </div>

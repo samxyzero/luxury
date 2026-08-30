@@ -85,15 +85,20 @@ export default function CtaBand({ site }: CtaBandProps) {
           </Reveal>
         </div>
 
-        <div className="border-void/20 mt-16 grid gap-px border-t sm:grid-cols-2">
-          {details.map((detail) => (
+        {/* The two cells sit shoulder to shoulder on a wide screen, so the
+            second is inset behind a rule — without it the first row's trailing
+            arrow reads as part of the second row's label. */}
+        <div className="border-void/20 mt-16 grid border-t sm:grid-cols-2">
+          {details.map((detail, i) => (
             <a
               key={detail.label}
               href={detail.href}
               {...(detail.external
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              className="group border-void/20 flex items-center gap-4 border-b py-5 sm:border-b-0"
+              className={`group border-void/20 flex items-center gap-4 border-b py-5 pr-1 sm:border-b-0 ${
+                i > 0 ? "sm:border-void/20 sm:border-l sm:pl-8" : "sm:pr-8"
+              }`}
             >
               <detail.icon className="text-void/50 h-4 w-4 shrink-0" />
               <span className="mono-label text-void/50 w-24 shrink-0">

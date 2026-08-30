@@ -19,13 +19,14 @@ export default function Eyebrow({
 }: EyebrowProps) {
   const muted = tone === "bone" ? "text-ash" : "text-slate";
   const rule = tone === "bone" ? "bg-smoke" : "bg-void/20";
+  // Ember on the light tones, not saffron: the closing section's background is
+  // itself saffron, where a saffron index would simply disappear.
+  const mark = tone === "bone" ? "text-saffron" : "text-ember";
 
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       {index !== undefined && (
-        <span className="mono-label text-saffron">
-          {String(index).padStart(2, "0")}
-        </span>
+        <span className={`mono-label ${mark}`}>{String(index).padStart(2, "0")}</span>
       )}
       <span className={`h-px w-8 ${rule}`} aria-hidden />
       <span className={`mono-label ${muted}`}>{children}</span>
